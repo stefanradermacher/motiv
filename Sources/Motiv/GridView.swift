@@ -58,7 +58,7 @@ struct GridView: View {
                 .focusEffectDisabled()
                 .focused($focused)
                 .onKeyPress(phases: [.down, .repeat]) { press in
-                    handle(press, columns: columns)
+                    handle(press, columns: columns, rows: visibleRows(for: geometry.size.height))
                 }
                 .onChange(of: gallery.cursor) { _, cursor in
                     if let cursor { proxy.scrollTo(cursor) }
@@ -142,7 +142,14 @@ struct GridView: View {
         return max(1, Int((width - 2 * padding + spacing) / (cellWidth + spacing)))
     }
 
-    private func handle(_ press: KeyPress, columns: Int) -> KeyPress.Result {
+    /// Whole rows that fit in the window, for paging with Page Up and Page Down.
+    private func visibleRows(for height: CGFloat) -> Int {
+        // A cell is the thumbnail with its padding, and the name below if shown.
+        let rowHeight = gallery.thumbnailSize + 12 + (showNames ? 22 : 0) + spacing
+        return max(1, Int((height - 2 * padding + spacing) / rowHeight))
+    }
+
+    private func handle(_ press: KeyPress, columns: Int, rows: Int) -> KeyPress.Result {
         guard press.modifiers.isDisjoint(with: [.command, .option, .control]) else { return .ignored }
         let extend = press.modifiers.contains(.shift)
         switch press.key {
@@ -150,6 +157,8 @@ struct GridView: View {
         case .rightArrow: gallery.step(1, extendingSelection: extend)
         case .upArrow: gallery.step(-columns, extendingSelection: extend)
         case .downArrow: gallery.step(columns, extendingSelection: extend)
+        case .pageUp: gallery.step(-columns * rows, extendingSelection: extend)
+        case .pageDown: gallery.step(columns * rows, extendingSelection: extend)
         case .home: gallery.goToFirst(extendingSelection: extend)
         case .end: gallery.goToLast(extendingSelection: extend)
         case .return: gallery.openCursor()

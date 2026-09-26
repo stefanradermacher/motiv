@@ -69,6 +69,7 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 | Auswahl bewegen / erweitern | Pfeiltasten / ⇧ + Pfeiltasten |
 | Vorheriges / nächstes Bild | ← / → oder ⌘← / ⌘→ (in der Einzelansicht auch ↑ / ↓ und Leertaste) |
 | Erstes / letztes Bild | Pos1 / Ende oder ⌘Pos1 / ⌘Ende |
+| Seitenweise blättern (Übersicht) | Bild auf / Bild ab (⇞ / ⇟) |
 | Vergrößern / Verkleinern (Übersicht: Miniaturen) | ⌘+ / ⌘- oder Pinch auf dem Trackpad |
 | Standardgröße der Miniaturen (Übersicht) | ⌘0 oder Doppelklick auf den Größenregler |
 | Originalgröße / An Fenster anpassen | ⌘0 / ⌘9 |
