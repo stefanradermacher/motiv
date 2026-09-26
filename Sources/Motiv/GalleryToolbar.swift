@@ -22,11 +22,24 @@ struct GalleryToolbar: ToolbarContent {
     var body: some ToolbarContent {
         if gallery.singleFile != nil {
             ToolbarItem(placement: .navigation) {
-                Button { gallery.grantFolderAccess() } label: {
-                    Label("Ordner freigeben …", systemImage: "folder.badge.plus")
-                        .labelStyle(.titleAndIcon)
+                // A click grants for good; the menu offers access only until Motiv quits, so that
+                // folders looked at once do not pile up in the sidebar.
+                Menu {
+                    Button("Ordner freigeben …") { gallery.grantFolderAccess() }
+                    Button("Nur bis zum Beenden freigeben …") { gallery.grantFolderAccess(temporarily: true) }
+                } label: {
+                    // The toolbar draws this as an AppKit pop-up button and ignores label styles;
+                    // a thin space gives icon and title a little more room.
+                    Label {
+                        Text(verbatim: "\u{2009}") + Text("Ordner freigeben …")
+                    } icon: {
+                        Image(systemName: "folder.badge.plus")
+                    }
+                    .labelStyle(.titleAndIcon)
+                } primaryAction: {
+                    gallery.grantFolderAccess()
                 }
-                .help("Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe.")
+                .help("Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe; über den Pfeil gilt sie nur bis zum Beenden.")
             }
         }
         if gallery.mode == .compare, let compare = gallery.compare {
@@ -339,3 +352,4 @@ private struct CompareZoomGroup: View {
         ])
     }
 }
+

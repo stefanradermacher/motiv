@@ -439,8 +439,9 @@ final class Gallery {
     }
 
     /// Asks for the folder of the single file shown, then shows the file among the others.
-    func grantFolderAccess() {
-        guard let file = singleFile, Library.shared.requestAccess(toFolderOf: file) else { return }
+    /// `temporarily`: only until Motiv quits, see `Place.isTemporary`.
+    func grantFolderAccess(temporarily: Bool = false) {
+        guard let file = singleFile, Library.shared.requestAccess(toFolderOf: file, temporarily: temporarily) else { return }
         reveal(file)
     }
 

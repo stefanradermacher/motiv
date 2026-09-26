@@ -28,7 +28,7 @@ Motiv ist ein schlichter Bild- und Galeriebetrachter für macOS, gemacht für Bi
 ## Was Motiv ausmacht
 
 - Arbeitet direkt mit deinen Ordnern, nichts wird importiert oder kopiert
-- Verändert nie eine Datei; Drehen und Spiegeln wirken nur auf die Ansicht
+- Modifiziert keine Dateien; Drehen und Spiegeln wirken nur auf die Ansicht
 - Kostenlos und quelloffen unter der Apache-Lizenz 2.0
 - Keine Werbung, kein Tracking, keine Datensammlung
 - Nur Apple-Frameworks, keine Fremdkomponenten

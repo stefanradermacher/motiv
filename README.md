@@ -22,7 +22,7 @@ Die Oberfläche gibt es auf Deutsch und Englisch. Die Texte liegen im String-Kat
 
 ### Warum Ordner freigeben?
 
-In der Sandbox darf eine App nur lesen, was der Benutzer ausgewählt hat. Öffnet man ein einzelnes Bild per Doppelklick, bekommt Motiv nur diese eine Datei, nicht die Bilder daneben. Liegt das Bild in keinem freigegebenen Ordner, zeigt Motiv es zunächst allein; in der Titelzeile steht dann „Ordner nicht freigegeben“ mit dem Button „Ordner freigeben …“.
+In der Sandbox darf eine App nur lesen, was der Benutzer ausgewählt hat. Öffnet man ein einzelnes Bild per Doppelklick, bekommt Motiv nur diese eine Datei, nicht die Bilder daneben. Liegt das Bild in keinem freigegebenen Ordner, zeigt Motiv es zunächst allein; in der Titelzeile steht dann „Ordner nicht freigegeben“ mit dem Button „Ordner freigeben …“. Über den Pfeil daneben gibt „Nur bis zum Beenden freigeben …“ den Ordner nur für die laufende Sitzung frei: Er erscheint mit einer Sanduhr in der Seitenleiste, Motiv speichert kein Lesezeichen dafür, und nach dem Beenden sind Freigabe und Eintrag wieder weg. Das Kontextmenü „Dauerhaft behalten“ macht daraus eine normale Freigabe.
 
 ## Bauen
 

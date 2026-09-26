@@ -177,7 +177,12 @@ private struct FolderRow: View {
                 library.remove(root)
                 gallery.closeFolderIfUnreadable()
             }) {
-                Label(node.name, systemImage: "externaldrive")
+                if root.isTemporary {
+                    Label(node.name, systemImage: "hourglass")
+                        .help("Nur bis zum Beenden von Motiv freigegeben")
+                } else {
+                    Label(node.name, systemImage: "externaldrive")
+                }
             }
             .tag(SidebarItem.folder(node.url))
             .contextMenu { FolderContextMenu(url: node.url, gallery: gallery) }
@@ -232,6 +237,9 @@ struct FolderContextMenu: View {
         Button("Im Finder zeigen") { FileActions.revealInFinder([url]) }
         if let root = library.roots.first(where: { $0.path == url.folderURL.path }) {
             Divider()
+            if root.isTemporary {
+                Button("Dauerhaft behalten") { library.keep(root) }
+            }
             Button("Aus der Seitenleiste entfernen") {
                 library.remove(root)
                 gallery.closeFolderIfUnreadable()

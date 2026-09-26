@@ -38,7 +38,7 @@ In der Übersicht springst du zu einem Bild, indem du den Anfang seines Namens t
 Nein, und das bleibt so. Motiv ist bewusst nur ein Betrachter. Drehen und Spiegeln wirken nur auf die Ansicht. Zum Bearbeiten öffnest du das Bild mit ⌘E in Vorschau oder über „Öffnen mit“ in einem anderen Programm.
 
 **Warum muss ich Ordner freigeben?**
-Wie jede App aus dem App Store darf Motiv nur lesen, was du ausgewählt hast. Öffnest du ein einzelnes Bild aus dem Finder, zeigt Motiv es sofort; die Bilder daneben sieht es erst, wenn du mit „Ordner freigeben …“ in der Titelzeile den Ordner freigibst. Motiv merkt sich die Freigabe.
+Wie jede App aus dem App Store darf Motiv nur lesen, was du ausgewählt hast. Öffnest du ein einzelnes Bild aus dem Finder, zeigt Motiv es sofort; die Bilder daneben sieht es erst, wenn du mit „Ordner freigeben …“ in der Titelzeile den Ordner freigibst. Motiv merkt sich die Freigabe. Willst du den Ordner nur kurz ansehen, wähle über den Pfeil daneben „Nur bis zum Beenden freigeben …“; dann verschwindet er nach dem Beenden wieder aus der Seitenleiste.
 
 **Ein Ordner in der Seitenleiste ist ausgegraut.**
 Motiv kann ihn gerade nicht lesen, etwa weil die Festplatte nicht angeschlossen ist oder der Ordner verschoben wurde. Über das Kontextmenü „Erneut freigeben …“ wählst du ihn neu aus.

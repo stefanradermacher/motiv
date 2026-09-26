@@ -791,12 +791,22 @@
         }
       }
     },
-    "Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe.": {
+    "Dauerhaft behalten": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Grant access to this image’s folder to see all images in it. Motiv remembers the permission."
+            "value": "Keep Permanently"
+          }
+        }
+      }
+    },
+    "Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe; über den Pfeil gilt sie nur bis zum Beenden.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant access to this image’s folder to see all images in it. Motiv remembers the access; with the arrow, it lasts only until Motiv quits."
           }
         }
       }
@@ -1841,6 +1851,26 @@
         }
       }
     },
+    "Nur bis zum Beenden freigeben …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant Only Until Quit …"
+          }
+        }
+      }
+    },
+    "Nur bis zum Beenden von Motiv freigegeben": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Granted only until Motiv quits"
+          }
+        }
+      }
+    },
     "Nächstes Bild": {
       "localizations": {
         "en": {
@@ -1897,6 +1927,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Folders"
+          }
+        }
+      }
+    },
+    "Ordner bis zum Beenden von Motiv freigeben, um alle Bilder darin zu sehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant access to the folder until Motiv quits, to see all images in it"
           }
         }
       }

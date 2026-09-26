@@ -22,6 +22,15 @@ struct Place: Identifiable, Hashable, Codable {
     /// Whether the bookmark allows reading only. Bookmarks from earlier versions allowed writing
     /// too; they are made again on the next launch.
     var isReadOnly: Bool? = nil
+    /// Granted only until Motiv quits: never saved, so the next launch has neither the access
+    /// nor the folder in the sidebar.
+    var isTemporary = false
+
+    /// `isTemporary` is left out: such places are never saved, and lists saved before it
+    /// existed must still load.
+    private enum CodingKeys: String, CodingKey {
+        case path, bookmark, isReadOnly
+    }
 
     var id: String { path }
     var url: URL { URL(fileURLWithPath: path, isDirectory: true) }
@@ -78,16 +87,18 @@ final class Library {
 
     /// Asks for the folder of a file opened from the Finder. Returns whether Motiv may now
     /// read the file's folder.
-    func requestAccess(toFolderOf file: URL) -> Bool {
+    func requestAccess(toFolderOf file: URL, temporarily: Bool = false) -> Bool {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.canCreateDirectories = false
         panel.directoryURL = file.deletingLastPathComponent()
         panel.prompt = String(localized: "Zugriff erlauben")
-        panel.message = String(localized: "Ordner freigeben, um alle Bilder darin zu sehen")
+        panel.message = temporarily
+            ? String(localized: "Ordner bis zum Beenden von Motiv freigeben, um alle Bilder darin zu sehen")
+            : String(localized: "Ordner freigeben, um alle Bilder darin zu sehen")
         guard panel.runModal() == .OK, let url = panel.url else { return false }
-        add(url)
+        add(url, temporarily: temporarily)
         return contains(file)
     }
 
@@ -104,12 +115,17 @@ final class Library {
         add(url)
     }
 
-    /// Adds a folder the user chose or dropped. Returns it in canonical form.
+    /// Adds a folder the user chose or dropped. Returns it in canonical form. Adding a folder
+    /// that is there only until Motiv quits, without `temporarily`, keeps it for good.
     @discardableResult
-    func add(_ url: URL) -> URL? {
+    func add(_ url: URL, temporarily: Bool = false) -> URL? {
         let folder = url.folderURL
         let path = folder.path
         if let index = roots.firstIndex(where: { $0.path == path }) {
+            if roots[index].isTemporary && !temporarily {
+                keep(roots[index])
+                return folder
+            }
             guard unavailable.contains(path) else { return folder }
             roots.remove(at: index)
         }
@@ -119,11 +135,22 @@ final class Library {
         if accessedRoots[path] == nil, url.startAccessingSecurityScopedResource() {
             accessedRoots[path] = url
         }
-        roots.append(Place(path: path, bookmark: bookmark, isReadOnly: true))
+        roots.append(Place(path: path, bookmark: bookmark, isReadOnly: true, isTemporary: temporarily))
         roots.sort { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
         save()
         rebuildNodes()
         return folder
+    }
+
+    /// Keeps a folder granted until Motiv quits for good.
+    func keep(_ place: Place) {
+        guard let index = roots.firstIndex(where: { $0.path == place.path }) else { return }
+        roots[index].isTemporary = false
+        save()
+    }
+
+    func isTemporary(_ url: URL) -> Bool {
+        roots.contains { $0.path == url.folderURL.path && $0.isTemporary }
     }
 
     func remove(_ place: Place) {
@@ -209,7 +236,7 @@ final class Library {
 
     private func save() {
         let defaults = UserDefaults.standard
-        defaults.set(try? JSONEncoder().encode(roots), forKey: Self.rootsKey)
+        defaults.set(try? JSONEncoder().encode(roots.filter { !$0.isTemporary }), forKey: Self.rootsKey)
         defaults.set(try? JSONEncoder().encode(favorites), forKey: Self.favoritesKey)
     }
 
