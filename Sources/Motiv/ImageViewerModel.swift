@@ -20,7 +20,9 @@ import UniformTypeIdentifiers
 
 /// A file as loaded for the single-image view.
 enum ViewerContent: @unchecked Sendable {
-    case still(CGImage)
+    /// `size` is the picture's full size in pixels, upright. A large picture is decoded smaller
+    /// at first, as large as the screen needs; see `ImageViewerModel.sharpenIfNeeded`.
+    case still(CGImage, size: CGSize)
     /// An animated GIF; NSImageView plays it.
     case animated(NSImage)
     /// A frame of a video. Motiv does not play videos itself.
@@ -30,14 +32,15 @@ enum ViewerContent: @unchecked Sendable {
 
 /// What the canvas draws: the content, rotated and mirrored as the user chose.
 enum CanvasPicture {
-    case image(CGImage)
+    /// Drawn at `size`, the picture's full size, even if the image itself has fewer pixels.
+    case image(CGImage, size: CGSize)
     case animated(NSImage)
     /// A small blurred copy of a picture that may be sensitive, shown as large as the picture.
     case concealed(CGImage, size: CGSize)
 
     var size: CGSize {
         switch self {
-        case .image(let image): CGSize(width: image.width, height: image.height)
+        case .image(_, let size): size
         case .animated(let image): image.size
         case .concealed(_, let size): size
         }
@@ -45,7 +48,7 @@ enum CanvasPicture {
 
     func isSame(as other: CanvasPicture?) -> Bool {
         switch (self, other) {
-        case (.image(let a), .image(let b)?): a === b
+        case (.image(let a, _), .image(let b, _)?): a === b
         case (.animated(let a), .animated(let b)?): a === b
         case (.concealed(let a, _), .concealed(let b, _)?): a === b
         default: false
@@ -63,7 +66,9 @@ final class ImageViewerModel {
     private(set) var quarterTurns = 0
     private(set) var mirrored = false
     /// Current magnification and fit mode, as reported by the canvas.
-    var zoom: CGFloat = 1
+    var zoom: CGFloat = 1 {
+        didSet { sharpenIfNeeded() }
+    }
     var fitMode: FitMode? = .window
     /// Asks the toolbar to show the field for entering a zoom level.
     var requestsZoomInput = false
@@ -75,7 +80,11 @@ final class ImageViewerModel {
     @ObservationIgnored weak var canvas: ImageScrollView?
     @ObservationIgnored private var loadTask: Task<Void, Never>?
     /// The current image and its neighbours, so that stepping through a folder is instant.
+    /// Large pictures are kept here only as large as the screen needs.
     @ObservationIgnored private var cache: [URL: ViewerContent] = [:]
+    @ObservationIgnored private var preloadTasks: [URL: Task<Void, Never>] = [:]
+    /// Loads the current picture at full size, once zooming in needs more pixels.
+    @ObservationIgnored private var sharpenTask: Task<Void, Never>?
     @ObservationIgnored private var wanted: Set<URL> = []
 
     @ObservationIgnored private var concealedSource: CGImage?
@@ -86,7 +95,7 @@ final class ImageViewerModel {
     /// plain area instead. Made once per picture.
     func concealedPicture() -> CanvasPicture? {
         let source: CGImage? = switch content {
-        case .still(let image), .poster(let image): image
+        case .still(let image, _), .poster(let image): image
         case .animated(let image): image.cgImage(forProposedRect: nil, context: nil, hints: nil)
         case .failed, nil: nil
         }
@@ -113,29 +122,71 @@ final class ImageViewerModel {
         self.item = item
         wanted = Set([item.url] + neighbours.map(\.url))
         cache = cache.filter { wanted.contains($0.key) }
+        // Pictures no longer next to the current one need not be decoded any more.
+        for (url, task) in preloadTasks where !wanted.contains(url) {
+            task.cancel()
+            preloadTasks[url] = nil
+        }
+        let maxPixels = Self.screenPixels
 
         if isNew {
             quarterTurns = 0
             mirrored = false
             canvas?.prepareForNewPicture()
             loadTask?.cancel()
+            sharpenTask?.cancel()
+            sharpenTask = nil
             if let cached = cache[item.url] {
                 setContent(cached)
             } else {
                 content = nil
                 picture = nil
                 loadTask = Task {
-                    let loaded = await Self.load(item)
+                    let loaded = await Self.load(item, maxPixels: maxPixels)
                     store(loaded, for: item.url)
                     if self.item?.url == item.url { setContent(loaded) }
                 }
             }
         }
-        for neighbour in neighbours where cache[neighbour.url] == nil {
-            Task(priority: .utility) {
-                store(await Self.load(neighbour), for: neighbour.url)
+        // One after the other: several very large pictures decoded at once need gigabytes.
+        for neighbour in neighbours where cache[neighbour.url] == nil && preloadTasks[neighbour.url] == nil {
+            preloadTasks[neighbour.url] = Task(priority: .utility) {
+                await Self.preloadGate.acquire()
+                defer { Task { await Self.preloadGate.release() } }
+                guard !Task.isCancelled else { return }
+                let loaded = await Self.load(neighbour, maxPixels: maxPixels)
+                preloadTasks[neighbour.url] = nil
+                guard !Task.isCancelled else { return }
+                store(loaded, for: neighbour.url)
             }
         }
+    }
+
+    /// Loads the current picture at full size when the zoom shows more pixels than the smaller
+    /// copy has. The full size is kept only while the picture is shown.
+    private func sharpenIfNeeded() {
+        guard sharpenTask == nil, needsSharpening, let item else { return }
+        sharpenTask = Task {
+            // Only a zoom that lasts: while a picture is being fitted, the canvas may briefly
+            // report a zoom it does not keep.
+            try? await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled, needsSharpening else {
+                sharpenTask = nil
+                return
+            }
+            let full = await Self.load(item, maxPixels: nil)
+            guard !Task.isCancelled, self.item?.url == item.url, case .still = full else { return }
+            setContent(full)
+        }
+    }
+
+    private var needsSharpening: Bool {
+        guard case .still(let image, let size) = content else { return false }
+        let pixels = CGFloat(max(image.width, image.height))
+        let largest = max(size.width, size.height)
+        guard pixels < largest else { return false }
+        let scale = canvas?.window?.backingScaleFactor ?? 2
+        return zoom * scale * largest > pixels * 1.05
     }
 
     private func store(_ content: ViewerContent, for url: URL) {
@@ -149,10 +200,12 @@ final class ImageViewerModel {
 
     private func updatePicture() {
         switch content {
-        case .still(let image):
-            picture = .image(Self.transformed(image, quarterTurns: quarterTurns, mirrored: mirrored))
+        case .still(let image, let size):
+            let sideways = quarterTurns % 2 == 1
+            picture = .image(Self.transformed(image, quarterTurns: quarterTurns, mirrored: mirrored),
+                             size: sideways ? CGSize(width: size.height, height: size.width) : size)
         case .poster(let image):
-            picture = .image(image)
+            picture = .image(image, size: CGSize(width: image.width, height: image.height))
         case .animated(let image):
             picture = .animated(image)
         case .failed, nil:
@@ -203,7 +256,16 @@ final class ImageViewerModel {
 
     // MARK: Loading
 
-    private nonisolated static func load(_ item: MediaItem) async -> ViewerContent {
+    /// The largest side, in pixels, of the largest screen: more a picture cannot show when fitted.
+    private static var screenPixels: Int {
+        let sides = NSScreen.screens.map { max($0.frame.width, $0.frame.height) * $0.backingScaleFactor }
+        return Int(sides.max() ?? 5120)
+    }
+
+    private static let preloadGate = DecodeGate()
+
+    /// `maxPixels` limits the larger side; nil decodes the full size.
+    private nonisolated static func load(_ item: MediaItem, maxPixels: Int?) async -> ViewerContent {
         if item.isVideo {
             let request = QLThumbnailGenerator.Request(fileAt: item.url, size: CGSize(width: 2048, height: 2048),
                                                        scale: 1, representationTypes: .thumbnail)
@@ -212,10 +274,10 @@ final class ImageViewerModel {
             return .poster(representation.cgImage)
         }
         let url = item.url
-        return await Task.detached(priority: .userInitiated) { decode(url) }.value
+        return await Task.detached(priority: .userInitiated) { decode(url, maxPixels: maxPixels) }.value
     }
 
-    private nonisolated static func decode(_ url: URL) -> ViewerContent {
+    private nonisolated static func decode(_ url: URL, maxPixels: Int?) -> ViewerContent {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return decodeWithAppKit(url) }
         if CGImageSourceGetCount(source) > 1,
            CGImageSourceGetType(source) as String? == UTType.gif.identifier,
@@ -226,15 +288,27 @@ final class ImageViewerModel {
         let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? [CFString: Any] ?? [:]
         let width = properties[kCGImagePropertyPixelWidth] as? Int ?? 0
         let height = properties[kCGImagePropertyPixelHeight] as? Int ?? 0
-        // Decoding as a full-size thumbnail applies the orientation stored in the file.
+        let largest = max(width, height, 1)
+        let orientation = properties[kCGImagePropertyOrientation] as? Int ?? 1
+        // At full size and upright, the image itself: a thumbnail of the full size would hold
+        // the pixels twice while it is made.
+        if orientation == 1, maxPixels.map({ largest <= $0 }) ?? true,
+           let image = CGImageSourceCreateImageAtIndex(source, index, [kCGImageSourceShouldCacheImmediately: true] as CFDictionary) {
+            return .still(image, size: CGSize(width: image.width, height: image.height))
+        }
+        // Decoding as a thumbnail applies the orientation stored in the file, and for a large
+        // picture it decodes only as many pixels as the screen can show.
         let options: [CFString: Any] = [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceThumbnailMaxPixelSize: max(width, height, 1),
+            kCGImageSourceThumbnailMaxPixelSize: min(largest, maxPixels ?? largest),
         ]
         if let image = CGImageSourceCreateThumbnailAtIndex(source, index, options as CFDictionary) {
-            return .still(image)
+            // The full size upright: orientations 5 to 8 turn the picture sideways.
+            let turned = orientation >= 5
+            let size = turned ? CGSize(width: height, height: width) : CGSize(width: width, height: height)
+            return .still(image, size: size == .zero ? CGSize(width: image.width, height: image.height) : size)
         }
         return decodeWithAppKit(url)
     }
@@ -244,7 +318,7 @@ final class ImageViewerModel {
         guard let image = NSImage(contentsOf: url),
               let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
         else { return .failed }
-        return .still(cgImage)
+        return .still(cgImage, size: CGSize(width: cgImage.width, height: cgImage.height))
     }
 
     private nonisolated static func transformed(_ image: CGImage, quarterTurns: Int, mirrored: Bool) -> CGImage {
@@ -264,5 +338,27 @@ final class ImageViewerModel {
         context.draw(image, in: CGRect(x: -CGFloat(width) / 2, y: -CGFloat(height) / 2,
                                        width: CGFloat(width), height: CGFloat(height)))
         return context.makeImage() ?? image
+    }
+}
+
+/// Lets one preload decode at a time.
+private actor DecodeGate {
+    private var busy = false
+    private var waiting: [CheckedContinuation<Void, Never>] = []
+
+    func acquire() async {
+        if !busy {
+            busy = true
+            return
+        }
+        await withCheckedContinuation { waiting.append($0) }
+    }
+
+    func release() {
+        if waiting.isEmpty {
+            busy = false
+        } else {
+            waiting.removeFirst().resume()
+        }
     }
 }

@@ -93,6 +93,8 @@ final class ImageScrollView: NSScrollView {
 
     private let pictureView = PictureView()
     private var picture: CanvasPicture?
+    /// Set when another picture is about to come, see `show`.
+    private var expectsNewPicture = true
     var gestures = CanvasGestures()
     /// Rotation of the current two-finger turn not yet used for a quarter turn, in degrees.
     private var pendingRotation: CGFloat = 0
@@ -201,6 +203,7 @@ final class ImageScrollView: NSScrollView {
     /// The next picture keeps a fit to width or height; after zooming by hand, it is fitted to
     /// the window again.
     func prepareForNewPicture() {
+        expectsNewPicture = true
         if fitMode == nil || fitMode == .window {
             fitMode = .window
             fitsOnRequest = false
@@ -209,6 +212,14 @@ final class ImageScrollView: NSScrollView {
 
     func show(_ picture: CanvasPicture?) {
         guard !(picture?.isSame(as: self.picture) ?? (self.picture == nil)) else { return }
+        // The same picture at the same size, only sharper or turned upside down: swapped in place,
+        // so that zoom and position stay.
+        if !expectsNewPicture, let picture, let current = self.picture, picture.size == current.size {
+            self.picture = picture
+            pictureView.picture = picture
+            return
+        }
+        if picture != nil { expectsNewPicture = false }
         self.picture = picture
         pictureView.picture = picture
         pictureView.frame = NSRect(origin: .zero, size: picture?.size ?? .zero)
@@ -429,7 +440,7 @@ final class PictureView: NSView {
         // Smooth when a large photo is scaled far down.
         layer.minificationFilter = .trilinear
         switch picture {
-        case .image(let image), .concealed(let image, _): layer.contents = image
+        case .image(let image, _), .concealed(let image, _): layer.contents = image
         case .animated, nil: layer.contents = nil
         }
     }
