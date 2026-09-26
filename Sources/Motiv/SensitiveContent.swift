@@ -15,7 +15,6 @@
 import AppKit
 import CoreImage
 import Observation
-import QuickLookThumbnailing
 import SensitiveContentAnalysis
 import SwiftUI
 
@@ -112,10 +111,7 @@ final class SensitiveContentGuard {
     /// Apple's own apps: the warning is a help, not a guarantee.
     private static func analyze(_ url: URL, isVideo: Bool, with analyzer: SCSensitivityAnalyzer) async -> Bool {
         if isVideo {
-            let request = QLThumbnailGenerator.Request(fileAt: url, size: CGSize(width: 512, height: 512),
-                                                       scale: 1, representationTypes: .thumbnail)
-            guard let frame = try? await QLThumbnailGenerator.shared.generateBestRepresentation(for: request).cgImage
-            else { return false }
+            guard let frame = await Stills.videoFrame(of: url, pixels: 512) else { return false }
             return (try? await analyzer.analyzeImage(frame))?.isSensitive ?? false
         }
         return (try? await analyzer.analyzeImage(at: url))?.isSensitive ?? false
@@ -165,8 +161,9 @@ final class SensitiveContentGuard {
     }
 }
 
-/// Lets only a few checks run at the same time, so a large folder does not flood the analysis.
-private actor Limiter {
+/// Lets only a few tasks run at the same time, so that a large folder does not flood the
+/// analysis or the decoding of pictures.
+actor Limiter {
     private let limit: Int
     private var running = 0
     private var waiting: [CheckedContinuation<Void, Never>] = []

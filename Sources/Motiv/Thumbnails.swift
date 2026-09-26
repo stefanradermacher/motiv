@@ -13,10 +13,14 @@
 // limitations under the License.
 
 import AppKit
+import AVFoundation
+import ImageIO
 import QuickLookThumbnailing
 import SwiftUI
+import UniformTypeIdentifiers
 
-/// Thumbnails of images and videos, made by Quick Look and kept in memory.
+/// Thumbnails of images and videos, kept in memory only. Motiv makes them itself, see `Stills`,
+/// so that no copy of the pictures stays behind on disk.
 @MainActor
 final class ThumbnailCache {
     static let shared = ThumbnailCache()
@@ -37,16 +41,22 @@ final class ThumbnailCache {
         cache.object(forKey: key(url, pixels))
     }
 
-    func thumbnail(for url: URL, pixels: Int) async -> NSImage {
+    /// As many at a time as the Mac has cores; very large pictures one after the other, since a
+    /// folder of them would otherwise need gigabytes at once.
+    private static let limiter = Limiter(limit: max(2, ProcessInfo.processInfo.activeProcessorCount))
+    private static let largeLimiter = Limiter(limit: 1)
+
+    /// nil if the cell asking for it went away while waiting.
+    func thumbnail(for url: URL, pixels: Int) async -> NSImage? {
         if let image = cached(url, pixels: pixels) { return image }
-        let request = QLThumbnailGenerator.Request(fileAt: url, size: CGSize(width: pixels, height: pixels),
-                                                   scale: 1, representationTypes: .thumbnail)
-        let image: NSImage
-        if let representation = try? await QLThumbnailGenerator.shared.generateBestRepresentation(for: request) {
-            image = representation.nsImage
-        } else {
-            image = NSWorkspace.shared.icon(forFile: url.path)
-        }
+        let limiter = Stills.isLarge(url) ? Self.largeLimiter : Self.limiter
+        await limiter.acquire()
+        defer { Task { await limiter.release() } }
+        // Scrolled past while waiting: not needed any more.
+        guard !Task.isCancelled else { return nil }
+        if let image = cached(url, pixels: pixels) { return image }
+        let image = await Stills.thumbnail(of: url, pixels: pixels).map { NSImage(cgImage: $0, size: CGSize(width: $0.width, height: $0.height)) }
+            ?? NSWorkspace.shared.icon(forFile: url.path)
         cache.setObject(image, forKey: key(url, pixels), cost: pixels * pixels * 4)
         return image
     }
@@ -99,7 +109,7 @@ struct ThumbnailImage: View {
             if let cached = ThumbnailCache.shared.cached(url, pixels: pixels) {
                 image = cached
             } else {
-                image = await ThumbnailCache.shared.thumbnail(for: url, pixels: pixels)
+                if let loaded = await ThumbnailCache.shared.thumbnail(for: url, pixels: pixels) { image = loaded }
             }
         }
         // Also when blurring resumes after a pause, so that pictures seen meanwhile get checked.
@@ -119,5 +129,91 @@ struct VideoBadge: View {
             .background(.black.opacity(0.55), in: RoundedRectangle(cornerRadius: 4))
             .padding(4)
             .accessibilityLabel("Video")
+    }
+}
+
+/// Still images of pictures and videos, made without Quick Look where possible: Quick Look keeps
+/// the thumbnails it makes in the system's thumbnail cache on disk, and Motiv should leave
+/// nothing behind. Only files that neither ImageIO nor AppKit can read go to Quick Look.
+enum Stills {
+    /// At most `pixels` on the larger side, upright.
+    nonisolated static func thumbnail(of url: URL, pixels: Int) async -> CGImage? {
+        let isVideo = (try? url.resourceValues(forKeys: [.contentTypeKey]))?.contentType?.conforms(to: .movie) ?? false
+        let still = isVideo
+            ? await videoFrame(of: url, pixels: pixels)
+            : await Task.detached(priority: .userInitiated) { image(of: url, pixels: pixels) }.value
+        if let still { return still }
+        return await quickLook(url, pixels: pixels)
+    }
+
+    /// A frame near the start of a video, as Quick Look would show it.
+    nonisolated static func videoFrame(of url: URL, pixels: Int) async -> CGImage? {
+        let asset = AVURLAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: pixels, height: pixels)
+        let seconds = (try? await asset.load(.duration))?.seconds ?? 0
+        let time = CMTime(seconds: seconds.isFinite ? min(1, seconds / 10) : 0, preferredTimescale: 600)
+        return try? await generator.image(at: time).image
+    }
+
+    /// Quick Look, for the few formats Motiv cannot read itself.
+    nonisolated static func quickLook(_ url: URL, pixels: Int) async -> CGImage? {
+        let request = QLThumbnailGenerator.Request(fileAt: url, size: CGSize(width: pixels, height: pixels),
+                                                   scale: 1, representationTypes: .thumbnail)
+        return try? await QLThumbnailGenerator.shared.generateBestRepresentation(for: request).cgImage
+    }
+
+    /// More than 50 megapixels: decoding such a picture needs hundreds of megabytes for a moment.
+    nonisolated static func isLarge(_ url: URL) -> Bool {
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
+              let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+              let width = properties[kCGImagePropertyPixelWidth] as? Int,
+              let height = properties[kCGImagePropertyPixelHeight] as? Int
+        else { return false }
+        return width * height > 50_000_000
+    }
+
+    /// ImageIO, and AppKit for what ImageIO does not read, such as SVG. Photos from cameras and
+    /// phones usually carry a small preview of their own; if it is large enough, it is used
+    /// instead of decoding the whole picture.
+    private nonisolated static func image(of url: URL, pixels: Int) -> CGImage? {
+        if let source = CGImageSourceCreateWithURL(url as CFURL, nil) {
+            let index = source.largestImageIndex
+            var options: [CFString: Any] = [
+                kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+                kCGImageSourceCreateThumbnailWithTransform: true,
+                kCGImageSourceShouldCacheImmediately: true,
+                kCGImageSourceThumbnailMaxPixelSize: pixels,
+            ]
+            let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? [CFString: Any] ?? [:]
+            let largest = max(properties[kCGImagePropertyPixelWidth] as? Int ?? 0, properties[kCGImagePropertyPixelHeight] as? Int ?? 0)
+            let wanted = Double(min(pixels, largest > 0 ? largest : pixels)) * 0.9
+            if let preview = CGImageSourceCreateThumbnailAtIndex(source, index, options as CFDictionary),
+               Double(max(preview.width, preview.height)) >= wanted {
+                return preview
+            }
+            options[kCGImageSourceCreateThumbnailFromImageAlways] = true
+            if let image = CGImageSourceCreateThumbnailAtIndex(source, index, options as CFDictionary) {
+                return image
+            }
+        }
+        return drawn(url, pixels: pixels)
+    }
+
+    private nonisolated static func drawn(_ url: URL, pixels: Int) -> CGImage? {
+        guard let image = NSImage(contentsOf: url), image.size.width > 0, image.size.height > 0 else { return nil }
+        let scale = Double(pixels) / max(image.size.width, image.size.height)
+        let width = max(1, Int((image.size.width * scale).rounded()))
+        let height = max(1, Int((image.size.height * scale).rounded()))
+        guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpace(name: CGColorSpace.sRGB)!,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        else { return nil }
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(cgContext: context, flipped: false)
+        image.draw(in: NSRect(x: 0, y: 0, width: width, height: height))
+        NSGraphicsContext.restoreGraphicsState()
+        return context.makeImage()
     }
 }

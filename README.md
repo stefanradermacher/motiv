@@ -1,6 +1,6 @@
 # Motiv
 
-Schlichter Bild- und Galeriebetrachter für macOS 15+, gebaut mit SwiftUI, ImageIO und Quick Look. Er zeigt Bildsammlungen in Ordnerstrukturen an und verändert keine Datei.
+Schlichter Bild- und Galeriebetrachter für macOS 15+, gebaut mit SwiftUI, ImageIO und AVFoundation. Er zeigt Bildsammlungen in Ordnerstrukturen an und verändert keine Datei.
 
 Motiv ist quelloffen (Apache-Lizenz 2.0, siehe `LICENSE`), werbefrei und übermittelt keine Daten: kein Tracking, keine Analyse, keine eigenen Netzwerkverbindungen. Es nutzt ausschließlich Apple-Frameworks. Wer die Entwicklung unterstützen möchte, kann unter **Motiv → Über Motiv** ein freiwilliges Trinkgeld über den App Store geben; es schaltet nichts frei.
 
@@ -49,7 +49,7 @@ Das App-Icon und das Dokumentsymbol zeichnet `scripts/make_icon.swift`: das App-
   - `Gallery.swift`: Inhalt eines Fensters — Ordner, Auswahl, Sortierung, Übersicht und Einzelansicht
   - `GridView.swift`, `ViewerView.swift`, `SidebarView.swift`: die drei Bereiche des Fensters
   - `ImageViewerModel.swift`, `ImageCanvas.swift`: Laden, Drehen und Zoomen in der Einzelansicht
-  - `Thumbnails.swift`: Miniaturen über Quick Look, mit Zwischenspeicher
+  - `Thumbnails.swift`: Miniaturen über ImageIO, AppKit und AVFoundation, nur im Arbeitsspeicher; Quick Look nur für Formate, die Motiv nicht selbst lesen kann, weil es seine Miniaturen im Systemcache auf der Platte ablegt
   - `FileActions.swift`: Übergabe an Vorschau, „Öffnen mit“, Finder
 - `Resources/`: Asset-Katalog mit App-Icon, Lokalisierung, `PrivacyInfo.xcprivacy`
 - `Config/Info.plist`, `Config/Motiv.entitlements`: App-Einstellungen und Sandbox-Berechtigungen (selbst gewählte Dateien, dauerhafte Bookmarks)
@@ -97,4 +97,4 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 
 - Diashow
 - „Exportieren als …“ über ImageIO (JPEG, PNG, HEIC, TIFF), immer in eine neue Datei
-- Zwischenspeicher für Miniaturen auf der Platte, Ordner beobachten statt „Aktualisieren“
+- Ordner beobachten statt „Aktualisieren“

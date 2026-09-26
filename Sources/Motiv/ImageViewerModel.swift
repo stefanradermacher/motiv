@@ -15,7 +15,6 @@
 import AppKit
 import ImageIO
 import Observation
-import QuickLookThumbnailing
 import UniformTypeIdentifiers
 
 /// A file as loaded for the single-image view.
@@ -262,16 +261,13 @@ final class ImageViewerModel {
         return Int(sides.max() ?? 5120)
     }
 
-    private static let preloadGate = DecodeGate()
+    private static let preloadGate = Limiter(limit: 1)
 
     /// `maxPixels` limits the larger side; nil decodes the full size.
     private nonisolated static func load(_ item: MediaItem, maxPixels: Int?) async -> ViewerContent {
         if item.isVideo {
-            let request = QLThumbnailGenerator.Request(fileAt: item.url, size: CGSize(width: 2048, height: 2048),
-                                                       scale: 1, representationTypes: .thumbnail)
-            guard let representation = try? await QLThumbnailGenerator.shared.generateBestRepresentation(for: request)
-            else { return .failed }
-            return .poster(representation.cgImage)
+            if let frame = await Stills.videoFrame(of: item.url, pixels: 2048) { return .poster(frame) }
+            return await Stills.quickLook(item.url, pixels: 2048).map { .poster($0) } ?? .failed
         }
         let url = item.url
         return await Task.detached(priority: .userInitiated) { decode(url, maxPixels: maxPixels) }.value
@@ -341,24 +337,3 @@ final class ImageViewerModel {
     }
 }
 
-/// Lets one preload decode at a time.
-private actor DecodeGate {
-    private var busy = false
-    private var waiting: [CheckedContinuation<Void, Never>] = []
-
-    func acquire() async {
-        if !busy {
-            busy = true
-            return
-        }
-        await withCheckedContinuation { waiting.append($0) }
-    }
-
-    func release() {
-        if waiting.isEmpty {
-            busy = false
-        } else {
-            waiting.removeFirst().resume()
-        }
-    }
-}
