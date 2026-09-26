@@ -340,9 +340,26 @@ func picture(_ path: String, caption: String) {
     y -= 12
 }
 
+func isBullet(_ block: Block) -> Bool {
+    if case .bullet = block { return true }
+    return false
+}
+
 titlePage()
 
-for block in blocks {
+for (index, block) in blocks.enumerated() {
+    // A list is not torn apart: if its points do not all fit, it starts on the next page.
+    if case .bullet = block, index == 0 || !isBullet(blocks[index - 1]) {
+        let run = blocks[index...].prefix(while: isBullet)
+        let needed = run.reduce(CGFloat(0)) { total, next in
+            guard case .bullet(let string) = next else { return total }
+            return total + height(text(string, size: 11.5, lineSpacing: 3.5), width: contentWidth - 18) + 7
+        }
+        if y - needed < bottomMargin && needed < pageSize.height - margin - bottomMargin {
+            endPage()
+            beginPage()
+        }
+    }
     switch block {
     case .chapter(let title):
         endPage()
