@@ -23,6 +23,15 @@ enum AppLinks {
     static let productPage = URL(string: "https://stefanradermacher.com/projects/motiv")!
     static let help = URL(string: "https://stefanradermacher.com/projects/motiv/support")!
     static let privacy = URL(string: "https://stefanradermacher.com/projects/motiv/datenschutz")!
+
+    /// Opens the manual that comes with the app, in the language of the app, in the default
+    /// PDF app. It lives in the bundle, so it matches this version and needs no network.
+    static func openManual() {
+        let german = Bundle.main.preferredLocalizations.first?.hasPrefix("de") == true
+        guard let url = Bundle.main.url(forResource: german ? "Motiv-Handbuch" : "Motiv-Manual", withExtension: "pdf")
+        else { return }
+        NSWorkspace.shared.open(url)
+    }
 }
 
 extension Color {

@@ -1721,6 +1721,16 @@
         }
       }
     },
+    "Motiv-Handbuch": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv Manual"
+          }
+        }
+      }
+    },
     "Möglicherweise sensibler Inhalt": {
       "localizations": {
         "en": {

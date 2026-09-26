@@ -6,6 +6,8 @@ Motiv ist ein schlichter Bild- und Galeriebetrachter für macOS, gemacht für Bi
 
 Füge mit „Ablage → Ordner hinzufügen …“ (⌘O) einen Ordner mit Bildern hinzu oder zieh ihn auf das Motiv-Symbol im Dock. Er steht dann mit allen Unterordnern in der Seitenleiste. Ein Doppelklick auf ein Bild zeigt es groß, Esc führt zurück zur Übersicht. Soll Motiv Bilder immer öffnen, lege es in den Einstellungen als Standard fest, für alle Formate oder einzeln. „Zurücksetzen“ gibt die Formate später der App zurück, die sie vorher hatte.
 
+Ausführlich steht alles im Handbuch: https://github.com/stefanradermacher/motiv/raw/main/docs/Motiv-Handbuch.pdf. In Motiv findest du es unter „Hilfe → Motiv-Handbuch“.
+
 ## Tastaturkürzel
 
 | Funktion | Kürzel |

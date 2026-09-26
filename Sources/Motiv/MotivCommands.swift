@@ -31,6 +31,7 @@ struct MotivCommands: Commands {
         CommandGroup(replacing: .help) {
             Button("Hilfe zu Motiv …") { NSWorkspace.shared.open(AppLinks.help) }
                 .keyboardShortcut("?")
+            Button("Motiv-Handbuch") { AppLinks.openManual() }
             Button("Motiv im Web") { NSWorkspace.shared.open(AppLinks.productPage) }
             Divider()
             Button("Motiv auf GitHub") { NSWorkspace.shared.open(AppLinks.sourceCode) }
