@@ -93,7 +93,7 @@ struct AboutView: View {
     /// Only for English readers: what the German app name means.
     private var nameNote: String? {
         guard Bundle.main.preferredLocalizations.first?.hasPrefix("en") == true else { return nil }
-        return "“Motiv” [moˈtiːf] is the German word for the subject of a picture."
+        return "“Motiv” [moˈtiːf] is the German word for the subject of an image."
     }
 
     /// What Motiv promises: free, open, without ads, without collecting data.
