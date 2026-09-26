@@ -12,7 +12,7 @@ Free, ad-free and without data collection.
 
 # About This Manual
 
-Motiv is a plain image and gallery viewer for macOS, made for collections of images in folders. It shows images where they are: no library, no import and no sign-in. In a few chapters, this manual describes what Motiv can do and how to use it.
+Motiv is a plain image and gallery viewer for macOS, made for collections of images in folders. It displays images where they are: no library, no import and no sign-in. In a few chapters, this manual describes what Motiv can do and how to use it.
 
 ## What Motiv Stands For
 
@@ -29,7 +29,7 @@ Motiv does not display any library, only your folders. Add a folder with “File
 
 ## Why Grant Access to Folders?
 
-Like every app from the App Store, Motiv may only read what you chose. If you open a single image from the Finder, Motiv shows it right away; it sees the images next to it only once you grant access to the folder with “Grant Folder Access …” in the title bar. Motiv remembers the access, for reading only.
+Like every app from the App Store, Motiv may only read what you chose. If you open a single image from the Finder, Motiv displays it right away; it sees the images next to it only once you grant access to the folder with “Grant Folder Access …” in the title bar. Motiv remembers the access, for reading only.
 
 ## Favourites
 
@@ -37,11 +37,11 @@ Bring deeply nested folders to the top of the sidebar as favourites, from the co
 
 ## The Folder Strip
 
-Above the thumbnails, a strip shows the subfolders of the current folder with their names and image counts, and the parent folder first. A click opens a folder. The strip can be dragged taller and scrolled sideways with the mouse wheel. With “Include Subfolders”, the overview also shows all images of the subfolders.
+Above the thumbnails, a strip displays the subfolders of the current folder with their names and image counts, and the parent folder first. A click opens a folder. The strip can be dragged taller and scrolled sideways with the mouse wheel. With “Include Subfolders”, the overview also displays all images of the subfolders.
 
 # The Overview
 
-The overview shows the images and videos of a folder as thumbnails. Set their size with the slider in the toolbar, with ⌘+ and ⌘- or with two fingers on the trackpad; ⌘0 restores the default size.
+The overview displays the images and videos of a folder as thumbnails. Set their size with the slider in the toolbar, with ⌘+ and ⌘- or with two fingers on the trackpad; ⌘0 restores the default size.
 
 ![The overview with folders, folder strip and thumbnails](docs/screenshots/en/1-overview.jpg)
 
@@ -51,17 +51,17 @@ Sort by name, capture date, modification date, size or kind. To find an image, s
 
 ## From the Overview
 
-A double-click or the Return key shows an image large. The context menu opens images in Preview or another app, shows them in the Finder, shares them or compares the selected images.
+A double-click or the Return key displays an image large. The context menu opens images in Preview or another app, shows them in the Finder, shares them or compares the selected images.
 
 # The Single Image View
 
-In the single image view, page through the folder with the arrow keys, the space bar or with two fingers on the trackpad. Esc returns to the overview; a strip at the bottom shows the neighbouring images. With ⌥⌘F the image fills the whole screen, without bars and without a pointer.
+In the single image view, page through the folder with the arrow keys, the space bar or with two fingers on the trackpad. Esc returns to the overview; a strip at the bottom displays the neighbouring images. With ⌥⌘F the image fills the whole screen, without bars and without a pointer.
 
 ![The single image view with information in the sidebar](docs/screenshots/en/2-viewer.jpg)
 
 ## Zooming
 
-An image first fits the window. A double-click shows it at actual size at the point clicked, a second one fits it again. The percentage in the toolbar fits to width or height or picks a zoom level. Motiv loads very large images at full resolution only when you zoom in, so it stays smooth.
+An image first fits the window. A double-click displays it at actual size at the point clicked, a second one fits it again. The percentage in the toolbar fits to width or height or picks a zoom level. Motiv loads very large images at full resolution only when you zoom in, so it stays smooth.
 
 ## Rotating and Flipping
 
@@ -69,7 +69,7 @@ Rotating (⌘L, ⌘R or with two fingers) and flipping affect the view only. The
 
 # Information
 
-The sidebar shows the folders, the images as a list, the information about the image, or folders and information stacked. Switch at the top of the sidebar or with ⌃⌘1 to ⌃⌘4.
+The sidebar displays the folders, the images as a list, the information about the image, or folders and information stacked. Switch at the top of the sidebar or with ⌃⌘1 to ⌃⌘4.
 
 ## What Motiv Shows
 
@@ -85,13 +85,13 @@ With ⌥⌘I, a line in the image shows the most important details. If an image 
 
 # Comparing
 
-Select two to four images and press ⌃⌘C. Motiv shows them side by side, four as 2 × 2. Below each image are its letter, name, dimensions and size.
+Select two to four images and press ⌃⌘C. Motiv displays them side by side, four as 2 × 2. Below each image are its letter, name, dimensions and size.
 
 ![Four images compared](docs/screenshots/en/3-compare.jpg)
 
 ## Linked Zoom
 
-Zoom and position are linked: all images show the same area, even at different resolutions. “Same pixels” shows them all at the same scale instead; the chain symbol unlinks them.
+Zoom and position are linked: all images show the same area, even at different resolutions. “Same pixels” displays them all at the same scale instead; the chain symbol unlinks them.
 
 ## On Top of Each Other
 
@@ -123,9 +123,9 @@ Motiv creates its thumbnails itself and does not store any copies of your images
 
 ## Sensitive Content
 
-If Sensitive Content Warning is switched on under “Privacy & Security” in System Settings, Motiv shows images that may contain sensitive content blurred until you choose “Show”. ⇧⌘U pauses this until Motiv quits. The check happens on your Mac only.
+If Sensitive Content Warning is switched on under “Privacy & Security” in System Settings, Motiv displays images that may contain sensitive content blurred until you choose “Show”. ⇧⌘U pauses this until Motiv quits. The check happens on your Mac only.
 
-> If Communication Safety is set up for a child in Screen Time, Motiv does not show such images at all, and this cannot be paused.
+> If Communication Safety is set up for a child in Screen Time, Motiv does not display such images at all, and this cannot be paused.
 
 # Questions and Answers
 
@@ -137,7 +137,7 @@ No. Motiv is a pure viewer. To edit an image, open it in Preview or another app.
 
 Motiv cannot read it right now, for example because the disk is not connected or the folder was moved. Choose “Grant Access Again …” from the context menu to select it anew.
 
-## The overview asks whether it should really show all images.
+## The overview asks whether it should really display all images.
 
 With subfolders, a folder can hold a great many images. Above 10,000, Motiv asks before reading them all.
 
@@ -174,7 +174,7 @@ Motiv does not transmit any data. There is no tracking, no analytics and no adve
 
 - Your settings
 - The folders you granted access to and your favourites
-- The folder shown last, and the size and position of the windows
+- The folder displayed last, and the size and position of the windows
 
 This data never leaves your Mac. Motiv keeps thumbnails and image information in memory only.
 
