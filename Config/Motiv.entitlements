@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
-	<!-- Nur Lesen in selbst gewählten Ordnern: Motiv ändert keine Datei. Erst ein Export in ein
-	     ausdrücklich gewähltes Ziel bräuchte wieder read-write. -->
+	<!-- Nur Lesen in selbst gewählten Ordnern: Motiv ist ein reiner Betrachter und schreibt
+	     keine Datei; Bearbeiten und Umwandeln übernehmen Vorschau und andere Programme. -->
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
 	<!-- Die freigegebenen Ordner und Favoriten über einen Neustart hinweg behalten. -->

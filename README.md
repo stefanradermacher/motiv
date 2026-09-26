@@ -99,5 +99,4 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 ## Geplant
 
 - Diashow
-- „Exportieren als …“ über ImageIO (JPEG, PNG, HEIC, TIFF), immer in eine neue Datei
 - Ordner beobachten statt „Aktualisieren“
