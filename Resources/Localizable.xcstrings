@@ -631,6 +631,16 @@
         }
       }
     },
+    "Bilder tauschen (Leertaste)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swap Pictures (Space)"
+          }
+        }
+      }
+    },
     "Bildrate": {
       "localizations": {
         "en": {
@@ -1117,6 +1127,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Applies when opening and browsing images. Otherwise Motiv shows images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway."
+          }
+        }
+      }
+    },
+    "Gleiche Pixel: alle Bilder im selben Maßstab; klicken für denselben Ausschnitt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Same pixels: all pictures at the same scale; click for the same area"
+          }
+        }
+      }
+    },
+    "Gleicher Ausschnitt; klicken, um alle Bilder im selben Maßstab zu zeigen (gleiche Pixel)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Same area; click to show all pictures at the same scale (same pixels)"
           }
         }
       }
@@ -2121,6 +2151,16 @@
         }
       }
     },
+    "Trennlinie: links das eine Bild, rechts das andere": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Split: one picture on the left, the other on the right"
+          }
+        }
+      }
+    },
     "Um 180° gedreht": {
       "localizations": {
         "en": {
@@ -2137,6 +2177,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "To make Motiv the default, the app has to be in the Applications folder."
+          }
+        }
+      }
+    },
+    "Umschalten: an derselben Stelle, mit Leertaste, Pfeiltasten oder A–D": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toggle: in the same place, switch with Space, the arrow keys or A–D"
           }
         }
       }
@@ -2671,12 +2721,22 @@
         }
       }
     },
-    "Übereinander: mit Leertaste, Pfeiltasten oder A–D umschalten": {
+    "Überblenden: ein Bild stufenlos ins andere": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On top of each other: switch with Space, the arrow keys or A–D"
+            "value": "Blend: fade smoothly from one picture into the other"
+          }
+        }
+      }
+    },
+    "Überblenden: ← und → schieben in Schritten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blend: ← and → move in steps"
           }
         }
       }

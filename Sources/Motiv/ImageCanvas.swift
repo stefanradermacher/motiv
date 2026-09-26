@@ -153,6 +153,36 @@ final class ImageScrollView: NSScrollView {
         reportZoom()
     }
 
+    /// Shows the part around the same relative centre at a given magnification, for comparing
+    /// pixel for pixel. Ends fitting to the window.
+    func follow(center: CGPoint, magnification value: CGFloat) {
+        let size = pictureView.frame.size
+        guard picture != nil, size.width > 0 else { return }
+        fitMode = nil
+        fitsOnRequest = false
+        magnification = min(max(value, minMagnification), maxMagnification)
+        let visible = contentView.bounds.size
+        let origin = NSPoint(x: center.x * size.width - visible.width / 2, y: center.y * size.height - visible.height / 2)
+        contentView.scroll(to: contentView.constrainBoundsRect(NSRect(origin: origin, size: visible)).origin)
+        reflectScrolledClipView(contentView)
+        reportZoom()
+    }
+
+    /// The magnification at which the picture fits the window, following the setting for small pictures.
+    var fittingMagnification: CGFloat? {
+        guard let size = picture?.size, size.width > 0, size.height > 0 else { return nil }
+        let scale = min(contentSize.width / size.width, contentSize.height / size.height)
+        return enlargesSmallImages ? scale : min(scale, 1)
+    }
+
+    /// Set when comparing on top of each other, see `toggleZoom`.
+    var countsRequestedFitAsFitted = false
+
+    /// Fitted to the window with small pictures enlarged, as "Zoom to Fit" does.
+    var isFittedOnRequest: Bool {
+        fitMode == .window && fitsOnRequest
+    }
+
     /// Back to fitting the window, following the setting for small pictures.
     func fitAutomatically() {
         fitMode = .window
@@ -307,6 +337,12 @@ final class ImageScrollView: NSScrollView {
     /// enlarged to the window, or 200 % if it fills the window exactly – and from anything else back
     /// to the fitted picture.
     func toggleZoom(at point: NSPoint) {
+        // Pictures compared on top of each other are all fitted with enlarging; for them that is
+        // the fitted state to zoom in from.
+        if countsRequestedFitAsFitted && isFittedOnRequest {
+            setZoom(max(1, magnification * 2), centeredAt: point)
+            return
+        }
         guard fitMode == .window && !fitsOnRequest else {
             fitMode = .window
             fitsOnRequest = false

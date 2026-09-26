@@ -282,28 +282,47 @@ private struct ThumbnailZoomGroup: View {
     }
 }
 
-/// Side by side | on top of each other, and linking zoom and position.
+/// The four ways to compare, then linking zoom and position, and matching area or pixels.
 private struct CompareLayoutGroup: View {
     @Bindable var compare: CompareModel
 
     var body: some View {
         let compare = compare
-        ToolbarSegments(segments: [
-            ToolbarSegment(symbol: compare.items.count == 4 ? "square.grid.2x2" : "rectangle.split.3x1",
-                           label: String(localized: "Nebeneinander"),
-                           isSelected: compare.layout == .sideBySide,
-                           action: { compare.layout = .sideBySide }),
-            ToolbarSegment(symbol: "square.2.layers.3d",
-                           label: String(localized: "Übereinander: mit Leertaste, Pfeiltasten oder A–D umschalten"),
-                           isSelected: compare.layout == .overlay,
-                           action: { compare.layout = .overlay }),
-            ToolbarSegment(symbol: compare.isLinked ? "link" : "link.badge.plus",
-                           label: compare.isLinked
-                               ? String(localized: "Zoom und Ausschnitt gekoppelt; klicken, um jedes Bild einzeln zu zoomen")
-                               : String(localized: "Jedes Bild einzeln; klicken, um Zoom und Ausschnitt zu koppeln"),
-                           isSelected: compare.isLinked,
-                           action: { compare.isLinked.toggle() }),
-        ])
+        HStack(spacing: 6) {
+            ToolbarSegments(segments: [
+                ToolbarSegment(symbol: compare.items.count == 4 ? "square.grid.2x2" : "rectangle.split.3x1",
+                               label: String(localized: "Nebeneinander"),
+                               isSelected: compare.layout == .sideBySide,
+                               action: { compare.layout = .sideBySide }),
+                ToolbarSegment(symbol: "square.2.layers.3d",
+                               label: String(localized: "Umschalten: an derselben Stelle, mit Leertaste, Pfeiltasten oder A–D"),
+                               isSelected: compare.layout == .overlay,
+                               action: { compare.layout = .overlay }),
+                ToolbarSegment(symbol: "circle.righthalf.filled",
+                               label: String(localized: "Überblenden: ein Bild stufenlos ins andere"),
+                               isSelected: compare.layout == .blend,
+                               action: { compare.layout = .blend }),
+                ToolbarSegment(symbol: "square.split.2x1",
+                               label: String(localized: "Trennlinie: links das eine Bild, rechts das andere"),
+                               isSelected: compare.layout == .split,
+                               action: { compare.layout = .split }),
+            ])
+            ToolbarSegments(segments: [
+                ToolbarSegment(symbol: compare.isLinked ? "link" : "link.badge.plus",
+                               label: compare.isLinked
+                                   ? String(localized: "Zoom und Ausschnitt gekoppelt; klicken, um jedes Bild einzeln zu zoomen")
+                                   : String(localized: "Jedes Bild einzeln; klicken, um Zoom und Ausschnitt zu koppeln"),
+                               isSelected: compare.isLinked,
+                               isEnabled: !compare.layout.isStacked,
+                               action: { compare.isLinked.toggle() }),
+                ToolbarSegment(symbol: "1.magnifyingglass",
+                               label: compare.matching == .samePixels
+                                   ? String(localized: "Gleiche Pixel: alle Bilder im selben Maßstab; klicken für denselben Ausschnitt")
+                                   : String(localized: "Gleicher Ausschnitt; klicken, um alle Bilder im selben Maßstab zu zeigen (gleiche Pixel)"),
+                               isSelected: compare.matching == .samePixels,
+                               action: { compare.matching = compare.matching == .samePixels ? .sameArea : .samePixels }),
+            ])
+        }
     }
 }
 
