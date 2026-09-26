@@ -17,7 +17,7 @@ Motiv is a plain image and gallery viewer for macOS, made for collections of ima
 ## What Motiv Stands For
 
 - Works directly with your folders; nothing is imported or copied
-- Never changes a file; rotating and flipping affect the view only
+- Does not modify files; rotating and flipping affect the view only
 - Free and open source under the Apache License 2.0
 - No ads, no tracking, no data collection
 - Apple frameworks only, no third-party components
@@ -25,7 +25,7 @@ Motiv is a plain image and gallery viewer for macOS, made for collections of ima
 
 # Folders and Favourites
 
-Motiv shows no library but your folders. Add a folder with “File → Add Folder …” or drag it onto the Motiv icon in the Dock. It then appears in the sidebar with all its subfolders.
+Motiv does not display any library, only your folders. Add a folder with “File → Add Folder …” or drag it onto the Motiv icon in the Dock. It then appears in the sidebar with all its subfolders.
 
 ## Why Grant Access to Folders?
 
@@ -103,11 +103,11 @@ Esc ends the comparison.
 
 # Videos and Other Apps
 
-Motiv recognises videos and shows them with a still frame, but does not play them. A double-click opens them in your default app, such as QuickTime Player.
+Motiv recognises videos and displays them with a still frame, but does not play them. A double-click opens them in your default app, such as QuickTime Player.
 
 ## Editing
 
-Motiv edits nothing. ⌘E opens an image in Preview, “Open With” in any other app. Sharing and copying hand over files only when you explicitly ask for it.
+Motiv never modifies any images. ⌘E opens an image in Preview, “Open With” in any other app. Sharing and copying hand over files only when you explicitly ask for it.
 
 ## Default App
 
@@ -119,7 +119,7 @@ Settings hold only what is rarely changed. Motiv remembers the sort order, thumb
 
 ## Thumbnails
 
-Motiv makes the thumbnails itself and stores no copies of your images on disk. If you prefer speed, switch on “Keep thumbnails in the system cache”; macOS Quick Look then makes them and keeps them in the system cache, as it does for the Finder.
+Motiv creates its thumbnails itself and does not store any copies of your images on disk. If you prefer speed, activate “Keep thumbnails in the system cache”; thumbnails will then be created by macOS Quick Look and kept in the system cache, just as it does for the Finder.
 
 ## Sensitive Content
 
@@ -143,7 +143,7 @@ With subfolders, a folder can hold a great many images. Above 10,000, Motiv asks
 
 ## What happens to my images?
 
-Nothing, except that they are shown. Motiv never writes to a file and uploads nothing.
+Nothing, except that they are displayed. Motiv never modifies your images and does not upload anything anywhere.
 
 # Keyboard Shortcuts
 
@@ -168,7 +168,7 @@ The most important commands work without a mouse:
 
 # Privacy
 
-Motiv transmits no data. There is no tracking, no analytics and no advertising, and the app itself never connects to the internet; only a voluntary tip goes through the App Store. Your images are read and shown on your Mac only.
+Motiv does not transmit any data. There is no tracking, no analytics and no advertising, and the app itself never connects to the internet; only a voluntary tip goes through the App Store. Your images are accessed and displayed on your Mac only.
 
 ## What Is Stored Locally
 

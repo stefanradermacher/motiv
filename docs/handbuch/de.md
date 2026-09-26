@@ -118,7 +118,7 @@ Motiv erkennt Videos und zeigt sie mit einem Standbild, spielt sie aber nicht ab
 
 ## Bearbeiten
 
-Motiv bearbeitet nichts. Mit ⌘E öffnest du ein Bild in Vorschau, über „Öffnen mit“ in jedem anderen Programm. Teilen und Kopieren übergeben die Dateien nur, wenn du es ausdrücklich möchtest.
+Motiv modifiziert keine Bilder. Mit ⌘E öffnest du ein Bild in Vorschau, über „Öffnen mit“ in jedem anderen Programm. Teilen und Kopieren übergeben die Dateien nur, wenn du es ausdrücklich möchtest.
 
 ## Standard-App
 
@@ -130,7 +130,7 @@ Die Einstellungen enthalten nur, was selten geändert wird. Sortierung, Größe 
 
 ## Miniaturen
 
-Motiv erzeugt die Miniaturen selbst und legt keine Kopien deiner Bilder auf der Platte ab. Wer es schneller mag, schaltet „Miniaturen im Systemcache ablegen“ ein; dann erzeugt sie die Übersicht von macOS und legt sie wie für den Finder im Systemcache ab.
+Motiv erzeugt die Miniaturen selbst und legt keine Kopien deiner Bilder auf der Platte ab. Wer es schneller mag, aktiviert „Miniaturen im Systemcache ablegen“; dann erzeugt die Übersicht von macOS die Miniaturen und legt sie wie für den Finder im Systemcache ab.
 
 ## Sensible Inhalte
 
@@ -154,7 +154,7 @@ Mit Unterordnern kann ein Ordner sehr viele Bilder enthalten. Ab 10.000 fragt Mo
 
 ## Was passiert mit meinen Bildern?
 
-Nichts, außer dass sie angezeigt werden. Motiv schreibt nie in eine Datei und lädt nichts hoch.
+Nichts, außer dass sie angezeigt werden. Motiv modifiziert deine Bilder nicht und lädt nirgendwo etwas hoch.
 
 # Tastaturkürzel
 
