@@ -1,17 +1,36 @@
 #!/bin/zsh
 # Builds Motiv.app with Xcode into ./build and installs it to /Applications.
-# Usage: ./build.sh [--no-install]
+# Usage: ./build.sh [--no-install] [--adhoc]
+#   Signs with the team from Config/Local.xcconfig if it names one; Xcode creates the App ID and the
+#   development profile in the developer account if needed. Without a team, or with --adhoc, it
+#   signs ad hoc and leaves out the entitlement for sensitive content analysis, which needs a
+#   provisioning profile: the app works, it just does not check for sensitive content.
 set -euo pipefail
 cd "${0:A:h}"
 
 install=true
-[[ "${1:-}" == "--no-install" ]] && install=false
+team=false
+grep -q '^DEVELOPMENT_TEAM *= *[A-Z0-9]' Config/Local.xcconfig 2>/dev/null && team=true
+for argument in "$@"; do
+    case "$argument" in
+        --no-install) install=false ;;
+        --adhoc) team=false ;;
+        --team) ;;  # the default when Config/Local.xcconfig names a team
+        *) echo "Unbekannte Option: $argument" >&2; exit 1 ;;
+    esac
+done
 
-# Local build without a developer account: ad-hoc signed, with the same sandbox as in the App Store.
+if $team; then
+    signing=(-allowProvisioningUpdates -allowProvisioningDeviceRegistration CODE_SIGN_STYLE=Automatic)
+else
+    # Without a developer account: ad-hoc signed, with the same sandbox as in the App Store.
+    signing=(CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= CODE_SIGN_ENTITLEMENTS=Config/Motiv-AdHoc.entitlements)
+fi
+
 mkdir -p .build
 if ! xcodebuild -project Motiv.xcodeproj -scheme Motiv -configuration Release \
     -derivedDataPath .build/xcode \
-    CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= \
+    "${signing[@]}" \
     build > .build/xcodebuild.log 2>&1; then
     grep -E "error:" .build/xcodebuild.log >&2 || tail -20 .build/xcodebuild.log >&2
     echo "Build fehlgeschlagen, vollständiges Protokoll: $PWD/.build/xcodebuild.log" >&2
@@ -31,7 +50,7 @@ lsregister=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchSe
 
 # The build number comes from Config/Motiv.xcconfig, the same source Xcode reads.
 build_number=$(sed -n 's/^CURRENT_PROJECT_VERSION = \([0-9][0-9]*\)$/\1/p' Config/Motiv.xcconfig)
-echo "Gebaut: $PWD/$app (Build ${build_number:-?})"
+echo "Gebaut: $PWD/$app (Build ${build_number:-?}, $($team && echo "signiert mit Team" || echo "ad hoc"))"
 
 $install || exit 0
 

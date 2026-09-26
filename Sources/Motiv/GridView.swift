@@ -179,7 +179,7 @@ struct ThumbnailCell: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            ThumbnailImage(url: item.url, size: size)
+            ThumbnailImage(url: item.url, size: size, isVideo: item.isVideo)
                 .overlay(alignment: .bottomLeading) {
                     if item.isVideo { VideoBadge() }
                 }
@@ -214,6 +214,7 @@ struct ItemContextMenu: View {
             .disabled(FileActions.previewApplication == nil)
         OpenWithMenu(urls: urls)
         Divider()
+        SensitiveContentMenu(urls: urls)
         Button("Im Finder zeigen") { FileActions.revealInFinder(urls) }
         Button("Kopieren") { FileActions.copy(urls) }
         ShareLink(items: urls) {

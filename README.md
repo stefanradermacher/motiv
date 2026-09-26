@@ -16,6 +16,7 @@ Die Oberfläche gibt es auf Deutsch und Englisch. Die Texte liegen im String-Kat
 - **Ordnerleiste.** Über der Übersicht zeigt eine Zeile die Unterordner des aktuellen Ordners mit Namen und Bildzahl, vorne als grauer Ordner mit Pfeil den übergeordneten Ordner; sie erscheint deshalb auch in Ordnern ohne Unterordner. Ein Klick öffnet den Ordner. Die Trennlinie darunter lässt sich ziehen, die Symbole wachsen mit und bleiben in einer Zeile, die sich mit dem Mausrad seitwärts scrollen lässt. Die Höhe gilt für alle Ordner; ein Doppelklick auf die Trennlinie oder das Kontextmenü der Leiste stellt die Standardhöhe wieder her. Ein- und ausschalten über den Button vor „Mit Unterordnern“ oder das Menü Darstellung.
 - **Bilderliste.** Die Seitenleiste kann auch die Bilder des Ordners als Liste zeigen, bei einbezogenen Unterordnern nach Unterordnern gegliedert. Man blättert darin mit Pfeiltasten oder Maus, rechts steht das Bild; die Miniaturleiste unten entfällt dann.
 - **Informationen.** Die Seitenleiste zeigt wahlweise die Ordner, die Informationen zum Bild (Datei, Bild, Aufnahme/EXIF, Ort, Beschreibung, Video, alle Metadaten) oder beides übereinander. Jede Ansicht merkt sich ihre Wahl: In der Übersicht stehen meist die Ordner, in der Einzelansicht die Informationen. Orte öffnet Motiv in Karten, eine eingebettete Karte gibt es nicht, weil sie Kacheln aus dem Netz laden würde.
+- **Sensible Inhalte.** Ist in den Systemeinstellungen unter „Datenschutz & Sicherheit“ der Hinweis für sensible Inhalte eingeschaltet, prüft Motiv Bilder mit Apples SensitiveContentAnalysis auf dem Mac und zeigt mögliche Nacktbilder weichgezeichnet, bis man „Anzeigen“ wählt. ⇧⌘U setzt das bis zum Beenden aus. Eine eigene Einstellung dafür gibt es bewusst nicht.
 - **Videos werden erkannt, aber nicht abgespielt.** Sie erscheinen mit Standbild in der Übersicht; ein Doppelklick öffnet sie im Standardprogramm.
 
 ### Warum Ordner freigeben?
@@ -26,13 +27,15 @@ In der Sandbox darf eine App nur lesen, was der Benutzer ausgewählt hat. Öffne
 
 Motiv ist ein Xcode-Projekt (`Motiv.xcodeproj`, Xcode 27 oder neuer, macOS 15+). In Xcode öffnen und mit ⌘R starten; für einen signierten Build unter „Signing & Capabilities“ das eigene Team eintragen.
 
-Ohne Xcode-Oberfläche und ohne Entwicklerkonto:
+Ohne Xcode-Oberfläche:
 
 ```
 ./build.sh
 ```
 
-Das baut `build/Motiv.app` mit `xcodebuild` (lokal ad hoc signiert, mit derselben Sandbox wie im App Store) und installiert die App nach `/Applications`. Läuft Motiv gerade, wird es vorher beendet und danach wieder geöffnet. Nur bauen, ohne zu installieren: `./build.sh --no-install`.
+Das baut `build/Motiv.app` mit `xcodebuild` (mit derselben Sandbox wie im App Store) und installiert die App nach `/Applications`. Läuft Motiv gerade, wird es vorher beendet und danach wieder geöffnet. Nur bauen, ohne zu installieren: `./build.sh --no-install`.
+
+Nennt `Config/Local.xcconfig` eine Team-ID, signiert `build.sh` mit diesem Team; Xcode legt App-ID und Entwicklungsprofil bei Bedarf im Entwicklerkonto an. Ohne Team-ID, oder mit `--adhoc`, signiert es ad hoc – dann ohne Entwicklerkonto, aber auch ohne die Berechtigung zur Prüfung sensibler Inhalte (`Config/Motiv-AdHoc.entitlements`), denn die verlangt ein Provisioning-Profil. Die App läuft trotzdem vollständig, sie prüft nur keine Bilder.
 
 Die Versionsnummer steht im Projekt unter „Version“ (`MARKETING_VERSION`) und wird von Hand erhöht. Die Build-Nummer steht als `CURRENT_PROJECT_VERSION` in `Config/Motiv.xcconfig`. **Vor jedem Upload in den App Store einmal `./scripts/bump-build.sh` ausführen und mitcommitten.**
 
@@ -81,6 +84,7 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 | Informationen ein-/ausblenden | ⌘I |
 | Schnellinfo im Bild | ⌥⌘I |
 | Nur Bild im Vollbild / beenden | ⌥⌘F / Esc |
+| Sensible Inhalte weichzeichnen, bis zum Beenden ein/aus | ⇧⌘U |
 | Bild per Namen finden (Übersicht) | Anfang des Namens eintippen |
 
 ## Geplant

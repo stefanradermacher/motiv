@@ -252,10 +252,9 @@ final class PictureView: NSView {
         layer.contentsGravity = .resize
         // Smooth when a large photo is scaled far down.
         layer.minificationFilter = .trilinear
-        if case .image(let image) = picture {
-            layer.contents = image
-        } else {
-            layer.contents = nil
+        switch picture {
+        case .image(let image), .concealed(let image, _): layer.contents = image
+        case .animated, nil: layer.contents = nil
         }
     }
 

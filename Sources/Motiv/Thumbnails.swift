@@ -57,21 +57,32 @@ final class ThumbnailCache {
 }
 
 /// A thumbnail that loads itself. At most `size` points wide and high, keeping its aspect ratio.
+/// Pictures that may be sensitive appear blurred, see SensitiveContentGuard; until they have been
+/// checked, only the placeholder shows.
 struct ThumbnailImage: View {
     let url: URL
     let size: CGFloat
+    var isVideo = false
 
     @Environment(\.displayScale) private var displayScale
     @State private var image: NSImage?
 
+    private var guardian: SensitiveContentGuard { .shared }
+
     var body: some View {
         let pixels = ThumbnailCache.pixelSize(for: size, scale: displayScale)
+        let concealed = guardian.isConcealed(url)
         Group {
-            if let image {
+            if let image, let concealed {
                 Image(nsImage: image)
                     .resizable()
                     .interpolation(.high)
                     .scaledToFit()
+                    .blur(radius: concealed ? max(6, size * 0.08) : 0, opaque: true)
+                    .clipped()
+                    .overlay {
+                        if concealed { ConcealedBadge(size: size) }
+                    }
             } else {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(.quaternary)
@@ -84,6 +95,10 @@ struct ThumbnailImage: View {
             } else {
                 image = await ThumbnailCache.shared.thumbnail(for: url, pixels: pixels)
             }
+        }
+        // Also when blurring resumes after a pause, so that pictures seen meanwhile get checked.
+        .task(id: "\(url.path)|\(guardian.isBlurring)") {
+            if guardian.isBlurring { await guardian.check(url, isVideo: isVideo) }
         }
     }
 }

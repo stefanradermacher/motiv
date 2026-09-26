@@ -32,11 +32,14 @@ enum ViewerContent: @unchecked Sendable {
 enum CanvasPicture {
     case image(CGImage)
     case animated(NSImage)
+    /// A small blurred copy of a picture that may be sensitive, shown as large as the picture.
+    case concealed(CGImage, size: CGSize)
 
     var size: CGSize {
         switch self {
         case .image(let image): CGSize(width: image.width, height: image.height)
         case .animated(let image): image.size
+        case .concealed(_, let size): size
         }
     }
 
@@ -44,6 +47,7 @@ enum CanvasPicture {
         switch (self, other) {
         case (.image(let a), .image(let b)?): a === b
         case (.animated(let a), .animated(let b)?): a === b
+        case (.concealed(let a, _), .concealed(let b, _)?): a === b
         default: false
         }
     }
@@ -73,6 +77,24 @@ final class ImageViewerModel {
     /// The current image and its neighbours, so that stepping through a folder is instant.
     @ObservationIgnored private var cache: [URL: ViewerContent] = [:]
     @ObservationIgnored private var wanted: Set<URL> = []
+
+    @ObservationIgnored private var concealedSource: CGImage?
+    @ObservationIgnored private var concealedCopy: CanvasPicture?
+
+    /// The picture blurred beyond recognition, for pictures that may be sensitive. Made once per picture.
+    func concealedPicture() -> CanvasPicture? {
+        let source: CGImage? = switch content {
+        case .still(let image), .poster(let image): image
+        case .animated(let image): image.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        case .failed, nil: nil
+        }
+        guard let source, let picture else { return nil }
+        if source !== concealedSource {
+            concealedSource = source
+            concealedCopy = SensitiveContentGuard.blurred(source).map { .concealed($0, size: picture.size) }
+        }
+        return concealedCopy
+    }
 
     var canTransform: Bool {
         if case .still = content { true } else { false }

@@ -72,6 +72,13 @@ struct SettingsView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            Section {
+                SensitiveContentSettingsRow()
+            } footer: {
+                Text("Ist in den Systemeinstellungen unter „Datenschutz & Sicherheit“ der Hinweis für sensible Inhalte eingeschaltet, zeigt Motiv Bilder mit möglicherweise sensiblen Inhalten zunächst unscharf. Geprüft wird nur auf diesem Mac.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
             Section("Übersicht") {
                 Toggle("Dateinamen unter den Miniaturen anzeigen", isOn: $showNames)
             }

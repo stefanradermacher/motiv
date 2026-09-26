@@ -84,6 +84,12 @@ struct MotivCommands: Commands {
             Button(infoTitle) { gallery?.toggleInfo() }
                 .keyboardShortcut("i")
                 .disabled(gallery == nil || gallery?.isPresenting == true)
+            Toggle("Sensible Inhalte weichzeichnen", isOn: Binding(
+                get: { SensitiveContentGuard.shared.isBlurring },
+                set: { SensitiveContentGuard.shared.isPaused = !$0 }
+            ))
+            .keyboardShortcut("u", modifiers: [.command, .shift])
+            .disabled(!SensitiveContentGuard.shared.isActive)
             Toggle("Schnellinfo im Bild", isOn: binding(\.showsQuickInfo))
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(gallery == nil)

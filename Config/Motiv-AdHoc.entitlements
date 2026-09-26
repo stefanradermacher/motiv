@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Für Builds ohne Entwicklerkonto (build.sh ohne Team-ID): wie Motiv.entitlements, aber ohne die
+	     Prüfung sensibler Inhalte, die ein Provisioning-Profil verlangt. -->
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
 	<!-- Lesen in selbst gewählten Ordnern; Schreiben nur dorthin, wo beim Exportieren
@@ -11,11 +13,5 @@
 	<!-- Die freigegebenen Ordner und Favoriten über einen Neustart hinweg behalten. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
-	<!-- Hinweis für sensible Inhalte: Bilder auf dem Mac auf Nacktheit prüfen, wenn der Hinweis
-	     in den Systemeinstellungen eingeschaltet ist. -->
-	<key>com.apple.developer.sensitivecontentanalysis.client</key>
-	<array>
-		<string>analysis</string>
-	</array>
 </dict>
 </plist>

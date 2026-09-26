@@ -70,7 +70,7 @@ private struct ItemInfoView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                ThumbnailImage(url: item.url, size: 200)
+                ThumbnailImage(url: item.url, size: 200, isVideo: item.isVideo)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 4)
                 if let info {

@@ -25,7 +25,7 @@ struct ViewerView: View {
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                ImageCanvas(picture: viewer.picture, enlargesSmallImages: enlargesSmallImages,
+                ImageCanvas(picture: shownPicture, enlargesSmallImages: enlargesSmallImages,
                             isPresenting: gallery.isPresenting, model: viewer)
                 overlay
             }
@@ -44,10 +44,36 @@ struct ViewerView: View {
         .focused($focused)
         .onKeyPress(phases: [.down, .repeat]) { press in handle(press) }
         .onExitCommand(perform: leave)
+        .task(id: "\(viewer.item?.url.path ?? "")|\(SensitiveContentGuard.shared.isBlurring)") {
+            guard let item = viewer.item else { return }
+            await SensitiveContentGuard.shared.check(item.url, isVideo: item.isVideo)
+        }
         .onAppear { focused = true }
     }
 
+    /// Whether the picture shown is hidden as possibly sensitive; nil while it is being checked.
+    private var concealed: Bool? {
+        viewer.item.map { SensitiveContentGuard.shared.isConcealed($0.url) } ?? false
+    }
+
+    /// Nothing until the check is done, so that a sensitive picture never flashes up.
+    private var shownPicture: CanvasPicture? {
+        switch concealed {
+        case nil: nil
+        case true?: viewer.concealedPicture()
+        case false?: viewer.picture
+        }
+    }
+
     @ViewBuilder private var overlay: some View {
+        if let item = viewer.item, concealed != false {
+            if concealed == true { ConcealedOverlay(url: item.url) } else { ProgressView() }
+        } else {
+            contentOverlay
+        }
+    }
+
+    @ViewBuilder private var contentOverlay: some View {
         switch viewer.content {
         case nil:
             ProgressView()
@@ -118,7 +144,7 @@ struct Filmstrip: View {
                 LazyHStack(spacing: 6) {
                     ForEach(gallery.items) { item in
                         let isCurrent = item.url == gallery.current
-                        ThumbnailImage(url: item.url, size: size)
+                        ThumbnailImage(url: item.url, size: size, isVideo: item.isVideo)
                             .overlay(alignment: .bottomLeading) {
                                 if item.isVideo { VideoBadge().scaleEffect(0.8, anchor: .bottomLeading) }
                             }

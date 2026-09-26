@@ -80,7 +80,7 @@ private struct ImageRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            ThumbnailImage(url: item.url, size: 36)
+            ThumbnailImage(url: item.url, size: 36, isVideo: item.isVideo)
                 .overlay(alignment: .bottomLeading) {
                     if item.isVideo {
                         Image(systemName: "play.fill")
