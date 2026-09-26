@@ -80,8 +80,10 @@ final class ImageViewerModel {
 
     @ObservationIgnored private var concealedSource: CGImage?
     @ObservationIgnored private var concealedCopy: CanvasPicture?
+    @ObservationIgnored private var concealedStrict = false
 
-    /// The picture blurred beyond recognition, for pictures that may be sensitive. Made once per picture.
+    /// The picture blurred beyond recognition, for pictures that may be sensitive; for a child a
+    /// plain area instead. Made once per picture.
     func concealedPicture() -> CanvasPicture? {
         let source: CGImage? = switch content {
         case .still(let image), .poster(let image): image
@@ -89,9 +91,11 @@ final class ImageViewerModel {
         case .failed, nil: nil
         }
         guard let source, let picture else { return nil }
-        if source !== concealedSource {
+        let strict = SensitiveContentGuard.shared.isStrict
+        if source !== concealedSource || strict != concealedStrict {
             concealedSource = source
-            concealedCopy = SensitiveContentGuard.blurred(source).map { .concealed($0, size: picture.size) }
+            concealedStrict = strict
+            concealedCopy = SensitiveContentGuard.concealed(source, strict: strict).map { .concealed($0, size: picture.size) }
         }
         return concealedCopy
     }

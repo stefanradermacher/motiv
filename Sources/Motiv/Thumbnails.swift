@@ -73,7 +73,13 @@ struct ThumbnailImage: View {
         let pixels = ThumbnailCache.pixelSize(for: size, scale: displayScale)
         let concealed = guardian.isConcealed(url)
         Group {
-            if let image, let concealed {
+            if let image, concealed == true, guardian.isStrict {
+                // For a child a plain area in the picture's proportions, nothing of the picture.
+                Rectangle()
+                    .fill(Color(cgColor: SensitiveContentGuard.strictFill))
+                    .aspectRatio(image.size, contentMode: .fit)
+                    .overlay { ConcealedBadge(size: size) }
+            } else if let image, let concealed {
                 Image(nsImage: image)
                     .resizable()
                     .interpolation(.high)

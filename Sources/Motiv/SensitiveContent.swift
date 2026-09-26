@@ -16,7 +16,6 @@ import AppKit
 import CoreImage
 import Observation
 import QuickLookThumbnailing
-import Security
 import SensitiveContentAnalysis
 import SwiftUI
 
@@ -33,26 +32,36 @@ final class SensitiveContentGuard {
     private(set) var results: [URL: Bool] = [:]
     /// Pictures the user chose to see, until Motiv quits.
     private(set) var revealed: Set<URL> = []
+    /// Set up through Screen Time for a child ("Communication Safety"): pictures stay hidden,
+    /// neither all of them (pause) nor single ones can be shown.
+    private(set) var isStrict: Bool
     /// Blurring paused by the user. Deliberately not stored: the next launch blurs again.
     var isPaused = false
 
+    /// Whether the user may pause blurring or show single pictures.
+    var canOverride: Bool {
+        isActive && !isStrict
+    }
+
     /// Whether pictures are checked and blurred right now.
     var isBlurring: Bool {
-        isActive && !isPaused
+        isActive && !(isPaused && canOverride)
+    }
+
+    /// Whether blurring is paused right now.
+    var isPausedNow: Bool {
+        isPaused && canOverride
     }
 
     @ObservationIgnored private let analyzer = SCSensitivityAnalyzer()
     @ObservationIgnored private var running: [URL: Task<Bool, Never>] = [:]
     @ObservationIgnored private let limiter = Limiter(limit: 4)
 
-    /// Builds without a developer account lack the entitlement; they never check, whatever the setting.
-    @ObservationIgnored private let isEntitled: Bool = {
-        guard let task = SecTaskCreateFromSelf(nil) else { return false }
-        return SecTaskCopyValueForEntitlement(task, "com.apple.developer.sensitivecontentanalysis.client" as CFString, nil) != nil
-    }()
-
+    /// Builds without a developer account lack the entitlement; the policy then reads `.disabled`,
+    /// whatever the setting.
     private init() {
-        isActive = isEntitled && analyzer.analysisPolicy != .disabled
+        isActive = analyzer.analysisPolicy != .disabled
+        isStrict = analyzer.analysisPolicy == .descriptiveInterventions
         // The setting can change while Motiv runs; it is read again whenever Motiv comes to the front.
         NotificationCenter.default.addObserver(forName: NSApplication.didBecomeActiveNotification, object: nil, queue: .main) { _ in
             MainActor.assumeIsolated { SensitiveContentGuard.shared.refreshPolicy() }
@@ -60,13 +69,16 @@ final class SensitiveContentGuard {
     }
 
     func refreshPolicy() {
-        let active = isEntitled && analyzer.analysisPolicy != .disabled
+        let policy = analyzer.analysisPolicy
+        let active = policy != .disabled
         if active != isActive { isActive = active }
+        let strict = policy == .descriptiveInterventions
+        if strict != isStrict { isStrict = strict }
     }
 
     /// Whether the picture is hidden now; nil while it has not been checked yet.
     func isConcealed(_ url: URL) -> Bool? {
-        guard isBlurring, !revealed.contains(url) else { return false }
+        guard isBlurring, !(canOverride && revealed.contains(url)) else { return false }
         return results[url]
     }
 
@@ -88,6 +100,7 @@ final class SensitiveContentGuard {
     }
 
     func reveal(_ urls: [URL]) {
+        guard canOverride else { return }
         revealed.formUnion(urls)
     }
 
@@ -115,7 +128,29 @@ final class SensitiveContentGuard {
         }
     }
 
-    // MARK: Blurred pictures
+    // MARK: Hidden pictures
+
+    /// The colour that replaces a picture for a child, see `isStrict`.
+    nonisolated static let strictFill = CGColor(gray: 0.55, alpha: 1)
+
+    /// What the single-image view shows instead of the picture: blurred, or for a child a plain
+    /// area, which gives away nothing of the picture at all.
+    nonisolated static func concealed(_ image: CGImage, strict: Bool) -> CGImage? {
+        strict ? plainArea(like: image) : blurred(image)
+    }
+
+    /// A small area of one colour in the proportions of the picture; the canvas scales it up.
+    nonisolated private static func plainArea(like image: CGImage) -> CGImage? {
+        let scale = 64 / Double(max(image.width, image.height, 1))
+        let width = max(1, Int((Double(image.width) * scale).rounded()))
+        let height = max(1, Int((Double(image.height) * scale).rounded()))
+        guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        else { return nil }
+        context.setFillColor(strictFill)
+        context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        return context.makeImage()
+    }
 
     /// A strongly blurred, small copy of a picture for the single-image view.
     nonisolated static func blurred(_ image: CGImage) -> CGImage? {
@@ -181,13 +216,20 @@ struct ConcealedOverlay: View {
             Text("Dieses Bild enthält möglicherweise sensible Inhalte.")
                 .font(.headline)
                 .multilineTextAlignment(.center)
-            Text("Der Hinweis für sensible Inhalte ist in den Systemeinstellungen eingeschaltet.")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-            Button("Anzeigen") { SensitiveContentGuard.shared.reveal([url]) }
-                .controlSize(.large)
-                .keyboardShortcut(.defaultAction)
+            if SensitiveContentGuard.shared.canOverride {
+                Text("Der Hinweis für sensible Inhalte ist in den Systemeinstellungen eingeschaltet.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                Button("Anzeigen") { SensitiveContentGuard.shared.reveal([url]) }
+                    .controlSize(.large)
+                    .keyboardShortcut(.defaultAction)
+            } else {
+                Text("Die Kommunikationssicherheit in der Bildschirmzeit verbirgt solche Bilder. Wenn du unsicher bist, sprich mit jemandem, dem du vertraust.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
         .padding(24)
         .frame(maxWidth: 360)
@@ -200,18 +242,23 @@ struct SensitiveContentSettingsRow: View {
     private let guardian = SensitiveContentGuard.shared
 
     var body: some View {
-        LabeledContent("Sensible Inhalte") {
-            HStack {
-                Text(guardian.isActive ? "Weichgezeichnet" : "Nicht geprüft")
-                    .foregroundStyle(.secondary)
-                Button("Systemeinstellungen …") { SensitiveContentGuard.openSystemSettings() }
-            }
+        LabeledContent {
+            Button("Systemeinstellungen …") { SensitiveContentGuard.openSystemSettings() }
+        } label: {
+            Text("Sensible Inhalte")
+            Text(status)
         }
         Toggle("Bis zum Beenden von Motiv nicht weichzeichnen", isOn: Binding(
-            get: { guardian.isPaused },
+            get: { guardian.isPausedNow },
             set: { guardian.isPaused = $0 }
         ))
-        .disabled(!guardian.isActive)
+        .disabled(!guardian.canOverride)
+    }
+
+    private var status: LocalizedStringKey {
+        if !guardian.isActive { return "Nicht geprüft" }
+        if guardian.isStrict { return "Weichgezeichnet (Kommunikationssicherheit)" }
+        return guardian.isPausedNow ? "Ausgesetzt bis zum Beenden" : "Weichgezeichnet"
     }
 }
 
@@ -223,7 +270,7 @@ struct SensitiveContentMenu: View {
         let guardian = SensitiveContentGuard.shared
         let concealed = urls.filter { guardian.isConcealed($0) == true }
         let revealed = urls.filter { guardian.revealed.contains($0) && guardian.results[$0] == true }
-        if !concealed.isEmpty {
+        if !concealed.isEmpty && guardian.canOverride {
             Divider()
             Button("Sensible Inhalte anzeigen") { guardian.reveal(concealed) }
         } else if !revealed.isEmpty {

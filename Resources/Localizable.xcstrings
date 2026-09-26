@@ -541,6 +541,16 @@
         }
       }
     },
+    "Ausgesetzt bis zum Beenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused until Motiv quits"
+          }
+        }
+      }
+    },
     "Ausgewählte Bilder vergleichen": {
       "localizations": {
         "en": {
@@ -837,6 +847,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "This file can’t be displayed"
+          }
+        }
+      }
+    },
+    "Die Kommunikationssicherheit in der Bildschirmzeit verbirgt solche Bilder. Wenn du unsicher bist, sprich mit jemandem, dem du vertraust.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Communication Safety in Screen Time hides pictures like this. If you are unsure, talk to someone you trust."
           }
         }
       }
@@ -2387,6 +2407,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Blurred"
+          }
+        }
+      }
+    },
+    "Weichgezeichnet (Kommunikationssicherheit)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blurred (Communication Safety)"
           }
         }
       }

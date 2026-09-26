@@ -89,7 +89,7 @@ struct MotivCommands: Commands {
                 set: { SensitiveContentGuard.shared.isPaused = !$0 }
             ))
             .keyboardShortcut("u", modifiers: [.command, .shift])
-            .disabled(!SensitiveContentGuard.shared.isActive)
+            .disabled(!SensitiveContentGuard.shared.canOverride)
             Toggle("Schnellinfo im Bild", isOn: binding(\.showsQuickInfo))
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(gallery == nil)
