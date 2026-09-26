@@ -68,11 +68,14 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 | Auswahl bewegen / erweitern | Pfeiltasten / ⇧ + Pfeiltasten |
 | Vorheriges / nächstes Bild | ← / → oder ⌘← / ⌘→ (in der Einzelansicht auch ↑ / ↓ und Leertaste) |
 | Erstes / letztes Bild | Pos1 / Ende oder ⌘Pos1 / ⌘Ende |
-| Vergrößern / Verkleinern (Übersicht: Miniaturen) | ⌘+ / ⌘- |
-| Originalgröße / An Fenster anpassen | ⌘0 / ⌘9, oder Doppelklick ins Bild |
+| Vergrößern / Verkleinern (Übersicht: Miniaturen) | ⌘+ / ⌘- oder Pinch auf dem Trackpad |
+| Standardgröße der Miniaturen (Übersicht) | ⌘0 oder Doppelklick auf den Größenregler |
+| Originalgröße / An Fenster anpassen | ⌘0 / ⌘9 |
+| Eingepasst ↔ näher heran (100 %, bei kleinen Bildern Fenstergröße) | Doppelklick ins Bild oder mit zwei Fingern doppeltippen |
 | An Breite / Höhe anpassen, feste Zoomstufen | Klick auf die Prozentzahl in der Toolbar |
 | Zoomstufe eingeben | ⌥⌘0 |
-| Nach links / rechts drehen (nur Ansicht) | ⌘L / ⌘R |
+| Nach links / rechts drehen (nur Ansicht) | ⌘L / ⌘R oder mit zwei Fingern drehen |
+| Nächstes / voriges Bild auf dem Trackpad | mit zwei Fingern waagerecht streichen (wenn „Mit Streichen Seiten blättern“ auf zwei Finger steht) |
 | Horizontal / vertikal spiegeln (nur Ansicht) | Menü „Bild“ oder Toolbar |
 | Mit Unterordnern (ab 10.000 Bildern mit Rückfrage) | ⌥⌘U |
 | In Vorschau öffnen | ⌘E |

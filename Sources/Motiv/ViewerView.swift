@@ -26,7 +26,7 @@ struct ViewerView: View {
         VStack(spacing: 0) {
             ZStack {
                 ImageCanvas(picture: shownPicture, enlargesSmallImages: enlargesSmallImages,
-                            isPresenting: gallery.isPresenting, model: viewer)
+                            isPresenting: gallery.isPresenting, model: viewer, gestures: gestures)
                 overlay
             }
             .overlay(alignment: .bottom) {
@@ -49,6 +49,18 @@ struct ViewerView: View {
             await SensitiveContentGuard.shared.check(item.url, isVideo: item.isVideo)
         }
         .onAppear { focused = true }
+    }
+
+    private var gestures: CanvasGestures {
+        let gallery = gallery
+        let viewer = viewer
+        return CanvasGestures(
+            hasPrevious: gallery.hasPrevious,
+            hasNext: gallery.hasNext,
+            canRotate: viewer.canTransform && concealed == false,
+            step: { gallery.step($0) },
+            rotate: { $0 > 0 ? viewer.rotateRight() : viewer.rotateLeft() }
+        )
     }
 
     /// Whether the picture shown is hidden as possibly sensitive; nil while it is being checked.

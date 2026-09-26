@@ -831,6 +831,16 @@
         }
       }
     },
+    "Doppelklick: Standardgröße der Miniaturen (⌘0)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double-click: default thumbnail size (⌘0)"
+          }
+        }
+      }
+    },
     "Ein Abendessen": {
       "localizations": {
         "en": {
@@ -1451,16 +1461,6 @@
         }
       }
     },
-    "Mit Unterordnern": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "With Subfolders"
-          }
-        }
-      }
-    },
     "Motiv": {
       "localizations": {
         "en": {
@@ -1997,6 +1997,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Default App by Image Format"
+          }
+        }
+      }
+    },
+    "Standardgröße der Miniaturen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default Thumbnail Size"
           }
         }
       }

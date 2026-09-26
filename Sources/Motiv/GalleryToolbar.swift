@@ -44,23 +44,7 @@ struct GalleryToolbar: ToolbarContent {
             separateItem { ViewerZoomGroup(viewer: gallery.viewer) }
         } else if gallery.folder != nil {
             separateItem { ThumbnailZoomGroup(gallery: gallery) }
-            ToolbarItem {
-                Toggle(isOn: $gallery.showsFolderStrip) {
-                    Label("Ordnerleiste", systemImage: "rectangle.topthird.inset.filled")
-                }
-                .help(gallery.showsFolderStrip
-                      ? "Die Leiste mit den Unterordnern über den Bildern ausblenden"
-                      : "Die Unterordner in einer Leiste über den Bildern zeigen")
-            }
-            ToolbarItem {
-                Toggle(isOn: $gallery.includeSubfolders) {
-                    Label("Mit Unterordnern", systemImage: "list.bullet.indent")
-                        .labelStyle(.titleAndIcon)
-                }
-                .help(gallery.includeSubfolders
-                      ? "Zeigt auch die Bilder aller Unterordner. Klicken, um nur diesen Ordner zu zeigen (⌥⌘U)."
-                      : "Zeigt nur die Bilder dieses Ordners. Klicken, um auch alle Unterordner einzubeziehen (⌥⌘U).")
-            }
+            separateItem { foldersGroup }
             ToolbarItem {
                 Menu {
                     Picker("Sortieren nach", selection: $gallery.sortKey) {
@@ -113,6 +97,25 @@ struct GalleryToolbar: ToolbarContent {
                            isEnabled: gallery.hasPrevious, action: { gallery.step(-1) }),
             ToolbarSegment(symbol: "chevron.right", label: String(localized: "Nächstes Bild"),
                            isEnabled: gallery.hasNext, action: { gallery.step(1) }),
+        ])
+    }
+
+    /// Folder strip | include subfolders: two switches in one capsule; the tooltips explain them.
+    private var foldersGroup: some View {
+        let gallery = gallery
+        return ToolbarSegments(segments: [
+            ToolbarSegment(symbol: "rectangle.topthird.inset.filled",
+                           label: gallery.showsFolderStrip
+                               ? String(localized: "Die Leiste mit den Unterordnern über den Bildern ausblenden")
+                               : String(localized: "Die Unterordner in einer Leiste über den Bildern zeigen"),
+                           isSelected: gallery.showsFolderStrip,
+                           action: { gallery.showsFolderStrip.toggle() }),
+            ToolbarSegment(symbol: "list.bullet.indent",
+                           label: gallery.includeSubfolders
+                               ? String(localized: "Zeigt auch die Bilder aller Unterordner. Klicken, um nur diesen Ordner zu zeigen (⌥⌘U).")
+                               : String(localized: "Zeigt nur die Bilder dieses Ordners. Klicken, um auch alle Unterordner einzubeziehen (⌥⌘U)."),
+                           isSelected: gallery.includeSubfolders,
+                           action: { gallery.includeSubfolders.toggle() }),
         ])
     }
 
@@ -241,6 +244,10 @@ private struct ThumbnailZoomGroup: View {
             button("plus.magnifyingglass", "Größere Miniaturen (⌘+)",
                    enabled: gallery.thumbnailSize < Preferences.thumbnailSizes.upperBound) { gallery.zoomIn() }
         }
+        // A double-click beside the buttons restores the default size, as on the folder strip's divider.
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) { gallery.resetThumbnailSize() }
+        .help("Doppelklick: Standardgröße der Miniaturen (⌘0)")
     }
 
     private func button(_ symbol: String, _ help: LocalizedStringKey, enabled: Bool,

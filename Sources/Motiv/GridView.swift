@@ -24,6 +24,8 @@ struct GridView: View {
     @State private var typed = ""
     @State private var typedAt = Date.distantPast
     @State private var typedMatches = true
+    /// Thumbnail size when a pinch began.
+    @State private var sizeAtPinchStart: Double?
 
     private let spacing: CGFloat = 12
     /// A pause this long starts a new search, as in the Finder.
@@ -43,6 +45,15 @@ struct GridView: View {
                     }
                     .padding(padding)
                 }
+                // Pinching on the trackpad changes the size of the thumbnails, as the slider does.
+                .simultaneousGesture(MagnifyGesture()
+                    .onChanged { value in
+                        let start = sizeAtPinchStart ?? gallery.thumbnailSize
+                        sizeAtPinchStart = start
+                        let range = Preferences.thumbnailSizes
+                        gallery.thumbnailSize = min(max(start * value.magnification, range.lowerBound), range.upperBound)
+                    }
+                    .onEnded { _ in sizeAtPinchStart = nil })
                 .focusable()
                 .focusEffectDisabled()
                 .focused($focused)

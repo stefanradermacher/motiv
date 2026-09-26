@@ -23,6 +23,8 @@ struct ImageCanvas: NSViewRepresentable {
     /// Only the image, full screen: on black, without a pointer.
     let isPresenting: Bool
     let model: ImageViewerModel
+    /// What trackpad gestures do beyond zooming: page through the folder and rotate.
+    let gestures: CanvasGestures
 
     func makeNSView(context: Context) -> ImageScrollView {
         let view = ImageScrollView()
@@ -38,9 +40,21 @@ struct ImageCanvas: NSViewRepresentable {
         model.canvas = view
         view.enlargesSmallImages = enlargesSmallImages
         view.backgroundColor = isPresenting ? .black : .underPageBackgroundColor
+        view.gestures = gestures
         view.show(picture)
         if isPresenting { NSCursor.setHiddenUntilMouseMoves(true) }
     }
+}
+
+/// The folder around the picture, for gestures on the trackpad.
+struct CanvasGestures {
+    var hasPrevious = false
+    var hasNext = false
+    var canRotate = false
+    /// -1 for the previous picture, 1 for the next.
+    var step: (Int) -> Void = { _ in }
+    /// Quarter turns: 1 clockwise, -1 counterclockwise.
+    var rotate: (Int) -> Void = { _ in }
 }
 
 /// How the picture follows the window size.
@@ -76,6 +90,9 @@ final class ImageScrollView: NSScrollView {
 
     private let pictureView = PictureView()
     private var picture: CanvasPicture?
+    var gestures = CanvasGestures()
+    /// Rotation of the current two-finger turn not yet used for a quarter turn, in degrees.
+    private var pendingRotation: CGFloat = 0
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -177,14 +194,88 @@ final class ImageScrollView: NSScrollView {
     }
 
     /// Double-click: from the fitted picture to 100 % at the point clicked, and back.
-    private func toggleZoom(at point: NSPoint) {
-        if fitMode != nil && abs(magnification - 1) > 0.001 {
-            setZoom(1, centeredAt: point)
-        } else {
+    // MARK: Trackpad gestures
+
+    /// Double-tap with two fingers ("smart zoom"): the same as a double-click.
+    override func smartMagnify(with event: NSEvent) {
+        guard picture != nil else { return }
+        toggleZoom(at: pictureView.convert(event.locationInWindow, from: nil))
+    }
+
+    /// Turning with two fingers rotates in quarter turns, like Preview; only the view, never the file.
+    override func rotate(with event: NSEvent) {
+        guard gestures.canRotate else { return }
+        if event.phase == .began { pendingRotation = 0 }
+        // Positive rotation is counterclockwise.
+        pendingRotation += CGFloat(event.rotation)
+        while abs(pendingRotation) >= 45 {
+            let counterclockwise = pendingRotation > 0
+            gestures.rotate(counterclockwise ? -1 : 1)
+            pendingRotation -= counterclockwise ? 90 : -90
+        }
+        if event.phase == .ended || event.phase == .cancelled { pendingRotation = 0 }
+    }
+
+    /// Swiping sideways with two fingers pages through the folder, as Safari pages back and forward –
+    /// while the picture fits the window. A larger picture is moved instead, as before.
+    override func scrollWheel(with event: NSEvent) {
+        if event.phase == .began, NSEvent.isSwipeTrackingFromScrollEventsEnabled,
+           abs(event.scrollingDeltaX) > abs(event.scrollingDeltaY), pictureFitsHorizontally,
+           gestures.hasPrevious || gestures.hasNext {
+            trackSwipe(event)
+            return
+        }
+        super.scrollWheel(with: event)
+    }
+
+    private var pictureFitsHorizontally: Bool {
+        pictureView.frame.width * magnification <= contentSize.width + 1
+    }
+
+    private func trackSwipe(_ event: NSEvent) {
+        wantsLayer = true
+        let width = bounds.width
+        var direction = 0
+        // Positive amounts lead to the next picture, negative ones to the previous.
+        event.trackSwipeEvent(options: [.lockDirection, .clampGestureAmount],
+                              dampenAmountThresholdMin: gestures.hasPrevious ? -1 : 0,
+                              max: gestures.hasNext ? 1 : 0) { [weak self] amount, phase, isComplete, _ in
+            guard let self else { return }
+            // The picture slides out the way the next one comes from.
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            self.layer?.sublayerTransform = CATransform3DMakeTranslation(-amount * width, 0, 0)
+            CATransaction.commit()
+            if phase == .ended {
+                direction = amount > 0 ? 1 : amount < 0 ? -1 : 0
+            } else if phase == .cancelled {
+                direction = 0
+            }
+            if isComplete {
+                self.layer?.sublayerTransform = CATransform3DIdentity
+                if direction != 0 { self.gestures.step(direction) }
+            }
+        }
+    }
+
+    /// Double-click or double-tap: two states, as in Preview. From the picture fitted automatically
+    /// to a closer look at the point – 100 %, or for a picture fitted at 100 % already the picture
+    /// enlarged to the window, or 200 % if it fills the window exactly – and from anything else back
+    /// to the fitted picture.
+    func toggleZoom(at point: NSPoint) {
+        guard fitMode == .window && !fitsOnRequest else {
             fitMode = .window
             fitsOnRequest = false
             applyFit()
+            return
         }
+        if abs(magnification - 1) > 0.001 {
+            setZoom(1, centeredAt: point)
+            return
+        }
+        let before = magnification
+        fit(.window)
+        if abs(magnification - before) < 0.001 { setZoom(2, centeredAt: point) }
     }
 
     private func centerPicture() {
@@ -223,6 +314,11 @@ final class CenteringClipView: NSClipView {
 /// redrawing. Dragging moves the picture, a double-click zooms.
 final class PictureView: NSView {
     var onDoubleClick: ((NSPoint) -> Void)?
+
+    /// Double-tap with two fingers on the picture, handed on as a double-click at that point.
+    override func smartMagnify(with event: NSEvent) {
+        onDoubleClick?(convert(event.locationInWindow, from: nil))
+    }
     var picture: CanvasPicture? {
         didSet { update() }
     }

@@ -23,6 +23,8 @@ struct ToolbarSegment {
     /// so the control does not change size while the title changes.
     var widestTitle: String?
     var label: String
+    /// Set for a segment that switches something on and off; it then stays pressed while on.
+    var isSelected: Bool?
     var isEnabled = true
     var action: (() -> Void)?
     /// Built each time the control updates, so check marks stay current.
@@ -51,6 +53,8 @@ struct ToolbarSegments: NSViewRepresentable {
     func updateNSView(_ control: NSSegmentedControl, context: Context) {
         context.coordinator.segments = segments
         control.segmentCount = segments.count
+        // Switches stay pressed while on; plain buttons spring back.
+        control.trackingMode = segments.contains { $0.isSelected != nil } ? .selectAny : .momentary
         for (index, segment) in segments.enumerated() {
             if let symbol = segment.symbol {
                 let image = NSImage(systemSymbolName: symbol, accessibilityDescription: segment.label)
@@ -62,6 +66,7 @@ struct ToolbarSegments: NSViewRepresentable {
             control.setLabel(segment.title ?? "", forSegment: index)
             control.setToolTip(segment.label, forSegment: index)
             control.setEnabled(segment.isEnabled, forSegment: index)
+            if let isSelected = segment.isSelected { control.setSelected(isSelected, forSegment: index) }
             let menu = segment.menu?()
             control.setWidth(width(of: segment, hasMenu: menu != nil, in: control), forSegment: index)
             control.setMenu(menu, forSegment: index)
@@ -87,7 +92,12 @@ struct ToolbarSegments: NSViewRepresentable {
         var segments: [ToolbarSegment] = []
 
         @objc func clicked(_ sender: NSSegmentedControl) {
-            let index = sender.selectedSegment
+            // With switches, selectedSegment can be -1 after switching one off; the clicked segment
+            // is the one whose state no longer matches the model.
+            let switched = segments.indices.first { index in
+                segments[index].isSelected.map { $0 != sender.isSelected(forSegment: index) } ?? false
+            }
+            let index = sender.trackingMode == .selectAny ? (switched ?? sender.selectedSegment) : sender.selectedSegment
             guard segments.indices.contains(index) else { return }
             let segment = segments[index]
             if let action = segment.action {

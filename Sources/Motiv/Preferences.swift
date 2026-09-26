@@ -33,6 +33,7 @@ enum Preferences {
     static let lastFolderKey = "lastFolder"
 
     static let thumbnailSizes: ClosedRange<Double> = 64...400
+    static let defaultThumbnailSize = 160.0
     /// Above this many images and videos, including subfolders asks first: the grid and the
     /// sorting stay usable, but reading that many files takes a while and a lot of memory.
     static let subfolderItemLimit = 10_000
@@ -44,7 +45,7 @@ enum Preferences {
             includeSubfoldersKey: false,
             sortKeyKey: SortKey.name.rawValue,
             sortAscendingKey: true,
-            thumbnailSizeKey: 160.0,
+            thumbnailSizeKey: defaultThumbnailSize,
             showsFilmstripKey: true,
             showsQuickInfoKey: false,
             showsFolderStripKey: true,

@@ -643,6 +643,10 @@ final class Gallery {
         }
     }
 
+    func resetThumbnailSize() {
+        thumbnailSize = Preferences.defaultThumbnailSize
+    }
+
     func zoomOut() {
         if mode == .view {
             viewer.zoomOut()

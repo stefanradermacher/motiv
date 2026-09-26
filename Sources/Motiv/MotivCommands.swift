@@ -128,9 +128,11 @@ struct MotivCommands: Commands {
             Button(isViewing ? "Verkleinern" : "Kleinere Miniaturen") { gallery?.zoomOut() }
                 .keyboardShortcut("-")
                 .disabled(gallery?.folder == nil && gallery?.singleFile == nil)
-            Button("Originalgröße") { gallery?.viewer.actualSize() }
-                .keyboardShortcut("0")
-                .disabled(!isViewing)
+            Button(isViewing ? "Originalgröße" : "Standardgröße der Miniaturen") {
+                if isViewing { gallery?.viewer.actualSize() } else { gallery?.resetThumbnailSize() }
+            }
+            .keyboardShortcut("0")
+            .disabled(gallery?.folder == nil && gallery?.singleFile == nil)
             Button("An Fenster anpassen") { gallery?.viewer.fit(.window) }
                 .keyboardShortcut("9")
                 .disabled(!isViewing)
