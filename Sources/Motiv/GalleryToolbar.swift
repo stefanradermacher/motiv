@@ -29,7 +29,16 @@ struct GalleryToolbar: ToolbarContent {
                 .help("Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe.")
             }
         }
-        if gallery.mode == .view {
+        if gallery.mode == .compare, let compare = gallery.compare {
+            ToolbarItem(placement: .navigation) {
+                Button { gallery.closeCompare() } label: {
+                    Label("Übersicht", systemImage: "square.grid.2x2")
+                }
+                .help("Vergleich beenden (Esc)")
+            }
+            separateItem { CompareLayoutGroup(compare: compare) }
+            separateItem { CompareZoomGroup(compare: compare) }
+        } else if gallery.mode == .view {
             if gallery.singleFile == nil {
                 ToolbarItem(placement: .navigation) {
                     Button { gallery.closeViewer() } label: {
@@ -116,6 +125,12 @@ struct GalleryToolbar: ToolbarContent {
                                : String(localized: "Zeigt nur die Bilder dieses Ordners. Klicken, um auch alle Unterordner einzubeziehen (⌥⌘U)."),
                            isSelected: gallery.includeSubfolders,
                            action: { gallery.includeSubfolders.toggle() }),
+            ToolbarSegment(symbol: "rectangle.split.2x1",
+                           label: gallery.canCompare
+                               ? String(localized: "Ausgewählte Bilder vergleichen (⌃⌘C)")
+                               : String(localized: "Zum Vergleichen zwei bis vier Bilder auswählen"),
+                           isEnabled: gallery.canCompare,
+                           action: { gallery.startCompare() }),
         ])
     }
 
@@ -264,5 +279,44 @@ private struct ThumbnailZoomGroup: View {
         .disabled(!enabled)
         .help(help)
         .accessibilityLabel(Text(help))
+    }
+}
+
+/// Side by side | on top of each other, and linking zoom and position.
+private struct CompareLayoutGroup: View {
+    @Bindable var compare: CompareModel
+
+    var body: some View {
+        let compare = compare
+        ToolbarSegments(segments: [
+            ToolbarSegment(symbol: compare.items.count == 4 ? "square.grid.2x2" : "rectangle.split.3x1",
+                           label: String(localized: "Nebeneinander"),
+                           isSelected: compare.layout == .sideBySide,
+                           action: { compare.layout = .sideBySide }),
+            ToolbarSegment(symbol: "square.2.layers.3d",
+                           label: String(localized: "Übereinander: mit Leertaste, Pfeiltasten oder A–D umschalten"),
+                           isSelected: compare.layout == .overlay,
+                           action: { compare.layout = .overlay }),
+            ToolbarSegment(symbol: compare.isLinked ? "link" : "link.badge.plus",
+                           label: compare.isLinked
+                               ? String(localized: "Zoom und Ausschnitt gekoppelt; klicken, um jedes Bild einzeln zu zoomen")
+                               : String(localized: "Jedes Bild einzeln; klicken, um Zoom und Ausschnitt zu koppeln"),
+                           isSelected: compare.isLinked,
+                           action: { compare.isLinked.toggle() }),
+        ])
+    }
+}
+
+/// Zoom out | fit all | zoom in, for all pictures of the comparison.
+private struct CompareZoomGroup: View {
+    let compare: CompareModel
+
+    var body: some View {
+        let compare = compare
+        ToolbarSegments(segments: [
+            ToolbarSegment(symbol: "minus.magnifyingglass", label: String(localized: "Verkleinern"), action: { compare.zoom(by: 1 / 1.25) }),
+            ToolbarSegment(symbol: "arrow.down.right.and.arrow.up.left", label: String(localized: "Alle an Fenster anpassen"), action: { compare.fitAll() }),
+            ToolbarSegment(symbol: "plus.magnifyingglass", label: String(localized: "Vergrößern"), action: { compare.zoom(by: 1.25) }),
+        ])
     }
 }

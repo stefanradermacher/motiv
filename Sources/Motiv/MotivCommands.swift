@@ -94,6 +94,12 @@ struct MotivCommands: Commands {
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 .disabled(gallery == nil)
             Divider()
+            Button(gallery?.mode == .compare ? "Vergleich beenden" : "Ausgewählte Bilder vergleichen") {
+                if gallery?.mode == .compare { gallery?.closeCompare() } else { gallery?.startCompare() }
+            }
+            // Not ⌥⌘C: in the Finder that copies the path name.
+            .keyboardShortcut("c", modifiers: [.command, .control])
+            .disabled(!(gallery?.canCompare ?? false) && gallery?.mode != .compare)
             Button(gallery?.isPresenting == true ? "Nur Bild beenden" : "Nur Bild im Vollbild") {
                 if gallery?.isPresenting == true { gallery?.stopPresenting() } else { gallery?.startPresenting() }
             }
@@ -128,14 +134,22 @@ struct MotivCommands: Commands {
             Button(isViewing ? "Verkleinern" : "Kleinere Miniaturen") { gallery?.zoomOut() }
                 .keyboardShortcut("-")
                 .disabled(gallery?.folder == nil && gallery?.singleFile == nil)
-            Button(isViewing ? "Originalgröße" : "Standardgröße der Miniaturen") {
-                if isViewing { gallery?.viewer.actualSize() } else { gallery?.resetThumbnailSize() }
+            Button(isViewing || gallery?.mode == .compare ? "Originalgröße" : "Standardgröße der Miniaturen") {
+                if gallery?.mode == .compare {
+                    gallery?.compare?.actualSize()
+                } else if isViewing {
+                    gallery?.viewer.actualSize()
+                } else {
+                    gallery?.resetThumbnailSize()
+                }
             }
             .keyboardShortcut("0")
             .disabled(gallery?.folder == nil && gallery?.singleFile == nil)
-            Button("An Fenster anpassen") { gallery?.viewer.fit(.window) }
-                .keyboardShortcut("9")
-                .disabled(!isViewing)
+            Button("An Fenster anpassen") {
+                if gallery?.mode == .compare { gallery?.compare?.fitAll() } else { gallery?.viewer.fit(.window) }
+            }
+            .keyboardShortcut("9")
+            .disabled(!isViewing && gallery?.mode != .compare)
             Button("An Breite anpassen") { gallery?.viewer.fit(.width) }
                 .disabled(!isViewing)
             Button("An Höhe anpassen") { gallery?.viewer.fit(.height) }

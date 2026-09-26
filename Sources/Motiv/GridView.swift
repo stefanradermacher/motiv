@@ -221,6 +221,9 @@ struct ItemContextMenu: View {
     var body: some View {
         let urls = gallery.selection.contains(item.url) ? gallery.selectedURLs : [item.url]
         Button("Öffnen") { gallery.open(item) }
+        if gallery.selection.contains(item.url) && gallery.canCompare {
+            Button("Vergleichen") { gallery.startCompare() }
+        }
         Button("In Vorschau öffnen") { FileActions.openInPreview(urls) }
             .disabled(FileActions.previewApplication == nil)
         OpenWithMenu(urls: urls)

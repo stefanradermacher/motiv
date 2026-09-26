@@ -94,7 +94,7 @@ enum SortKey: String, CaseIterable, Identifiable {
 @MainActor @Observable
 final class Gallery {
     enum Mode {
-        case browse, view
+        case browse, view, compare
     }
 
     /// The folder shown, chosen in the sidebar.
@@ -218,6 +218,7 @@ final class Gallery {
 
     var subtitle: String {
         if singleFile != nil { return String(localized: "Ordner nicht freigegeben") }
+        if mode == .compare, let compare { return String(localized: "Vergleich von \(compare.items.count) Bildern") }
         if mode == .view, let index = currentIndex {
             return String(localized: "\(index + 1) von \(items.count)")
         }
@@ -262,6 +263,7 @@ final class Gallery {
     func goBack() {
         if isPresenting { stopPresenting(); return }
         if mode == .view { closeViewer(); return }
+        if mode == .compare { closeCompare(); return }
         // Folders that are no longer readable, e.g. removed from the sidebar, are skipped.
         while let previous = backStack.popLast() {
             guard Library.shared.contains(previous) else { continue }
@@ -584,6 +586,34 @@ final class Gallery {
         mode = .browse
     }
 
+    // MARK: Comparing
+
+    /// The comparison shown, while the mode is `.compare`.
+    private(set) var compare: CompareModel?
+
+    /// The selected pictures, if there are two to four and none is a video.
+    private var itemsToCompare: [MediaItem] {
+        let chosen = items.filter { selection.contains($0.url) }
+        return CompareModel.itemRange.contains(chosen.count) && !chosen.contains(where: \.isVideo) ? chosen : []
+    }
+
+    var canCompare: Bool {
+        mode == .browse && !itemsToCompare.isEmpty
+    }
+
+    /// Compares the selected pictures side by side.
+    func startCompare() {
+        let chosen = itemsToCompare
+        guard !chosen.isEmpty else { return }
+        compare = CompareModel(items: chosen)
+        mode = .compare
+    }
+
+    func closeCompare() {
+        compare = nil
+        mode = .browse
+    }
+
     // MARK: Only the image
 
     /// Shows only the image, full screen. From the overview it starts with the selected image.
@@ -636,7 +666,9 @@ final class Gallery {
     // MARK: Zoom
 
     func zoomIn() {
-        if mode == .view {
+        if mode == .compare {
+            compare?.zoom(by: 1.25)
+        } else if mode == .view {
             viewer.zoomIn()
         } else {
             thumbnailSize = min(thumbnailSize * 1.25, Preferences.thumbnailSizes.upperBound)
@@ -648,7 +680,9 @@ final class Gallery {
     }
 
     func zoomOut() {
-        if mode == .view {
+        if mode == .compare {
+            compare?.zoom(by: 1 / 1.25)
+        } else if mode == .view {
             viewer.zoomOut()
         } else {
             thumbnailSize = max(thumbnailSize / 1.25, Preferences.thumbnailSizes.lowerBound)

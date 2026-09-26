@@ -321,6 +321,16 @@
         }
       }
     },
+    "Alle an Fenster anpassen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit All to Window"
+          }
+        }
+      }
+    },
     "Alle anzeigen": {
       "localizations": {
         "en": {
@@ -527,6 +537,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fired"
+          }
+        }
+      }
+    },
+    "Ausgewählte Bilder vergleichen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare Selected Images"
+          }
+        }
+      }
+    },
+    "Ausgewählte Bilder vergleichen (⌃⌘C)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare selected images (⌃⌘C)"
           }
         }
       }
@@ -1301,6 +1331,16 @@
         }
       }
     },
+    "Jedes Bild einzeln; klicken, um Zoom und Ausschnitt zu koppeln": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each image on its own; click to link zoom and position"
+          }
+        }
+      }
+    },
     "Kamera": {
       "localizations": {
         "en": {
@@ -1637,6 +1677,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Name"
+          }
+        }
+      }
+    },
+    "Nebeneinander": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Side by Side"
           }
         }
       }
@@ -2121,6 +2171,46 @@
         }
       }
     },
+    "Vergleich beenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End Comparison"
+          }
+        }
+      }
+    },
+    "Vergleich beenden (Esc)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End comparison (Esc)"
+          }
+        }
+      }
+    },
+    "Vergleich von %lld Bildern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparing %lld images"
+          }
+        }
+      }
+    },
+    "Vergleichen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare"
+          }
+        }
+      }
+    },
     "Vergrößern": {
       "localizations": {
         "en": {
@@ -2381,6 +2471,16 @@
         }
       }
     },
+    "Zoom und Ausschnitt gekoppelt; klicken, um jedes Bild einzeln zu zoomen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom and position linked; click to zoom each image on its own"
+          }
+        }
+      }
+    },
     "Zoomstufe": {
       "localizations": {
         "en": {
@@ -2417,6 +2517,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Allow Access"
+          }
+        }
+      }
+    },
+    "Zum Vergleichen zwei bis vier Bilder auswählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select two to four images to compare"
           }
         }
       }
@@ -2557,6 +2667,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "About Motiv"
+          }
+        }
+      }
+    },
+    "Übereinander: mit Leertaste, Pfeiltasten oder A–D umschalten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On top of each other: switch with Space, the arrow keys or A–D"
           }
         }
       }

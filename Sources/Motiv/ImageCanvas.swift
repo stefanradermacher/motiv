@@ -25,6 +25,8 @@ struct ImageCanvas: NSViewRepresentable {
     let model: ImageViewerModel
     /// What trackpad gestures do beyond zooming: page through the folder and rotate.
     let gestures: CanvasGestures
+    /// Called once with the scroll view, e.g. to keep several pictures in step when comparing.
+    var onCanvas: ((ImageScrollView) -> Void)? = nil
 
     func makeNSView(context: Context) -> ImageScrollView {
         let view = ImageScrollView()
@@ -33,6 +35,7 @@ struct ImageCanvas: NSViewRepresentable {
             model?.fitMode = fitMode
         }
         model.canvas = view
+        onCanvas?(view)
         return view
     }
 
@@ -106,14 +109,55 @@ final class ImageScrollView: NSScrollView {
         maxMagnification = 32
         backgroundColor = .underPageBackgroundColor
         pictureView.onDoubleClick = { [weak self] point in self?.toggleZoom(at: point) }
+        contentView.postsBoundsChangedNotifications = true
 
         let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(viewportDidChange), name: NSView.boundsDidChangeNotification, object: contentView)
         center.addObserver(self, selector: #selector(willStartMagnifying), name: NSScrollView.willStartLiveMagnifyNotification, object: self)
         center.addObserver(self, selector: #selector(didEndMagnifying), name: NSScrollView.didEndLiveMagnifyNotification, object: self)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not used")
+    }
+
+    // MARK: Keeping several pictures in step
+
+    /// Called whenever the visible part changes: scrolling, zooming, fitting.
+    var onViewportChange: ((ImageScrollView) -> Void)?
+
+    @objc private func viewportDidChange(_ notification: Notification) {
+        onViewportChange?(self)
+    }
+
+    /// The visible part as fractions of the picture: its centre, and the share of the picture's
+    /// width that is visible. Pictures of different resolution show the same part at equal values.
+    var viewport: (center: CGPoint, widthShare: CGFloat)? {
+        let size = pictureView.frame.size
+        guard picture != nil, size.width > 0, size.height > 0 else { return nil }
+        let visible = documentVisibleRect
+        return (CGPoint(x: visible.midX / size.width, y: visible.midY / size.height), visible.width / size.width)
+    }
+
+    /// Shows the same part as another picture, see `viewport`. Ends fitting to the window.
+    func follow(center: CGPoint, widthShare: CGFloat) {
+        let size = pictureView.frame.size
+        guard picture != nil, size.width > 0, widthShare > 0 else { return }
+        fitMode = nil
+        fitsOnRequest = false
+        magnification = min(max(contentSize.width / (widthShare * size.width), minMagnification), maxMagnification)
+        let visible = contentView.bounds.size
+        let origin = NSPoint(x: center.x * size.width - visible.width / 2, y: center.y * size.height - visible.height / 2)
+        contentView.scroll(to: contentView.constrainBoundsRect(NSRect(origin: origin, size: visible)).origin)
+        reflectScrolledClipView(contentView)
+        reportZoom()
+    }
+
+    /// Back to fitting the window, following the setting for small pictures.
+    func fitAutomatically() {
+        fitMode = .window
+        fitsOnRequest = false
+        applyFit()
     }
 
     @objc private func willStartMagnifying(_ notification: Notification) {

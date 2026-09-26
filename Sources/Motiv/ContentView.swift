@@ -88,6 +88,8 @@ struct ContentView: View {
             WelcomeView(gallery: gallery)
         } else if gallery.mode == .view {
             ViewerView(gallery: gallery)
+        } else if gallery.mode == .compare, let compare = gallery.compare {
+            CompareView(gallery: gallery, compare: compare)
         } else if gallery.showsFolderStrip && (!gallery.subfolders.isEmpty || gallery.parentFolder != nil) {
             FolderStripSplit(gallery: gallery) {
                 GridView(gallery: gallery)

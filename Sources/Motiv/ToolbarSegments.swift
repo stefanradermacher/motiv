@@ -66,7 +66,8 @@ struct ToolbarSegments: NSViewRepresentable {
             control.setLabel(segment.title ?? "", forSegment: index)
             control.setToolTip(segment.label, forSegment: index)
             control.setEnabled(segment.isEnabled, forSegment: index)
-            if let isSelected = segment.isSelected { control.setSelected(isSelected, forSegment: index) }
+            // Plain buttons among switches spring back as well.
+            if control.trackingMode == .selectAny { control.setSelected(segment.isSelected ?? false, forSegment: index) }
             let menu = segment.menu?()
             control.setWidth(width(of: segment, hasMenu: menu != nil, in: control), forSegment: index)
             control.setMenu(menu, forSegment: index)
@@ -97,9 +98,13 @@ struct ToolbarSegments: NSViewRepresentable {
             let switched = segments.indices.first { index in
                 segments[index].isSelected.map { $0 != sender.isSelected(forSegment: index) } ?? false
             }
-            let index = sender.trackingMode == .selectAny ? (switched ?? sender.selectedSegment) : sender.selectedSegment
+            let pressed = segments.indices.first { segments[$0].isSelected == nil && sender.isSelected(forSegment: $0) }
+            let index = sender.trackingMode == .selectAny ? (switched ?? pressed ?? sender.selectedSegment) : sender.selectedSegment
             guard segments.indices.contains(index) else { return }
             let segment = segments[index]
+            if segment.isSelected == nil, sender.trackingMode == .selectAny {
+                sender.setSelected(false, forSegment: index)
+            }
             if let action = segment.action {
                 action()
             } else if let menu = sender.menu(forSegment: index) {

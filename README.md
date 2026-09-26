@@ -14,6 +14,7 @@ Die Oberfläche gibt es auf Deutsch und Englisch. Die Texte liegen im String-Kat
 - **Nur betrachten.** Drehen und Spiegeln wirken nur in der Ansicht und werden nie gespeichert. Zum Bearbeiten öffnet man das Bild in Vorschau (⌘E) oder über „Öffnen mit“ in einem anderen Programm.
 - **Standard-App.** Unter **Motiv → Einstellungen** lässt sich Motiv als Standard-App für Bilder festlegen, für alle Formate auf einmal oder einzeln (JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, BMP, ICNS, ICO; Kamera-RAW bewusst nicht). Nach drei Tagen Nutzung bietet Motiv das wie Leser höchstens zweimal in einem schmalen Balken an. Das geht nur mit einer Kopie im Ordner „Programme“.
 - **Ordnerleiste.** Über der Übersicht zeigt eine Zeile die Unterordner des aktuellen Ordners mit Namen und Bildzahl, vorne als grauer Ordner mit Pfeil den übergeordneten Ordner; sie erscheint deshalb auch in Ordnern ohne Unterordner. Ein Klick öffnet den Ordner. Die Trennlinie darunter lässt sich ziehen, die Symbole wachsen mit und bleiben in einer Zeile, die sich mit dem Mausrad seitwärts scrollen lässt. Die Höhe gilt für alle Ordner; ein Doppelklick auf die Trennlinie oder das Kontextmenü der Leiste stellt die Standardhöhe wieder her. Ein- und ausschalten über den Button vor „Mit Unterordnern“ oder das Menü Darstellung.
+- **Vergleichen.** Zwei bis vier ausgewählte Bilder nebeneinander, vier als 2 × 2 (⌃⌘C oder Knopf in der Toolbar). Unter jedem Bild stehen Buchstabe, Name, Maße und Größe. Zoom und Ausschnitt sind gekoppelt, auch bei unterschiedlicher Auflösung zeigen alle denselben Bildbereich; das Kettensymbol hebt das auf. „Übereinander“ legt die Bilder an dieselbe Stelle, Leertaste, Pfeiltasten oder A–D schalten um (A/B-Vergleich). Esc beendet den Vergleich.
 - **Bilderliste.** Die Seitenleiste kann auch die Bilder des Ordners als Liste zeigen, bei einbezogenen Unterordnern nach Unterordnern gegliedert. Man blättert darin mit Pfeiltasten oder Maus, rechts steht das Bild; die Miniaturleiste unten entfällt dann.
 - **Informationen.** Die Seitenleiste zeigt wahlweise die Ordner, die Informationen zum Bild (Datei, Bild, Aufnahme/EXIF, Ort, Beschreibung, Video, alle Metadaten) oder beides übereinander. Jede Ansicht merkt sich ihre Wahl: In der Übersicht stehen meist die Ordner, in der Einzelansicht die Informationen. Orte öffnet Motiv in Karten, eine eingebettete Karte gibt es nicht, weil sie Kacheln aus dem Netz laden würde.
 - **Sensible Inhalte.** Ist in den Systemeinstellungen unter „Datenschutz & Sicherheit“ der Hinweis für sensible Inhalte eingeschaltet, prüft Motiv Bilder mit Apples SensitiveContentAnalysis auf dem Mac und zeigt mögliche Nacktbilder weichgezeichnet, bis man „Anzeigen“ wählt. ⇧⌘U setzt das bis zum Beenden aus. Eine eigene Einstellung dafür gibt es bewusst nicht.
@@ -87,12 +88,13 @@ Zum Signieren mit eigenem Entwicklerkonto `Config/Local.xcconfig.example` nach `
 | Informationen ein-/ausblenden | ⌘I |
 | Schnellinfo im Bild | ⌥⌘I |
 | Nur Bild im Vollbild / beenden | ⌥⌘F / Esc |
+| Ausgewählte Bilder vergleichen / im Vergleich umschalten | ⌃⌘C / Leertaste, Pfeiltasten, A–D oder 1–4 |
 | Sensible Inhalte weichzeichnen, bis zum Beenden ein/aus | ⇧⌘U |
 | Bild per Namen finden (Übersicht) | Anfang des Namens eintippen |
 
 ## Geplant
 
 - Diashow
-- Vergleichsansicht für 2–4 Bilder
+- Vergleich: „gleiche Pixel“ statt gleichem Ausschnitt, Überblenden, Trennlinie
 - „Exportieren als …“ über ImageIO (JPEG, PNG, HEIC, TIFF), immer in eine neue Datei
 - Zwischenspeicher für Miniaturen auf der Platte, Ordner beobachten statt „Aktualisieren“
