@@ -1,0 +1,2466 @@
+{
+  "sourceLanguage": "de",
+  "strings": {
+    " (%lld mm Kleinbild)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " (%lld mm full-frame equivalent)"
+          }
+        }
+      }
+    },
+    "%@ (%@ Bytes)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ (%2$@ bytes)"
+          }
+        }
+      }
+    },
+    "%@ (Standard)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (Default)"
+          }
+        }
+      }
+    },
+    "%@ Bilder/s": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ fps"
+          }
+        }
+      }
+    },
+    "%@ Pixel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pixels"
+          }
+        }
+      }
+    },
+    "%@ · Apache-Lizenz 2.0": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · Apache License 2.0"
+          }
+        }
+      }
+    },
+    "%@ – %lld Bilder": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%1$@ – %2$lld Bild"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%1$@ – %2$lld Bilder"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%1$@ – %2$lld image"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%1$@ – %2$lld images"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Bilder": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Bild"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Bilder"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld image"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld images"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Bit pro Kanal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld bits per channel"
+          }
+        }
+      }
+    },
+    "%lld Bytes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld bytes"
+          }
+        }
+      }
+    },
+    "%lld Objekte ausgewählt": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Objekt ausgewählt"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Objekte ausgewählt"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld item selected"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld items selected"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Videos": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Video"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Videos"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld video"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld videos"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld von %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld × %lld Pixel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld × %2$lld pixels"
+          }
+        }
+      }
+    },
+    "%lld × %lld Pixel (%@ MP)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld × %2$lld pixels (%3$@ MP)"
+          }
+        }
+      }
+    },
+    "90° gegen den Uhrzeigersinn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90° counterclockwise"
+          }
+        }
+      }
+    },
+    "90° im Uhrzeigersinn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90° clockwise"
+          }
+        }
+      }
+    },
+    "Absteigend": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descending"
+          }
+        }
+      }
+    },
+    "Aktualisieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        }
+      }
+    },
+    "Alle Metadaten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Metadata"
+          }
+        }
+      }
+    },
+    "Alle anzeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show All"
+          }
+        }
+      }
+    },
+    "Alle anzuzeigen kann eine Weile dauern und braucht viel Arbeitsspeicher.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Showing all of them can take a while and needs a lot of memory."
+          }
+        }
+      }
+    },
+    "Alle kopieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy All"
+          }
+        }
+      }
+    },
+    "Alle zurücksetzen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset All"
+          }
+        }
+      }
+    },
+    "Alles auswählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select All"
+          }
+        }
+      }
+    },
+    "Als Standard festlegen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set as Default"
+          }
+        }
+      }
+    },
+    "An Breite anpassen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit to Width"
+          }
+        }
+      }
+    },
+    "An Fenster anpassen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom to Fit"
+          }
+        }
+      }
+    },
+    "An Höhe anpassen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit to Height"
+          }
+        }
+      }
+    },
+    "Anpassen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Customize …"
+          }
+        }
+      }
+    },
+    "Anwenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply"
+          }
+        }
+      }
+    },
+    "Art": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kind"
+          }
+        }
+      }
+    },
+    "Aufgenommen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taken"
+          }
+        }
+      }
+    },
+    "Auflösung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resolution"
+          }
+        }
+      }
+    },
+    "Aufnahme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capture"
+          }
+        }
+      }
+    },
+    "Aufnahmedaten werden gelesen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading capture dates …"
+          }
+        }
+      }
+    },
+    "Aufnahmedatum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date Taken"
+          }
+        }
+      }
+    },
+    "Aus Favoriten entfernen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from Favorites"
+          }
+        }
+      }
+    },
+    "Aus der Seitenleiste entfernen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from Sidebar"
+          }
+        }
+      }
+    },
+    "Ausgelöst": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fired"
+          }
+        }
+      }
+    },
+    "Ausrichtung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orientation"
+          }
+        }
+      }
+    },
+    "Automatisch": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        }
+      }
+    },
+    "Belichtungskorrektur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exposure bias"
+          }
+        }
+      }
+    },
+    "Belichtungszeit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exposure"
+          }
+        }
+      }
+    },
+    "Beschreibung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Description"
+          }
+        }
+      }
+    },
+    "Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image"
+          }
+        }
+      }
+    },
+    "Bilder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Images"
+          }
+        }
+      }
+    },
+    "Bildrate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frame rate"
+          }
+        }
+      }
+    },
+    "Blende": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperture"
+          }
+        }
+      }
+    },
+    "Blitz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        }
+      }
+    },
+    "Brennweite": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal length"
+          }
+        }
+      }
+    },
+    "Codec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codec"
+          }
+        }
+      }
+    },
+    "Copyright": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copyright"
+          }
+        }
+      }
+    },
+    "Danke für das Abendessen!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanks for the dinner!"
+          }
+        }
+      }
+    },
+    "Danke für das Frühstück!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanks for the breakfast!"
+          }
+        }
+      }
+    },
+    "Danke für den Kaffee!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanks for the coffee!"
+          }
+        }
+      }
+    },
+    "Datei": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        }
+      }
+    },
+    "Dateinamen unter den Miniaturen anzeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show file names below thumbnails"
+          }
+        }
+      }
+    },
+    "Datenschutz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        }
+      }
+    },
+    "Dauer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duration"
+          }
+        }
+      }
+    },
+    "Den Ordner dieses Bildes freigeben, um alle Bilder darin zu sehen. Motiv merkt sich die Freigabe.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant access to this image’s folder to see all images in it. Motiv remembers the permission."
+          }
+        }
+      }
+    },
+    "Der Kauf ist nicht zustande gekommen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase did not go through."
+          }
+        }
+      }
+    },
+    "Der Kauf konnte nicht bestätigt werden.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase could not be verified."
+          }
+        }
+      }
+    },
+    "Der Kauf wartet noch auf eine Bestätigung.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase is still waiting for approval."
+          }
+        }
+      }
+    },
+    "Die Datei lässt sich nicht anzeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file can’t be displayed"
+          }
+        }
+      }
+    },
+    "Die Leiste mit den Unterordnern über den Bildern ausblenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the strip with the subfolders above the images"
+          }
+        }
+      }
+    },
+    "Die Unterordner in einer Leiste über den Bildern zeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the subfolders in a strip above the images"
+          }
+        }
+      }
+    },
+    "Ein Abendessen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner"
+          }
+        }
+      }
+    },
+    "Ein Frühstück": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast"
+          }
+        }
+      }
+    },
+    "Ein Kaffee": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coffee"
+          }
+        }
+      }
+    },
+    "Ein Trinkgeld ist in der Version aus dem App Store möglich.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tips are possible in the App Store version."
+          }
+        }
+      }
+    },
+    "Ein schlichter Bild- und Galeriebetrachter für macOS.\nAufgeräumt, schnell und ohne Ablenkung.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A plain image and gallery viewer for macOS.\nTidy, fast and free of distractions."
+          }
+        }
+      }
+    },
+    "Einzelansicht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Single Image"
+          }
+        }
+      }
+    },
+    "Einzelbilder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frames"
+          }
+        }
+      }
+    },
+    "Einzelne Bildformate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Individual image formats"
+          }
+        }
+      }
+    },
+    "Enthaltene Größen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sizes included"
+          }
+        }
+      }
+    },
+    "Erneut freigeben …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant Access Again …"
+          }
+        }
+      }
+    },
+    "Erstellt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Created"
+          }
+        }
+      }
+    },
+    "Erstes Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First Image"
+          }
+        }
+      }
+    },
+    "Farbmodell": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color model"
+          }
+        }
+      }
+    },
+    "Farbprofil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color profile"
+          }
+        }
+      }
+    },
+    "Farbtiefe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color depth"
+          }
+        }
+      }
+    },
+    "Favoriten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorites"
+          }
+        }
+      }
+    },
+    "Fehler melden oder Idee vorschlagen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report a Problem or Suggest an Idea…"
+          }
+        }
+      }
+    },
+    "Fertig": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "Filtern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter"
+          }
+        }
+      }
+    },
+    "Füge einen Ordner mit Bildern hinzu. Motiv merkt sich die Freigabe und zeigt den Ordner künftig in der Seitenleiste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a folder with images. Motiv remembers the permission and shows the folder in the sidebar from now on."
+          }
+        }
+      }
+    },
+    "Gehe zu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go"
+          }
+        }
+      }
+    },
+    "Gespiegelt und um 90° gedreht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mirrored and rotated by 90°"
+          }
+        }
+      }
+    },
+    "Geändert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modified"
+          }
+        }
+      }
+    },
+    "Gibt die Bildformate wieder den Apps, die sie vor Motiv hatten, sonst Vorschau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gives the image formats back to the apps they had before Motiv, otherwise Preview"
+          }
+        }
+      }
+    },
+    "Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applies when opening and browsing images. Otherwise Motiv shows images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway."
+          }
+        }
+      }
+    },
+    "Größe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Size"
+          }
+        }
+      }
+    },
+    "Größe der Miniaturen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thumbnail size"
+          }
+        }
+      }
+    },
+    "Größere Miniaturen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Larger Thumbnails"
+          }
+        }
+      }
+    },
+    "Größere Miniaturen (⌘+)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Larger Thumbnails (⌘+)"
+          }
+        }
+      }
+    },
+    "Hilfe zu Motiv …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv Help…"
+          }
+        }
+      }
+    },
+    "Hinzufügen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        }
+      }
+    },
+    "Horizontal gespiegelt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flipped horizontally"
+          }
+        }
+      }
+    },
+    "Horizontal spiegeln": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flip Horizontal"
+          }
+        }
+      }
+    },
+    "Höhe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altitude"
+          }
+        }
+      }
+    },
+    "Im Finder zeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Finder"
+          }
+        }
+      }
+    },
+    "In %@ öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in %@"
+          }
+        }
+      }
+    },
+    "In Karten öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in Maps"
+          }
+        }
+      }
+    },
+    "In Vorschau öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in Preview"
+          }
+        }
+      }
+    },
+    "In diesem Ordner liegen keine Bilder oder Videos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There are no images or videos in this folder."
+          }
+        }
+      }
+    },
+    "In diesem Ordner und seinen Unterordnern liegen keine Bilder oder Videos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There are no images or videos in this folder or its subfolders."
+          }
+        }
+      }
+    },
+    "In einem anderen Programm öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in another app"
+          }
+        }
+      }
+    },
+    "Informationen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
+          }
+        }
+      }
+    },
+    "Informationen ausblenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide Info"
+          }
+        }
+      }
+    },
+    "Informationen einblenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Info"
+          }
+        }
+      }
+    },
+    "Ja": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes"
+          }
+        }
+      }
+    },
+    "Kamera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera"
+          }
+        }
+      }
+    },
+    "Kein Bild ausgewählt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Image Selected"
+          }
+        }
+      }
+    },
+    "Kein Ordner ausgewählt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Folder Selected"
+          }
+        }
+      }
+    },
+    "Keine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        }
+      }
+    },
+    "Keine Bilder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Images"
+          }
+        }
+      }
+    },
+    "Keine Datensammlung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No data collection"
+          }
+        }
+      }
+    },
+    "Kleine Bilder auf Fenstergröße vergrößern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlarge small images to fit the window"
+          }
+        }
+      }
+    },
+    "Kleinere Miniaturen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smaller Thumbnails"
+          }
+        }
+      }
+    },
+    "Kleinere Miniaturen (⌘-)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smaller Thumbnails (⌘-)"
+          }
+        }
+      }
+    },
+    "Koordinaten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coordinates"
+          }
+        }
+      }
+    },
+    "Kopieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        }
+      }
+    },
+    "Kostenlos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free"
+          }
+        }
+      }
+    },
+    "Letztes Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last Image"
+          }
+        }
+      }
+    },
+    "Manuell": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual"
+          }
+        }
+      }
+    },
+    "Maße": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimensions"
+          }
+        }
+      }
+    },
+    "Miniaturleiste": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filmstrip"
+          }
+        }
+      }
+    },
+    "Mit Unterordnern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With Subfolders"
+          }
+        }
+      }
+    },
+    "Motiv": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv"
+          }
+        }
+      }
+    },
+    "Motiv als Standard festlegen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make Motiv the Default"
+          }
+        }
+      }
+    },
+    "Motiv als Standard-App für Bilder verwenden?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Motiv as the default app for images?"
+          }
+        }
+      }
+    },
+    "Motiv auf GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv on GitHub"
+          }
+        }
+      }
+    },
+    "Motiv für %lld von %lld Formaten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv for %1$lld of %2$lld formats"
+          }
+        }
+      }
+    },
+    "Motiv für alle Formate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv for All Formats"
+          }
+        }
+      }
+    },
+    "Motiv hat kein Tracking, keine Analyse und keine Werbung und baut selbst keine Verbindungen ins Internet auf; nur ein freiwilliges Trinkgeld läuft über den App Store. Deine Bilder und Einstellungen bleiben auf deinem Mac.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv has no tracking, no analytics and no advertising, and it never connects to the internet on its own; only a voluntary tip goes through the App Store. Your images and settings stay on your Mac."
+          }
+        }
+      }
+    },
+    "Motiv im Web": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv on the Web"
+          }
+        }
+      }
+    },
+    "Motiv ist ein unabhängiges Open-Source-Projekt und bleibt vollständig kostenlos. Wenn du mir für die Weiterentwicklung etwas ausgeben möchtest, würde ich mich freuen:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv is an independent open-source project and will stay completely free. If you would like to buy me something for the continued development, I would appreciate it:"
+          }
+        }
+      }
+    },
+    "Motiv kann diesen Ordner derzeit nicht lesen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv can’t read this folder at the moment."
+          }
+        }
+      }
+    },
+    "Motiv unterstützen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support Motiv"
+          }
+        }
+      }
+    },
+    "Motiv unterstützen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support Motiv…"
+          }
+        }
+      }
+    },
+    "Motiv verwenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Motiv"
+          }
+        }
+      }
+    },
+    "N": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N"
+          }
+        }
+      }
+    },
+    "Nach links drehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotate Left"
+          }
+        }
+      }
+    },
+    "Nach rechts drehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotate Right"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "Nicht ausgelöst": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did not fire"
+          }
+        }
+      }
+    },
+    "Nicht jetzt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not now"
+          }
+        }
+      }
+    },
+    "Normal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        }
+      }
+    },
+    "Nur Apple-Frameworks, keine Fremdkomponenten.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only Apple frameworks, no third-party components."
+          }
+        }
+      }
+    },
+    "Nur Bild beenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exit Image Only"
+          }
+        }
+      }
+    },
+    "Nur Bild im Vollbild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image Only, Full Screen"
+          }
+        }
+      }
+    },
+    "Nächstes Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next Image"
+          }
+        }
+      }
+    },
+    "O": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E"
+          }
+        }
+      }
+    },
+    "Objektiv": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lens"
+          }
+        }
+      }
+    },
+    "Ohne Unterordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without Subfolders"
+          }
+        }
+      }
+    },
+    "Open Source (Apache 2.0)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open source (Apache 2.0)"
+          }
+        }
+      }
+    },
+    "Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folders"
+          }
+        }
+      }
+    },
+    "Ordner freigeben …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant Folder Access …"
+          }
+        }
+      }
+    },
+    "Ordner freigeben, um alle Bilder darin zu sehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant access to the folder to see all images in it"
+          }
+        }
+      }
+    },
+    "Ordner hinzufügen (⌘O)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Folder (⌘O)"
+          }
+        }
+      }
+    },
+    "Ordner hinzufügen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Folder …"
+          }
+        }
+      }
+    },
+    "Ordner nicht freigegeben": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder not shared with Motiv"
+          }
+        }
+      }
+    },
+    "Ordner und Informationen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folders and Info"
+          }
+        }
+      }
+    },
+    "Ordnerleiste": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder Strip"
+          }
+        }
+      }
+    },
+    "Originalgröße": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actual Size"
+          }
+        }
+      }
+    },
+    "Ort": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Location"
+          }
+        }
+      }
+    },
+    "Quellcode auf GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source code on GitHub"
+          }
+        }
+      }
+    },
+    "S": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S"
+          }
+        }
+      }
+    },
+    "Schlagwörter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keywords"
+          }
+        }
+      }
+    },
+    "Schnellinfo im Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Info in Image"
+          }
+        }
+      }
+    },
+    "Seitenleiste": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sidebar"
+          }
+        }
+      }
+    },
+    "Software": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Software"
+          }
+        }
+      }
+    },
+    "Sortieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort"
+          }
+        }
+      }
+    },
+    "Sortieren nach": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort By"
+          }
+        }
+      }
+    },
+    "Sortierung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort order"
+          }
+        }
+      }
+    },
+    "Standard-App für Bilder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default app for images"
+          }
+        }
+      }
+    },
+    "Standard-App nach Bildformat": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default App by Image Format"
+          }
+        }
+      }
+    },
+    "Standardgröße der Ordnerleiste": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default Size of Folder Strip"
+          }
+        }
+      }
+    },
+    "Suche: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search: %@"
+          }
+        }
+      }
+    },
+    "Teilen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share …"
+          }
+        }
+      }
+    },
+    "Titel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Title"
+          }
+        }
+      }
+    },
+    "Transparenz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transparency"
+          }
+        }
+      }
+    },
+    "Um 180° gedreht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotated by 180°"
+          }
+        }
+      }
+    },
+    "Um Motiv als Standard festzulegen, muss die App im Ordner „Programme“ liegen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To make Motiv the default, the app has to be in the Applications folder."
+          }
+        }
+      }
+    },
+    "Unterordner einbeziehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include Subfolders"
+          }
+        }
+      }
+    },
+    "Urheber": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creator"
+          }
+        }
+      }
+    },
+    "Ursprüngliche Ausrichtung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original Orientation"
+          }
+        }
+      }
+    },
+    "Vergrößern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom In"
+          }
+        }
+      }
+    },
+    "Verkleinern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom Out"
+          }
+        }
+      }
+    },
+    "Verschiedene Apps": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Various apps"
+          }
+        }
+      }
+    },
+    "Vertikal gespiegelt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flipped vertically"
+          }
+        }
+      }
+    },
+    "Vertikal spiegeln": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flip Vertical"
+          }
+        }
+      }
+    },
+    "Video": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Video"
+          }
+        }
+      }
+    },
+    "Videos spielt Motiv nicht selbst ab.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motiv doesn’t play videos itself."
+          }
+        }
+      }
+    },
+    "Vielen Dank für deine Unterstützung!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thank you for your support!"
+          }
+        }
+      }
+    },
+    "Vorheriges Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous Image"
+          }
+        }
+      }
+    },
+    "Vorschau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview"
+          }
+        }
+      }
+    },
+    "Vorwärts": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forward"
+          }
+        }
+      }
+    },
+    "W": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W"
+          }
+        }
+      }
+    },
+    "Weitere Werkzeuge von mir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More tools by me"
+          }
+        }
+      }
+    },
+    "Weißabgleich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "White balance"
+          }
+        }
+      }
+    },
+    "Werbefrei": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No ads"
+          }
+        }
+      }
+    },
+    "Willkommen bei Motiv": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to Motiv"
+          }
+        }
+      }
+    },
+    "Wähle Ordner mit Bildern. Motiv merkt sich die Freigabe und zeigt die Ordner in der Seitenleiste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose folders with images. Motiv remembers the permission and shows the folders in the sidebar."
+          }
+        }
+      }
+    },
+    "Wähle den Ordner „%@“ erneut aus.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the folder “%@” again."
+          }
+        }
+      }
+    },
+    "Wähle ein Bild aus, um seine Informationen zu sehen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select an image to see its information."
+          }
+        }
+      }
+    },
+    "Wähle links einen Ordner aus.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a folder on the left."
+          }
+        }
+      }
+    },
+    "Zeigt auch die Bilder aller Unterordner. Klicken, um nur diesen Ordner zu zeigen (⌥⌘U).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also shows the images of all subfolders. Click to show this folder only (⌥⌘U)."
+          }
+        }
+      }
+    },
+    "Zeigt nur die Bilder dieses Ordners. Klicken, um auch alle Unterordner einzubeziehen (⌥⌘U).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shows the images of this folder only. Click to include all subfolders (⌥⌘U)."
+          }
+        }
+      }
+    },
+    "Ziehen, um die Ordnerleiste höher oder niedriger zu machen; Doppelklick für die Standardgröße": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag to make the folder strip taller or shorter; double-click for the default size"
+          }
+        }
+      }
+    },
+    "Zoom": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom"
+          }
+        }
+      }
+    },
+    "Zoomstufe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom level"
+          }
+        }
+      }
+    },
+    "Zoomstufe eingeben …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter Zoom Level …"
+          }
+        }
+      }
+    },
+    "Zu Favoriten hinzufügen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to Favorites"
+          }
+        }
+      }
+    },
+    "Zugriff erlauben": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Access"
+          }
+        }
+      }
+    },
+    "Zurück": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        }
+      }
+    },
+    "Zurück zu %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to %@"
+          }
+        }
+      }
+    },
+    "Zurück zur Übersicht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to Overview"
+          }
+        }
+      }
+    },
+    "Zurück zur Übersicht (⌘↑)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to Overview (⌘↑)"
+          }
+        }
+      }
+    },
+    "Zurücksetzen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset"
+          }
+        }
+      }
+    },
+    "davon %lld Videos": {
+      "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "davon %lld Video"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "davon %lld Videos"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "including %lld video"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "including %lld videos"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "macOS fragt bei jeder Änderung einmal nach. Zurücksetzen gibt ein Format der App zurück, die es vor Motiv hatte, sonst Vorschau.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS asks once for every change. Resetting gives a format back to the app it had before Motiv, otherwise Preview."
+          }
+        }
+      }
+    },
+    "Änderungsdatum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date Modified"
+          }
+        }
+      }
+    },
+    "Öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        }
+      }
+    },
+    "Öffnen mit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open With"
+          }
+        }
+      }
+    },
+    "Über Motiv": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About Motiv"
+          }
+        }
+      }
+    },
+    "Übergeordneter Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enclosing Folder"
+          }
+        }
+      }
+    },
+    "Übergeordneter Ordner: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enclosing folder: %@"
+          }
+        }
+      }
+    },
+    "Übersicht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overview"
+          }
+        }
+      }
+    },
+    "„%@“ enthält mit allen Unterordnern mehr als %@ Bilder und Videos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” contains more than %2$@ images and videos including all subfolders."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

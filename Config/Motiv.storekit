@@ -1,0 +1,107 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "de",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "7A4D9E21",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6810000001",
+      "localizations" : [
+        {
+          "description" : "Ein kleines Trinkgeld für die Weiterentwicklung von Motiv.",
+          "displayName" : "Ein Kaffee",
+          "locale" : "de"
+        },
+        {
+          "description" : "A small tip for the continued development of Motiv.",
+          "displayName" : "Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.stefanradermacher.motiv.tip.coffee",
+      "referenceName" : "Trinkgeld Kaffee",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6810000002",
+      "localizations" : [
+        {
+          "description" : "Ein mittleres Trinkgeld für die Weiterentwicklung von Motiv.",
+          "displayName" : "Ein Frühstück",
+          "locale" : "de"
+        },
+        {
+          "description" : "A medium tip for the continued development of Motiv.",
+          "displayName" : "Breakfast",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.stefanradermacher.motiv.tip.breakfast",
+      "referenceName" : "Trinkgeld Frühstück",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "6810000003",
+      "localizations" : [
+        {
+          "description" : "Ein großzügiges Trinkgeld für die Weiterentwicklung von Motiv.",
+          "displayName" : "Ein Abendessen",
+          "locale" : "de"
+        },
+        {
+          "description" : "A generous tip for the continued development of Motiv.",
+          "displayName" : "Dinner",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.stefanradermacher.motiv.tip.dinner",
+      "referenceName" : "Trinkgeld Abendessen",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6810000000",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_developerTeamID" : "",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "de",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "DEU",
+    "_storeKitErrors" : [
+
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionBundleGroups" : [
+
+  ],
+  "subscriptionGroups" : [
+
+  ],
+  "subscriptionSuiteGroups" : [
+
+  ],
+  "version" : {
+    "major" : 6,
+    "minor" : 3
+  }
+}
