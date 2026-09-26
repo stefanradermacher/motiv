@@ -42,6 +42,8 @@ Die Versionsnummer steht im Projekt unter „Version“ (`MARKETING_VERSION`) un
 
 Das App-Icon und das Dokumentsymbol zeichnet `scripts/make_icon.swift`: das App-Icon in den Asset-Katalog, das Dokumentsymbol nach `Resources/ImageDocument.icns`. Das Dokumentsymbol zeigt macOS nur, wenn Motiv die Standard-App für ein Bildformat ist, und auch dann meist nur dort, wo es keine Vorschau des Bildes gibt. Nach Änderungen an der Zeichnung im Projektordner `swift scripts/make_icon.swift` ausführen.
 
+`scripts/make_manual.swift` zeichnet `docs/Motiv-Handbuch.pdf`, ein kurzes Handbuch mit Gliederung im Stil des Leser-Handbuchs. Die Texte stehen in `docs/handbuch/de.md` und `docs/handbuch/en.md`, das Format ist oben in `de.md` beschrieben; Bildschirmfotos kommen aus `docs/screenshots/` und werden ausgelassen, solange sie fehlen. Nach Änderungen im Projektordner `swift scripts/make_manual.swift` ausführen; `swift scripts/make_manual.swift en` schreibt die englische Fassung nach `docs/Motiv-Manual.pdf`. Datenschutzerklärung und Hilfe stehen außerdem als `docs/datenschutz.md` und `docs/support.md` im Repository.
+
 ### Projektstruktur
 
 - `Sources/Motiv/`: Quellcode; neue Dateien gehören automatisch zum Projekt

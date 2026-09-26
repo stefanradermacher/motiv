@@ -186,18 +186,21 @@ Videos are recognised but not played; a double-click opens them in their default
 
 ## Screenshots
 
-Geplant, noch nicht erstellt. In `docs/screenshots/`, 2880 × 1800 Pixel, englisch in `docs/screenshots/en/`.
+In `docs/screenshots/`, 2880 × 1800 Pixel, aufgenommen als Fenster mit 1440 × 900 Punkten (`screencapture -o -l <Fenster-ID>`) und als JPEG in Qualität 90 gespeichert, die transparenten Fensterecken auf Weiß; das Prüfbild für die Trinkgelder bleibt PNG:
 
 | Datei | Inhalt |
 |---|---|
-| 1-uebersicht.png / en/1-overview.png | Übersicht: Seitenleiste mit Ordnern und Favoriten, Ordnerleiste, Miniaturen |
-| 2-einzelansicht.png / en/2-viewer.png | Einzelansicht mit Informationen (EXIF, Ort) in der Seitenleiste und Miniaturleiste |
-| 3-vergleich.png / en/3-compare.png | Vergleich von vier Bildern als 2 × 2 |
-| 4-trennlinie.png / en/4-split.png | Vergleich mit Trennlinie, gleiche Pixel |
-| 5-vollbild.png / en/5-fullscreen.png | Nur das Bild im Vollbild (optional) |
-| trinkgeld.png | Fenster „Motiv unterstützen“ als Prüfbild für die In-App-Käufe |
+| 1-uebersicht.jpg | Übersicht von „Köln“ mit Unterordnern, Favorit, Ordnerleiste und markiertem Bild |
+| 2-einzelansicht.jpg | ICE in Köln Messe/Deutz mit Aufnahme- und Ortsangaben in der Seitenleiste und Schnellinfo |
+| 3-vergleich.jpg | Vier Bilder als 2 × 2: zwei historische Ansichten von Deutz, ein Holzschnitt, die Hohenzollernbrücke bei Nacht |
+| 4-trennlinie.jpg | Trennlinie zwischen „Köln von Deutz gesehen“ (schwarzweiß) und der Ponton-Brücke um 1900 (farbig) |
+| trinkgeld.png | Fenster „Motiv unterstützen“ mit Preisen, Prüfbild für die In-App-Käufe |
 
-Die Bilder darin müssen frei verwendbar sein: eigene Fotos oder solche mit passender Lizenz, mit sinnvollen EXIF-Daten und Ort für Bild 2. Keine privaten Ordner, keine erkennbaren Personen ohne Einwilligung. Die Ordnernamen in der Seitenleiste sollten neutral sein. Für die englische Fassung Motiv mit englischer Oberfläche starten (`-AppleLanguages "(en)"`).
+Für den englischen Eintrag derselbe Satz mit englischer Oberfläche in `docs/screenshots/en/` (`1-overview.jpg`, `2-viewer.jpg`, `3-compare.jpg`, `4-split.jpg`), aufgenommen nach `open -a Motiv --args -AppleLanguages "(en)"`.
+
+Die Bilder im Ordner „Köln“ (`Testdateien/Köln`, nicht im Repository) stammen von Wikimedia Commons und sind CC0 oder gemeinfrei. Das Handbuch zeigt dieselben Aufnahmen (1 bis 3).
+
+Das Prüfbild für die Trinkgelder braucht Preise. Die liefert StoreKit nur aus dem App Store oder, beim Start aus Xcode, aus `Config/Motiv.storekit`; in der installierten App steht stattdessen „Ein Trinkgeld ist in der Version aus dem App Store möglich.“ Also Motiv in Xcode mit ⌘R starten und dann „Hilfe → Motiv unterstützen …“ aufnehmen.
 
 ## Vor dem Hochladen
 
@@ -213,7 +216,8 @@ Für Motiv:
 - [x] Capability „Sensitive Content Analysis“ an der App-ID (steht im Provisioning-Profil)
 - [ ] App-Eintrag angelegt (Deutsch „Motiv“, Englisch „Motiv – Image Viewer“); Bundle-ID unter „Identifiers“ registriert (hat Xcode beim Signieren bereits getan)
 - [ ] Drei Verbrauchsartikel angelegt
-- [ ] Screenshots und Prüfbild erstellt
+- [x] Screenshots erstellt (deutsch und englisch)
+- [x] Prüfbild für die Trinkgelder (Start aus Xcode)
 - [ ] Build-Nummer höher als beim letzten Upload (`./scripts/bump-build.sh`)
 - [ ] Archiv erstellt, validiert und hochgeladen; beim Archivieren prüfen, dass das Distributionsprofil das Entitlement für sensible Inhalte enthält
 
