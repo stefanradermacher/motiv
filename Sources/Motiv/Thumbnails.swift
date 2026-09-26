@@ -134,10 +134,16 @@ struct VideoBadge: View {
 
 /// Still images of pictures and videos, made without Quick Look where possible: Quick Look keeps
 /// the thumbnails it makes in the system's thumbnail cache on disk, and Motiv should leave
-/// nothing behind. Only files that neither ImageIO nor AppKit can read go to Quick Look.
+/// nothing behind. Only files that neither ImageIO nor AppKit can read go to Quick Look –
+/// unless the user chose the system's cache in the settings for speed.
 enum Stills {
     /// At most `pixels` on the larger side, upright.
     nonisolated static func thumbnail(of url: URL, pixels: Int) async -> CGImage? {
+        // The user may prefer speed: Quick Look first, as the Finder does.
+        if UserDefaults.standard.bool(forKey: Preferences.usesSystemThumbnailCacheKey),
+           let image = await quickLook(url, pixels: pixels) {
+            return image
+        }
         let isVideo = (try? url.resourceValues(forKeys: [.contentTypeKey]))?.contentType?.conforms(to: .movie) ?? false
         let still = isVideo
             ? await videoFrame(of: url, pixels: pixels)

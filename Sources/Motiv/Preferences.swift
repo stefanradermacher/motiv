@@ -18,6 +18,9 @@ import SwiftUI
 /// as last used; the settings window holds only what is rarely changed.
 enum Preferences {
     static let showNamesKey = "showNames"
+    /// Thumbnails through Quick Look, which keeps them in the system's cache on disk: faster when
+    /// a folder is shown again, but copies of the pictures stay behind. Off by default.
+    static let usesSystemThumbnailCacheKey = "usesSystemThumbnailCache"
     static let enlargeSmallImagesKey = "enlargeSmallImages"
     static let includeSubfoldersKey = "includeSubfolders"
     static let sortKeyKey = "sortKey"
@@ -41,6 +44,7 @@ enum Preferences {
     static func register() {
         UserDefaults.standard.register(defaults: [
             showNamesKey: true,
+            usesSystemThumbnailCacheKey: false,
             enlargeSmallImagesKey: false,
             includeSubfoldersKey: false,
             sortKeyKey: SortKey.name.rawValue,
@@ -60,6 +64,7 @@ enum Preferences {
 
 struct SettingsView: View {
     @AppStorage(Preferences.showNamesKey) private var showNames = true
+    @AppStorage(Preferences.usesSystemThumbnailCacheKey) private var usesSystemThumbnailCache = false
     @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
 
     var body: some View {
@@ -80,8 +85,15 @@ struct SettingsView: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
-            Section("Übersicht") {
+            Section {
                 Toggle("Dateinamen unter den Miniaturen anzeigen", isOn: $showNames)
+                Toggle("Miniaturen im Systemcache ablegen", isOn: $usesSystemThumbnailCache)
+            } header: {
+                Text("Übersicht")
+            } footer: {
+                Text("Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie selbst und hinterlässt keine Kopien deiner Bilder.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             }
             Section {
                 Toggle("Kleine Bilder auf Fenstergröße vergrößern", isOn: $enlargeSmallImages)

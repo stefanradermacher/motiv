@@ -1541,6 +1541,16 @@
         }
       }
     },
+    "Miniaturen im Systemcache ablegen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep thumbnails in the system cache"
+          }
+        }
+      }
+    },
     "Miniaturleiste": {
       "localizations": {
         "en": {
@@ -1987,6 +1997,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Keywords"
+          }
+        }
+      }
+    },
+    "Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie selbst und hinterlässt keine Kopien deiner Bilder.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faster when you open a folder again. macOS then keeps the thumbnails in its protected cache on disk, as it does for the Finder. When off, Motiv makes them itself and leaves no copies of your images behind."
           }
         }
       }

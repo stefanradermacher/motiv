@@ -49,7 +49,7 @@ Das App-Icon und das Dokumentsymbol zeichnet `scripts/make_icon.swift`: das App-
   - `Gallery.swift`: Inhalt eines Fensters — Ordner, Auswahl, Sortierung, Übersicht und Einzelansicht
   - `GridView.swift`, `ViewerView.swift`, `SidebarView.swift`: die drei Bereiche des Fensters
   - `ImageViewerModel.swift`, `ImageCanvas.swift`: Laden, Drehen und Zoomen in der Einzelansicht
-  - `Thumbnails.swift`: Miniaturen über ImageIO, AppKit und AVFoundation, nur im Arbeitsspeicher; Quick Look nur für Formate, die Motiv nicht selbst lesen kann, weil es seine Miniaturen im Systemcache auf der Platte ablegt
+  - `Thumbnails.swift`: Miniaturen über ImageIO, AppKit und AVFoundation, nur im Arbeitsspeicher; Quick Look nur für Formate, die Motiv nicht selbst lesen kann, weil es seine Miniaturen im Systemcache auf der Platte ablegt; wer es schneller mag, schaltet den Systemcache in den Einstellungen ein
   - `FileActions.swift`: Übergabe an Vorschau, „Öffnen mit“, Finder
 - `Resources/`: Asset-Katalog mit App-Icon, Lokalisierung, `PrivacyInfo.xcprivacy`
 - `Config/Info.plist`, `Config/Motiv.entitlements`: App-Einstellungen und Sandbox-Berechtigungen (selbst gewählte Dateien, dauerhafte Bookmarks)
