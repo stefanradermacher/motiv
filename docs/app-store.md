@@ -84,11 +84,11 @@ Für die Sprachen „Englisch (USA)“ und „Englisch (UK)“ in App Store Conn
 
 **Werbetext (170):**
 
-Motiv shows your images where they are: in folders, fast and without importing. Compare, inspect, keep favourites. Free, ad-free, no data collection.
+Motiv displays your images where they are: in folders, fast and without importing. Compare, inspect, keep favourites. Free, ad-free, no data collection.
 
 **Beschreibung (4000):**
 
-Motiv is an image and gallery viewer for the Mac. It shows images where they are, in your folders: no library, no import, no sign-in. Motiv never changes a file.
+Motiv is an image and gallery viewer for the Mac. It displays images where they are, in your folders: no library, no import, no sign-in. Motiv never modifies a file.
 
 Folders instead of a library
 • Folders you granted access to and favourites in the sidebar, subfolders as a strip above the thumbnails
@@ -115,7 +115,7 @@ Information
 Pleasant every day
 • Videos appear with a still frame and open in their default app on double-click
 • Open in Preview, Open With, Share, Show in Finder
-• If Sensitive Content Warning is switched on in macOS, Motiv shows affected images blurred
+• If Sensitive Content Warning is switched on in macOS, Motiv displays affected images blurred
 • JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, SVG, RAW and everything macOS can read
 
 Honest and open

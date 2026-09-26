@@ -25,7 +25,7 @@ Diese Angaben liegen im Bereich der App auf deinem Mac und verlassen ihn nicht. 
 
 ### Miniaturen
 
-Miniaturen und Bildinformationen hält Motiv nur im Arbeitsspeicher, solange es läuft. Die Miniaturen erzeugt Motiv selbst und legt keine Kopien deiner Bilder auf der Platte ab. Nur bei wenigen seltenen Formaten, die Motiv nicht selbst lesen kann, übernimmt das die Übersicht (Quick Look) von macOS; sie speichert ihre Miniaturen im geschützten Systemcache, wie für den Finder. Wer es schneller mag, kann in den Einstellungen „Miniaturen im Systemcache ablegen“ einschalten; dann erzeugt Quick Look alle Miniaturen und legt sie dort ab.
+Miniaturen und Bildinformationen hält Motiv nur im Arbeitsspeicher, solange es läuft. Die Miniaturen erzeugt Motiv selbst und legt keine Kopien deiner Bilder auf der Platte ab. Nur bei wenigen seltenen Formaten, die Motiv nicht selbst lesen kann, übernimmt das die Übersicht (Quick Look) von macOS; sie speichert ihre Miniaturen im geschützten Systemcache, wie für den Finder. Wer es schneller mag, kann in den Einstellungen „Miniaturen im Systemcache ablegen“ aktivieren; dann erzeugt Quick Look alle Miniaturen und legt sie dort ab.
 
 ### So löschst du sie
 
