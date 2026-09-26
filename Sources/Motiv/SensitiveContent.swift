@@ -203,17 +203,22 @@ struct ConcealedBadge: View {
 }
 
 /// On top of a hidden picture in the single-image view.
+/// For adults a small panel on the blurred picture, as Apple asks for the Sensitive Content
+/// Warning: brief and inline. For a child (Communication Safety) a cover filling the whole view,
+/// in simple words, as Apple asks for that setting; the picture cannot be shown there at all.
 struct ConcealedOverlay: View {
     let url: URL
+    /// Leaves the picture, for the button on the child's cover.
+    var onBack: (() -> Void)?
 
     var body: some View {
-        VStack(spacing: 10) {
-            Image(systemName: "eye.slash")
-                .font(.system(size: 44, weight: .light))
-            Text("Dieses Bild enthält möglicherweise sensible Inhalte.")
-                .font(.headline)
-                .multilineTextAlignment(.center)
-            if SensitiveContentGuard.shared.canOverride {
+        if SensitiveContentGuard.shared.canOverride {
+            VStack(spacing: 10) {
+                Image(systemName: "eye.slash")
+                    .font(.system(size: 44, weight: .light))
+                Text("Dieses Bild enthält möglicherweise sensible Inhalte.")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
                 Text("Der Hinweis für sensible Inhalte ist in den Systemeinstellungen eingeschaltet.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -221,16 +226,46 @@ struct ConcealedOverlay: View {
                 Button("Anzeigen") { SensitiveContentGuard.shared.reveal([url]) }
                     .controlSize(.large)
                     .keyboardShortcut(.defaultAction)
-            } else {
-                Text("Die Kommunikationssicherheit in der Bildschirmzeit verbirgt solche Bilder. Wenn du unsicher bist, sprich mit jemandem, dem du vertraust.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+            }
+            .padding(24)
+            .frame(maxWidth: 360)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+        } else {
+            ChildSafetyCover(onBack: onBack)
+        }
+    }
+}
+
+/// Covers the whole view for a child. Plain words, no way to see the picture, and no blame.
+private struct ChildSafetyCover: View {
+    var onBack: (() -> Void)?
+
+    var body: some View {
+        VStack(spacing: 18) {
+            Image(systemName: "hand.raised.fill")
+                .font(.system(size: 64))
+                .foregroundStyle(.white.opacity(0.9))
+            Text("Dieses Bild wird nicht gezeigt")
+                .font(.largeTitle.bold())
+            Text("Es könnte etwas zeigen, das dich erschrecken oder verunsichern kann.")
+                .font(.title3)
+            Text("Du hast nichts falsch gemacht. Wenn du Fragen hast oder dich unwohl fühlst, sprich mit einem Erwachsenen, dem du vertraust.")
+                .font(.body)
+                .foregroundStyle(.white.opacity(0.85))
+            if let onBack {
+                Button("Zurück", action: onBack)
+                    .controlSize(.large)
+                    .keyboardShortcut(.defaultAction)
+                    .padding(.top, 6)
             }
         }
-        .padding(24)
-        .frame(maxWidth: 360)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .multilineTextAlignment(.center)
+        .foregroundStyle(.white)
+        .frame(maxWidth: 520)
+        .padding(32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 0.12, green: 0.30, blue: 0.34))
+        .environment(\.colorScheme, .dark)
     }
 }
 

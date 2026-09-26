@@ -851,16 +851,6 @@
         }
       }
     },
-    "Die Kommunikationssicherheit in der Bildschirmzeit verbirgt solche Bilder. Wenn du unsicher bist, sprich mit jemandem, dem du vertraust.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Communication Safety in Screen Time hides images like this. If you are unsure, talk to someone you trust."
-          }
-        }
-      }
-    },
     "Die Leiste mit den Unterordnern über den Bildern ausblenden": {
       "localizations": {
         "en": {
@@ -891,12 +881,32 @@
         }
       }
     },
+    "Dieses Bild wird nicht gezeigt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This image is not shown"
+          }
+        }
+      }
+    },
     "Doppelklick: Standardgröße der Miniaturen (⌘0)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Double-click: default thumbnail size (⌘0)"
+          }
+        }
+      }
+    },
+    "Du hast nichts falsch gemacht. Wenn du Fragen hast oder dich unwohl fühlst, sprich mit einem Erwachsenen, dem du vertraust.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You did nothing wrong. If you have questions or feel uncomfortable, talk to an adult you trust."
           }
         }
       }
@@ -1017,6 +1027,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "First Image"
+          }
+        }
+      }
+    },
+    "Es könnte etwas zeigen, das dich erschrecken oder verunsichern kann.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It might show something that could scare or upset you."
           }
         }
       }
@@ -2001,12 +2021,12 @@
         }
       }
     },
-    "Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie selbst und hinterlässt keine Kopien deiner Bilder.": {
+    "Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie soweit möglich selbst und nutzt den Systemcache nur für Formate, die es nicht selbst lesen kann.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Faster when you open a folder again. macOS then keeps the thumbnails in its protected cache on disk, as it does for the Finder. When off, Motiv makes them itself and leaves no copies of your images behind."
+            "value": "Faster when you open a folder again. macOS then keeps the thumbnails in its protected cache on disk, as it does for the Finder. When off, Motiv makes them itself wherever possible and uses the system cache only for formats it cannot read itself."
           }
         }
       }

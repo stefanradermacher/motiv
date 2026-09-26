@@ -91,7 +91,7 @@ struct SettingsView: View {
             } header: {
                 Text("Übersicht")
             } footer: {
-                Text("Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie selbst und hinterlässt keine Kopien deiner Bilder.")
+                Text("Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie soweit möglich selbst und nutzt den Systemcache nur für Formate, die es nicht selbst lesen kann.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }

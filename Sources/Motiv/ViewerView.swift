@@ -79,7 +79,7 @@ struct ViewerView: View {
 
     @ViewBuilder private var overlay: some View {
         if let item = viewer.item, concealed != false {
-            if concealed == true { ConcealedOverlay(url: item.url) } else { ProgressView() }
+            if concealed == true { ConcealedOverlay(url: item.url, onBack: leave) } else { ProgressView() }
         } else {
             contentOverlay
         }

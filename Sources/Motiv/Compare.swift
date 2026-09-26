@@ -362,7 +362,7 @@ struct CompareView: View {
             if viewer.content == nil || concealed == nil {
                 ProgressView()
             } else if concealed == true {
-                ConcealedOverlay(url: item.url)
+                ConcealedOverlay(url: item.url, onBack: { gallery.closeCompare() })
             }
         }
         .task(id: item.url) {
