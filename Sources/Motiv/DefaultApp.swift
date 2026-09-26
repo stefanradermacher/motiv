@@ -115,15 +115,19 @@ enum DefaultAppOffer {
         ImageFormat.allCases.contains(where: \.isMotivDefault)
     }
 
-    /// macOS asks the user to confirm each change.
+    /// macOS asks the user to confirm each type, one dialog after the other, and cannot ask for
+    /// several at once. Types Motiv already has are skipped, and a single "keep" ends the whole run,
+    /// so that declining does not mean declining ten times.
     static func makeDefault(for formats: [ImageFormat] = ImageFormat.allCases) async {
         var previous = previousApps
-        for format in formats where !format.isMotivDefault {
+        run: for format in formats where !format.isMotivDefault {
             for type in format.types {
-                if let app = NSWorkspace.shared.urlForApplication(toOpen: type), !isMotiv(app) {
-                    previous[type.identifier] = app.path
-                }
+                let current = NSWorkspace.shared.urlForApplication(toOpen: type)
+                if let current, isMotiv(current) { continue }
+                if let current { previous[type.identifier] = current.path }
                 try? await NSWorkspace.shared.setDefaultApplication(at: Bundle.main.bundleURL, toOpen: type)
+                let now = NSWorkspace.shared.urlForApplication(toOpen: type)
+                guard let now, isMotiv(now) else { break run }
             }
         }
         defaults.set(previous, forKey: Key.previousApps)
@@ -131,13 +135,18 @@ enum DefaultAppOffer {
     }
 
     /// Gives the formats back to the app they had before Motiv, or to Preview if that is unknown or
-    /// gone. macOS cannot remove a default, only set another one; it asks to confirm each change.
+    /// gone. macOS cannot remove a default, only set another one; it asks to confirm each change,
+    /// and as when setting, a single "keep" ends the run.
     static func restore(_ formats: [ImageFormat] = ImageFormat.allCases) async {
         var previous = previousApps
-        for format in formats where format.isMotivDefault {
+        run: for format in formats where format.isMotivDefault {
             for type in format.types {
-                guard let app = restoreApplication(for: type) else { continue }
+                guard let current = NSWorkspace.shared.urlForApplication(toOpen: type), isMotiv(current),
+                      let app = restoreApplication(for: type)
+                else { continue }
                 try? await NSWorkspace.shared.setDefaultApplication(at: app, toOpen: type)
+                let now = NSWorkspace.shared.urlForApplication(toOpen: type)
+                guard let now, !isMotiv(now) else { break run }
                 previous[type.identifier] = nil
             }
         }
@@ -221,6 +230,7 @@ struct DefaultAppBanner: View {
                     onClose()
                 }
             }
+            .help("macOS fragt für jedes Bildformat einzeln nach; lehnst du einmal ab, fragt Motiv nicht weiter")
             Button("Nicht jetzt", action: onClose)
         }
         .controlSize(.small)
@@ -250,6 +260,7 @@ struct DefaultAppSettingsRow: View {
                         }
                     }
                     .disabled(!DefaultAppOffer.isInstalled)
+                    .help("macOS fragt für jedes Bildformat einzeln nach; lehnst du einmal ab, fragt Motiv nicht weiter")
                 }
             }
         }
@@ -341,7 +352,7 @@ struct DefaultAppFormatsView: View {
                 }
             }
             .id(generation)
-            Text("macOS fragt bei jeder Änderung einmal nach. Zurücksetzen gibt ein Format der App zurück, die es vor Motiv hatte, sonst Vorschau.")
+            Text("macOS fragt für jedes Format einzeln nach, bei allen Formaten also mehrmals hintereinander. Lehnst du einmal ab, fragt Motiv nicht weiter. Zurücksetzen gibt ein Format der App zurück, die es vor Motiv hatte, sonst Vorschau.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

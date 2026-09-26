@@ -2701,12 +2701,22 @@
         }
       }
     },
-    "macOS fragt bei jeder Änderung einmal nach. Zurücksetzen gibt ein Format der App zurück, die es vor Motiv hatte, sonst Vorschau.": {
+    "macOS fragt für jedes Bildformat einzeln nach; lehnst du einmal ab, fragt Motiv nicht weiter": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS asks once for every change. Resetting gives a format back to the app it had before Motiv, otherwise Preview."
+            "value": "macOS asks for each image format separately; if you decline once, Motiv stops asking"
+          }
+        }
+      }
+    },
+    "macOS fragt für jedes Format einzeln nach, bei allen Formaten also mehrmals hintereinander. Lehnst du einmal ab, fragt Motiv nicht weiter. Zurücksetzen gibt ein Format der App zurück, die es vor Motiv hatte, sonst Vorschau.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS asks for each format separately, so for all formats several times in a row. If you decline once, Motiv stops asking. Reset gives a format back to the app it had before Motiv, otherwise Preview."
           }
         }
       }
