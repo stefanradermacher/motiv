@@ -19,7 +19,7 @@ import UniformTypeIdentifiers
 /// The image formats Motiv offers to open by default. Camera RAW formats are left out on purpose:
 /// every camera maker has types of its own, and RAW files usually belong to a photo editor.
 enum ImageFormat: String, CaseIterable, Identifiable {
-    case jpeg, png, heic, tiff, gif, webp, avif, bmp, icns, ico
+    case jpeg, png, heic, tiff, gif, webp, avif, bmp, svg, icon
 
     var id: Self { self }
 
@@ -33,8 +33,8 @@ enum ImageFormat: String, CaseIterable, Identifiable {
         case .webp: "WebP"
         case .avif: "AVIF"
         case .bmp: "BMP"
-        case .icns: "ICNS"
-        case .ico: "ICO"
+        case .svg: "SVG"
+        case .icon: "ICNS / ICO"
         }
     }
 
@@ -48,8 +48,8 @@ enum ImageFormat: String, CaseIterable, Identifiable {
         case .webp: [.webP]
         case .avif: [UTType("public.avif")].compactMap { $0 }
         case .bmp: [.bmp]
-        case .icns: [.icns]
-        case .ico: [.ico]
+        case .svg: [.svg]
+        case .icon: [.icns, .ico]
         }
     }
 

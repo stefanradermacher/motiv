@@ -58,7 +58,7 @@ Angenehm im Alltag
 • Videos erscheinen mit Standbild und öffnen sich per Doppelklick im Standardprogramm
 • In Vorschau öffnen, Öffnen mit, Teilen, im Finder zeigen
 • Ist der Hinweis für sensible Inhalte in macOS eingeschaltet, zeigt Motiv betroffene Bilder weichgezeichnet
-• JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, RAW und alles, was macOS lesen kann
+• JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, SVG, RAW und alles, was macOS lesen kann
 
 Ehrlich und offen
 • Kostenlos und quelloffen unter der Apache-Lizenz 2.0
@@ -116,7 +116,7 @@ Pleasant every day
 • Videos appear with a still frame and open in their default app on double-click
 • Open in Preview, Open With, Share, Show in Finder
 • If Sensitive Content Warning is switched on in macOS, Motiv shows affected images blurred
-• JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, RAW and everything macOS can read
+• JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, SVG, RAW and everything macOS can read
 
 Honest and open
 • Free and open source under the Apache License 2.0
