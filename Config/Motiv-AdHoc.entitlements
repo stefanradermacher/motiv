@@ -6,9 +6,9 @@
 	     Prüfung sensibler Inhalte, die ein Provisioning-Profil verlangt. -->
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
-	<!-- Lesen in selbst gewählten Ordnern; Schreiben nur dorthin, wo beim Exportieren
-	     ausdrücklich ein Ziel gewählt wird. Motiv ändert keine vorhandenen Dateien. -->
-	<key>com.apple.security.files.user-selected.read-write</key>
+	<!-- Nur Lesen in selbst gewählten Ordnern: Motiv ändert keine Datei. Erst ein Export in ein
+	     ausdrücklich gewähltes Ziel bräuchte wieder read-write. -->
+	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
 	<!-- Die freigegebenen Ordner und Favoriten über einen Neustart hinweg behalten. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>

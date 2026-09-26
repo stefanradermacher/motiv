@@ -19,6 +19,9 @@ import Observation
 struct Place: Identifiable, Hashable, Codable {
     var path: String
     var bookmark: Data
+    /// Whether the bookmark allows reading only. Bookmarks from earlier versions allowed writing
+    /// too; they are made again on the next launch.
+    var isReadOnly: Bool? = nil
 
     var id: String { path }
     var url: URL { URL(fileURLWithPath: path, isDirectory: true) }
@@ -44,6 +47,9 @@ final class Library {
 
     @ObservationIgnored private var accessedRoots: [String: URL] = [:]
     @ObservationIgnored private var accessedFavorites: [String: URL] = [:]
+
+    /// Motiv only reads the folders it shows, so their bookmarks allow nothing more.
+    private static let bookmarkOptions: URL.BookmarkCreationOptions = [.withSecurityScope, .securityScopeAllowOnlyReadAccess]
 
     private static let rootsKey = "folders"
     private static let favoritesKey = "favorites"
@@ -107,13 +113,13 @@ final class Library {
             guard unavailable.contains(path) else { return folder }
             roots.remove(at: index)
         }
-        guard let bookmark = try? url.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
+        guard let bookmark = try? url.bookmarkData(options: Self.bookmarkOptions, includingResourceValuesForKeys: nil, relativeTo: nil)
         else { return nil }
         unavailable.remove(path)
         if accessedRoots[path] == nil, url.startAccessingSecurityScopedResource() {
             accessedRoots[path] = url
         }
-        roots.append(Place(path: path, bookmark: bookmark))
+        roots.append(Place(path: path, bookmark: bookmark, isReadOnly: true))
         roots.sort { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
         save()
         rebuildNodes()
@@ -161,9 +167,11 @@ final class Library {
             if !roots.contains(where: { $0.path == place.path }) { unavailable.remove(place.path) }
         } else {
             // A bookmark of its own keeps the favourite readable even if its root is removed.
-            guard let bookmark = try? folder.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
+            guard let bookmark = try? folder.bookmarkData(options: Self.bookmarkOptions, includingResourceValuesForKeys: nil, relativeTo: nil)
             else { return }
-            favorites.append(Place(path: folder.path, bookmark: bookmark))
+            // Access starts right away, not only on the next launch: otherwise the favourite would
+            // become unreadable as soon as its root is removed.
+            favorites.append(resolve(Place(path: folder.path, bookmark: bookmark, isReadOnly: true), into: &accessedFavorites))
         }
         save()
     }
@@ -188,8 +196,9 @@ final class Library {
         var resolved = place
         resolved.path = url.folderURL.path
         accessed[resolved.path] = url
-        if stale, let bookmark = try? url.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil) {
+        if stale || resolved.isReadOnly != true, let bookmark = try? url.bookmarkData(options: Self.bookmarkOptions, includingResourceValuesForKeys: nil, relativeTo: nil) {
             resolved.bookmark = bookmark
+            resolved.isReadOnly = true
         }
         return resolved
     }
