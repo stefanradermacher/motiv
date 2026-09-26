@@ -30,7 +30,7 @@ Motiv zeigt deine Bilder dort, wo sie liegen: in Ordnern, schnell und ohne Impor
 
 ## Beschreibung (4000)
 
-Motiv ist ein Bild- und Galeriebetrachter für den Mac. Es zeigt Bilder dort, wo sie liegen, in deinen Ordnern: ohne Mediathek, ohne Import, ohne Anmeldung. Motiv verändert nie eine Datei.
+Motiv ist ein Bild- und Galeriebetrachter für den Mac. Es zeigt Bilder dort, wo sie liegen, in deinen Ordnern: ohne Mediathek, ohne Import, ohne Anmeldung. Motiv modifiziert nie eine Datei.
 
 Ordner statt Mediathek
 • Freigegebene Ordner und Favoriten in der Seitenleiste, Unterordner als Leiste über den Miniaturen
