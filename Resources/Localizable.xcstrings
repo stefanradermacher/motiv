@@ -646,7 +646,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Swap Pictures (Space)"
+            "value": "Swap Images (Space)"
           }
         }
       }
@@ -856,7 +856,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Communication Safety in Screen Time hides pictures like this. If you are unsure, talk to someone you trust."
+            "value": "Communication Safety in Screen Time hides images like this. If you are unsure, talk to someone you trust."
           }
         }
       }
@@ -1156,7 +1156,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Same pixels: all pictures at the same scale; click for the same area"
+            "value": "Same pixels: all images at the same scale; click for the same area"
           }
         }
       }
@@ -1166,7 +1166,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Same area; click to show all pictures at the same scale (same pixels)"
+            "value": "Same area; click to show all images at the same scale (same pixels)"
           }
         }
       }
@@ -2176,7 +2176,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Split: one picture on the left, the other on the right"
+            "value": "Split: one image on the left, the other on the right"
           }
         }
       }
@@ -2766,7 +2766,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blend: fade smoothly from one picture into the other"
+            "value": "Blend: fade smoothly from one image into the other"
           }
         }
       }
