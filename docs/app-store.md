@@ -214,12 +214,12 @@ Für Motiv:
 
 - [x] Support- und Datenschutzseite online
 - [x] Capability „Sensitive Content Analysis“ an der App-ID (steht im Provisioning-Profil)
-- [ ] App-Eintrag angelegt (Deutsch „Motiv“, Englisch „Motiv – Image Viewer“); Bundle-ID unter „Identifiers“ registriert (hat Xcode beim Signieren bereits getan)
-- [ ] Drei Verbrauchsartikel angelegt
+- [x] App-Eintrag angelegt (Deutsch „Motiv“, Englisch „Motiv – Image Viewer“); Bundle-ID unter „Identifiers“ registriert (hat Xcode beim Signieren bereits getan)
+- [x] Drei Verbrauchsartikel angelegt
 - [x] Screenshots erstellt (deutsch und englisch)
 - [x] Prüfbild für die Trinkgelder (Start aus Xcode)
-- [ ] Build-Nummer höher als beim letzten Upload (`./scripts/bump-build.sh`)
-- [ ] Archiv erstellt, validiert und hochgeladen; beim Archivieren prüfen, dass das Distributionsprofil das Entitlement für sensible Inhalte enthält
+- [x] Build-Nummer höher als beim letzten Upload (`./scripts/bump-build.sh`)
+- [x] Archiv erstellt, validiert und hochgeladen; beim Archivieren prüfen, dass das Distributionsprofil das Entitlement für sensible Inhalte enthält
 
 ## Einreichen
 
@@ -228,3 +228,5 @@ Wie bei Leser ist die Reihenfolge wichtig, weil der erste Verbrauchsartikel nur 
 1. Auf der Versionsseite den Build auswählen und „Zur Prüfung hinzufügen“. Das legt einen Übermittlungsentwurf an. Dafür müssen unter „App-Informationen“ Kategorie und Inhaltsrechte gesetzt sein.
 2. Auf der Seite jedes In-App-Kaufs „Zur Prüfung hinzufügen“. Sein Status „In Vorbereitung zur Übermittlung“ ist dabei normal.
 3. Im Entwurf prüfen, dass Version und alle Käufe enthalten sind, dann „Zur Prüfung übermitteln“.
+
+Version 1.0 (Build 46) mit den drei Trinkgeldern wurde am 27. September 2026 eingereicht; der Stand trägt den Tag `v1.0-build46`.
