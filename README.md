@@ -34,11 +34,15 @@ Ohne Xcode-Oberfläche:
 ./build.sh
 ```
 
-Das baut `build/Motiv.app` mit `xcodebuild` (mit derselben Sandbox wie im App Store) und installiert die App nach `/Applications`. Läuft Motiv gerade, wird es vorher beendet und danach wieder geöffnet. Nur bauen, ohne zu installieren: `./build.sh --no-install`.
+Das baut `build/Motiv.app` mit `xcodebuild` (mit derselben Sandbox wie im App Store) und installiert die App nach `/Applications`. Läuft Motiv gerade, wird es vorher beendet und danach wieder geöffnet. Stammt die installierte App aus dem App Store, lässt `build.sh` sie unangetastet und meldet nur den Build. Nur bauen, ohne zu installieren: `./build.sh --no-install`.
 
 Nennt `Config/Local.xcconfig` eine Team-ID, signiert `build.sh` mit diesem Team; Xcode legt App-ID und Entwicklungsprofil bei Bedarf im Entwicklerkonto an. Ohne Team-ID, oder mit `--adhoc`, signiert es ad hoc – dann ohne Entwicklerkonto, aber auch ohne die Berechtigung zur Prüfung sensibler Inhalte (`Config/Motiv-AdHoc.entitlements`), denn die verlangt ein Provisioning-Profil. Die App läuft trotzdem vollständig, sie prüft nur keine Bilder.
 
-Die Versionsnummer steht im Projekt unter „Version“ (`MARKETING_VERSION`) und wird von Hand erhöht. Die Build-Nummer steht als `CURRENT_PROJECT_VERSION` in `Config/Motiv.xcconfig`. **Vor jedem Upload in den App Store einmal `./scripts/bump-build.sh` ausführen und mitcommitten.**
+Die Versionsnummer steht im Projekt unter „Version“ (`MARKETING_VERSION`) und wird von Hand erhöht. Die Build-Nummer steht als `CURRENT_PROJECT_VERSION` in `Config/Motiv.xcconfig` und ist damit eingecheckter Zustand: Xcode und `build.sh` lesen dieselbe Zahl, sie kann nicht sinken, und im Verlauf sieht man, welcher Commit welchen Build ergeben hat.
+
+**Vor jedem Upload in den App Store einmal `./scripts/bump-build.sh` ausführen und mitcommitten** — App Store Connect verlangt für jeden Upload eine höhere Nummer als für den vorigen. Die eingereichten Stände tragen Tags wie `v1.0-build46`.
+
+Nachträglich lässt sich die Nummer nicht setzen: `CFBundleVersion` wird beim Verarbeiten der `Info.plist` eingesetzt, und ein Skript, das die fertige Plist im Produkt ändert, wird von Xcode danach wieder überschrieben.
 
 Das App-Icon und das Dokumentsymbol zeichnet `scripts/make_icon.swift`: das App-Icon in den Asset-Katalog, das Dokumentsymbol nach `Resources/ImageDocument.icns`. Das Dokumentsymbol zeigt macOS nur, wenn Motiv die Standard-App für ein Bildformat ist, und auch dann meist nur dort, wo es keine Vorschau des Bildes gibt. Nach Änderungen an der Zeichnung im Projektordner `swift scripts/make_icon.swift` ausführen.
 
