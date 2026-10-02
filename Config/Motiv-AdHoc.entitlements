@@ -13,5 +13,8 @@
 	<!-- Die freigegebenen Ordner und Favoriten über einen Neustart hinweg behalten. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
+	<!-- Bilder drucken. -->
+	<key>com.apple.security.print</key>
+	<true/>
 </dict>
 </plist>

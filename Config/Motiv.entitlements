@@ -11,6 +11,9 @@
 	<!-- Die freigegebenen Ordner und Favoriten über einen Neustart hinweg behalten. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
+	<!-- Bilder drucken. -->
+	<key>com.apple.security.print</key>
+	<true/>
 	<!-- Hinweis für sensible Inhalte: Bilder auf dem Mac auf Nacktheit prüfen, wenn der Hinweis
 	     in den Systemeinstellungen eingeschaltet ist. -->
 	<key>com.apple.developer.sensitivecontentanalysis.client</key>

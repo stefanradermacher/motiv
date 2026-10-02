@@ -273,7 +273,7 @@ final class ImageViewerModel {
         return await Task.detached(priority: .userInitiated) { decode(url, maxPixels: maxPixels) }.value
     }
 
-    private nonisolated static func decode(_ url: URL, maxPixels: Int?) -> ViewerContent {
+    nonisolated static func decode(_ url: URL, maxPixels: Int?) -> ViewerContent {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return decodeWithAppKit(url) }
         if CGImageSourceGetCount(source) > 1,
            CGImageSourceGetType(source) as String? == UTType.gif.identifier,
@@ -317,7 +317,7 @@ final class ImageViewerModel {
         return .still(cgImage, size: CGSize(width: cgImage.width, height: cgImage.height))
     }
 
-    private nonisolated static func transformed(_ image: CGImage, quarterTurns: Int, mirrored: Bool) -> CGImage {
+    nonisolated static func transformed(_ image: CGImage, quarterTurns: Int, mirrored: Bool) -> CGImage {
         guard quarterTurns != 0 || mirrored else { return image }
         let width = image.width
         let height = image.height

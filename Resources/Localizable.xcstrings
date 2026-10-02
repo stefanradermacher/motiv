@@ -911,6 +911,16 @@
         }
       }
     },
+    "Drucken …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Print…"
+          }
+        }
+      }
+    },
     "Du hast nichts falsch gemacht. Wenn du Fragen hast oder dich unwohl fühlst, sprich mit einem Erwachsenen, dem du vertraust.": {
       "localizations": {
         "en": {
@@ -2037,6 +2047,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Location"
+          }
+        }
+      }
+    },
+    "Papierformat …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page Setup…"
           }
         }
       }

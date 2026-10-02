@@ -61,6 +61,14 @@ struct MotivCommands: Commands {
             .disabled(gallery?.folder == nil)
         }
 
+        CommandGroup(replacing: .printItem) {
+            Button("Papierformat …") { ImagePrinter.pageSetup(for: NSApp.keyWindow) }
+                .keyboardShortcut("p", modifiers: [.command, .shift])
+            Button("Drucken …") { gallery?.printImages() }
+                .keyboardShortcut("p")
+                .disabled(!(gallery?.canPrint ?? false))
+        }
+
         CommandGroup(replacing: .undoRedo) {}
 
         CommandGroup(replacing: .pasteboard) {
