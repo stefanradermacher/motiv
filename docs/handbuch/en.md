@@ -109,6 +109,10 @@ Motiv recognises videos and displays them with a still frame, but does not play 
 
 Motiv never modifies any images. ⌘E opens an image in Preview, “Open With” in any other app. Sharing and copying hand over files only when you explicitly ask for it.
 
+## Printing
+
+⌘P prints the image displayed or all selected images, each on its own page and as large as the paper allows. Motiv turns wide images to landscape. In the single image view it prints the image rotated and flipped as you see it. To get a PDF, choose “PDF → Open in Preview” in the print dialog and save it in Preview, because Motiv itself does not write any files.
+
 ## Default App
 
 If Motiv should always open images, make it the default in Settings, for all formats or one by one. macOS asks you to confirm each format. “Reset” later gives a format back to the app that had it before. Camera RAW formats are deliberately not offered.
@@ -164,6 +168,7 @@ The most important commands work without a mouse:
 | Just the image in full screen | ⌥⌘F |
 | Compare images | ⌃⌘C |
 | Open in Preview | ⌘E |
+| Print | ⌘P |
 | Show in Finder | ⇧⌘R |
 
 # Privacy

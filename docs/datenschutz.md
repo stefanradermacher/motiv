@@ -41,7 +41,7 @@ Enthält ein Bild Ortsangaben, zeigt Motiv die Koordinaten als Text. Erst wenn d
 
 ## Teilen und andere Apps
 
-Wenn du ein Bild teilst, mit „Öffnen mit“ oder „In Vorschau öffnen“ an eine andere App gibst, ein Video im Standardprogramm öffnest oder Dateien kopierst, übergibt Motiv die ausgewählten Dateien an die App oder den Dienst, den du wählst, bzw. an die Zwischenablage. Das geschieht nur auf deine ausdrückliche Aktion. Für die weitere Verarbeitung gelten die Datenschutzbestimmungen der jeweiligen App oder des Dienstes.
+Wenn du ein Bild teilst, druckst, mit „Öffnen mit“ oder „In Vorschau öffnen“ an eine andere App gibst, ein Video im Standardprogramm öffnest oder Dateien kopierst, übergibt Motiv die ausgewählten Dateien an die App oder den Dienst, den du wählst, an den Drucker bzw. an die Zwischenablage. Das geschieht nur auf deine ausdrückliche Aktion. Für die weitere Verarbeitung gelten die Datenschutzbestimmungen der jeweiligen App oder des Dienstes.
 
 ## Freiwillige Trinkgelder
 

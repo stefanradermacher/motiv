@@ -120,6 +120,10 @@ Motiv erkennt Videos und zeigt sie mit einem Standbild, spielt sie aber nicht ab
 
 Motiv modifiziert keine Bilder. Mit ⌘E öffnest du ein Bild in Vorschau, über „Öffnen mit“ in jedem anderen Programm. Teilen und Kopieren übergeben die Dateien nur, wenn du es ausdrücklich möchtest.
 
+## Drucken
+
+Mit ⌘P druckst du das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite und so groß, wie das Papier es zulässt. Breite Bilder legt Motiv quer. In der Einzelansicht druckt es das Bild so gedreht und gespiegelt, wie du es siehst. Ein PDF bekommst du über „PDF → In Vorschau öffnen“ im Druckdialog und sicherst es dann in Vorschau, denn Motiv selbst schreibt keine Dateien.
+
 ## Standard-App
 
 Soll Motiv Bilder immer öffnen, legst du es in den Einstellungen als Standard fest, für alle Formate oder einzeln. macOS fragt für jedes Format selbst nach. „Zurücksetzen“ gibt ein Format später der App zurück, die es vorher hatte. Kamera-RAW bietet Motiv dabei bewusst nicht an.
@@ -175,6 +179,7 @@ Die wichtigsten Befehle lassen sich ohne Maus erreichen:
 | Nur das Bild im Vollbild | ⌥⌘F |
 | Bilder vergleichen | ⌃⌘C |
 | In Vorschau öffnen | ⌘E |
+| Drucken | ⌘P |
 | Im Finder zeigen | ⇧⌘R |
 
 # Datenschutz
