@@ -12,7 +12,7 @@ Free, ad-free and without data collection.
 
 # About This Manual
 
-Motiv is a plain image and gallery viewer for macOS, made for collections of images in folders. It displays images where they are: no library, no import and no sign-in. In a few chapters, this manual describes what Motiv can do and how to use it.
+Motiv is an image and gallery viewer for macOS, made for collections of images in folders. It displays images where they are: no library, no import and no sign-in. In a few chapters, this manual describes what Motiv can do and how to use it.
 
 ## What Motiv Stands For
 

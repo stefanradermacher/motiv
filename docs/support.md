@@ -1,6 +1,6 @@
 # Hilfe zu Motiv
 
-Motiv ist ein schlichter Bild- und Galeriebetrachter für macOS, gemacht für Bildsammlungen in Ordnern.
+Motiv ist ein Bild- und Galeriebetrachter für macOS, gemacht für Bildsammlungen in Ordnern.
 
 ## Erste Schritte
 

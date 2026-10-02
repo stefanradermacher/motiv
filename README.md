@@ -1,6 +1,6 @@
 # Motiv
 
-Schlichter Bild- und Galeriebetrachter für macOS 15+, gebaut mit SwiftUI, ImageIO und AVFoundation. Er zeigt Bildsammlungen in Ordnerstrukturen an und verändert keine Datei.
+Bild- und Galeriebetrachter für macOS 15+, gebaut mit SwiftUI, ImageIO und AVFoundation. Er zeigt Bildsammlungen in Ordnerstrukturen an und verändert keine Datei.
 
 Motiv ist quelloffen (Apache-Lizenz 2.0, siehe `LICENSE`), werbefrei und übermittelt keine Daten: kein Tracking, keine Analyse, keine eigenen Netzwerkverbindungen. Es nutzt ausschließlich Apple-Frameworks. Wer die Entwicklung unterstützen möchte, kann unter **Hilfe → Motiv unterstützen …** oder **Motiv → Über Motiv** ein freiwilliges Trinkgeld über den App Store geben; es schaltet nichts frei.
 

@@ -1001,6 +1001,16 @@
         }
       }
     },
+    "Ein Bild- und Galeriebetrachter für macOS.\nAufgeräumt, schnell und ohne Ablenkung.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An image and gallery viewer for macOS.\nTidy, fast and free of distractions."
+          }
+        }
+      }
+    },
     "Ein Frühstück": {
       "localizations": {
         "en": {
@@ -1027,16 +1037,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tips are possible in the App Store version."
-          }
-        }
-      }
-    },
-    "Ein schlichter Bild- und Galeriebetrachter für macOS.\nAufgeräumt, schnell und ohne Ablenkung.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A plain image and gallery viewer for macOS.\nTidy, fast and free of distractions."
           }
         }
       }

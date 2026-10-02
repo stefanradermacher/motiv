@@ -23,7 +23,7 @@ Kostenlos, werbefrei und ohne Datensammlung.
 
 # Über dieses Handbuch
 
-Motiv ist ein schlichter Bild- und Galeriebetrachter für macOS, gemacht für Bildsammlungen in Ordnern. Es zeigt Bilder dort, wo sie liegen: ohne Mediathek, ohne Import und ohne Anmeldung. Dieses Handbuch beschreibt in wenigen Kapiteln, was Motiv kann und wie es sich bedienen lässt.
+Motiv ist ein Bild- und Galeriebetrachter für macOS, gemacht für Bildsammlungen in Ordnern. Es zeigt Bilder dort, wo sie liegen: ohne Mediathek, ohne Import und ohne Anmeldung. Dieses Handbuch beschreibt in wenigen Kapiteln, was Motiv kann und wie es sich bedienen lässt.
 
 ## Was Motiv ausmacht
 

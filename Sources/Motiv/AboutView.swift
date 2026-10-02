@@ -85,7 +85,7 @@ struct AboutView: View {
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .textSelection(.enabled)
-            Text("Ein schlichter Bild- und Galeriebetrachter für macOS.\nAufgeräumt, schnell und ohne Ablenkung.")
+            Text("Ein Bild- und Galeriebetrachter für macOS.\nAufgeräumt, schnell und ohne Ablenkung.")
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 4)
