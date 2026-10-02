@@ -219,6 +219,14 @@ func height(_ string: NSAttributedString, width: CGFloat = contentWidth) -> CGFl
     return ceil(layout.usedRect(for: container).height) + 3
 }
 
+/// Draws text whose first line starts at `top`. The rectangle reaches far below the measured
+/// height: draw(with:) cuts off whatever sticks out of it, which clipped the descenders of
+/// the last line.
+func draw(_ string: NSAttributedString, x: CGFloat, top: CGFloat, width: CGFloat) {
+    string.draw(with: CGRect(x: x, y: top - 10_000, width: width, height: 10_000),
+                options: [.usesLineFragmentOrigin, .usesFontLeading])
+}
+
 func place(_ string: NSAttributedString, indent: CGFloat = 0, gap: CGFloat = 0) {
     let width = contentWidth - indent
     let needed = height(string, width: width)
@@ -226,8 +234,7 @@ func place(_ string: NSAttributedString, indent: CGFloat = 0, gap: CGFloat = 0) 
         endPage()
         beginPage()
     }
-    string.draw(with: CGRect(x: margin + indent, y: y - needed, width: width, height: needed),
-                options: [.usesLineFragmentOrigin, .usesFontLeading])
+    draw(string, x: margin + indent, top: y, width: width)
     y -= needed + gap
 }
 
@@ -289,8 +296,7 @@ func noteBox(_ string: String) {
     NSBezierPath(roundedRect: box, xRadius: 7, yRadius: 7).fill()
     accent.setFill()
     CGRect(x: box.minX, y: box.minY, width: 3.5, height: box.height).fill()
-    content.draw(with: CGRect(x: box.minX + 20, y: box.minY + 14, width: inner, height: needed - 28),
-                 options: [.usesLineFragmentOrigin, .usesFontLeading])
+    draw(content, x: box.minX + 20, top: box.minY + needed - 14, width: inner)
     y -= needed + 16
 }
 
@@ -333,8 +339,7 @@ func picture(_ path: String, caption: String) {
     NSBezierPath(rect: frame.insetBy(dx: -0.25, dy: -0.25)).stroke()
     y -= imageHeight + 6
     if !caption.isEmpty {
-        label.draw(with: CGRect(x: margin, y: y - labelHeight, width: width, height: labelHeight),
-                   options: [.usesLineFragmentOrigin, .usesFontLeading])
+        draw(label, x: margin, top: y, width: width)
         y -= labelHeight
     }
     y -= 12
@@ -389,8 +394,7 @@ for (index, block) in blocks.enumerated() {
             beginPage()
         }
         dot.draw(at: NSPoint(x: margin, y: y - needed + (needed - 14)))
-        line.draw(with: CGRect(x: margin + 18, y: y - needed, width: contentWidth - 18, height: needed),
-                  options: [.usesLineFragmentOrigin, .usesFontLeading])
+        draw(line, x: margin + 18, top: y, width: contentWidth - 18)
         y -= needed + 7
     case .note(let string):
         y -= 4

@@ -41,7 +41,7 @@ In der Übersicht springst du zu einem Bild, indem du den Anfang seines Namens t
 Nein, und das bleibt so. Motiv ist bewusst nur ein Betrachter. Drehen und Spiegeln wirken nur auf die Ansicht. Zum Bearbeiten öffnest du das Bild mit ⌘E in Vorschau oder über „Öffnen mit“ in einem anderen Programm.
 
 **Kann ich Bilder drucken oder als PDF sichern?**
-Drucken ja: ⌘P druckt das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite. Für ein PDF wählst du im Druckdialog „PDF → In Vorschau öffnen“ und sicherst es in Vorschau; „Als PDF sichern“ geht in Motiv nicht, weil die App nur lesen darf.
+Drucken ja: ⌘P druckt das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite. Drehen und Größe stellst du im Abschnitt „Motiv“ des Druckdialogs ein. Für ein PDF wählst du im Druckdialog „PDF → In Vorschau öffnen“ und sicherst es in Vorschau; „Als PDF sichern“ geht in Motiv nicht, weil die App nur lesen darf.
 
 **Warum muss ich Ordner freigeben?**
 Wie jede App aus dem App Store darf Motiv nur lesen, was du ausgewählt hast. Öffnest du ein einzelnes Bild aus dem Finder, zeigt Motiv es sofort; die Bilder daneben sieht es erst, wenn du mit „Ordner freigeben …“ in der Titelzeile den Ordner freigibst. Motiv merkt sich die Freigabe. Willst du den Ordner nur kurz ansehen, wähle über den Pfeil daneben „Nur bis zum Beenden freigeben …“; dann verschwindet er nach dem Beenden wieder aus der Seitenleiste.

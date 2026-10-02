@@ -111,7 +111,7 @@ Motiv never modifies any images. ⌘E opens an image in Preview, “Open With”
 
 ## Printing
 
-⌘P prints the image displayed or all selected images, each on its own page and as large as the paper allows. Motiv turns wide images to landscape. In the single image view it prints the image rotated and flipped as you see it. To get a PDF, choose “PDF → Open in Preview” in the print dialog and save it in Preview, because Motiv itself does not write any files.
+⌘P prints the image displayed or all selected images, each on its own page. For wide images, Motiv preselects landscape. In the “Motiv” section of the print dialog you choose whether images are rotated automatically to match the paper and how large they appear: at actual size according to their resolution, shrunk only when they do not fit, or scaled to the paper size. Motiv remembers your choice. In the single image view it prints the image rotated and flipped as you see it. To get a PDF, choose “PDF → Open in Preview” in the print dialog and save it in Preview, because Motiv itself does not write any files.
 
 ## Default App
 

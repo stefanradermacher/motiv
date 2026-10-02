@@ -122,7 +122,7 @@ Motiv modifiziert keine Bilder. Mit ⌘E öffnest du ein Bild in Vorschau, über
 
 ## Drucken
 
-Mit ⌘P druckst du das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite und so groß, wie das Papier es zulässt. Breite Bilder legt Motiv quer. In der Einzelansicht druckt es das Bild so gedreht und gespiegelt, wie du es siehst. Ein PDF bekommst du über „PDF → In Vorschau öffnen“ im Druckdialog und sicherst es dann in Vorschau, denn Motiv selbst schreibt keine Dateien.
+Mit ⌘P druckst du das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite. Für breite Bilder wählt Motiv das Querformat vor. Im Abschnitt „Motiv“ des Druckdialogs wählst du, ob Bilder automatisch zum Papier gedreht werden und wie groß sie erscheinen: in Originalgröße nach ihrer Auflösung, nur verkleinert, wenn sie nicht passen, oder auf das Papierformat skaliert. Motiv merkt sich die Wahl. In der Einzelansicht druckt es das Bild so gedreht und gespiegelt, wie du es siehst. Ein PDF bekommst du über „PDF → In Vorschau öffnen“ im Druckdialog und sicherst es dann in Vorschau, denn Motiv selbst schreibt keine Dateien.
 
 ## Standard-App
 
