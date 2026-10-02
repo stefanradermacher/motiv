@@ -461,6 +461,16 @@
         }
       }
     },
+    "Auf Papierformat skalieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scale to paper size"
+          }
+        }
+      }
+    },
     "Aufgenommen": {
       "localizations": {
         "en": {
@@ -507,6 +517,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Date Taken"
+          }
+        }
+      }
+    },
+    "Aus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
           }
         }
       }
@@ -641,6 +661,16 @@
         }
       }
     },
+    "Bilder automatisch drehen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotate images automatically"
+          }
+        }
+      }
+    },
     "Bilder tauschen (Leertaste)": {
       "localizations": {
         "en": {
@@ -657,6 +687,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Frame rate"
+          }
+        }
+      }
+    },
+    "Bildskalierung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image scaling"
+          }
+        }
+      }
+    },
+    "Bildskalierung:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image scaling:"
           }
         }
       }
@@ -927,6 +977,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "You did nothing wrong. If you have questions or feel uncomfortable, talk to an adult you trust."
+          }
+        }
+      }
+    },
+    "Ein": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
           }
         }
       }
@@ -1207,6 +1267,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Same area; click to show all images at the same scale (same pixels)"
+          }
+        }
+      }
+    },
+    "Große Bilder verkleinern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shrink large images"
           }
         }
       }
