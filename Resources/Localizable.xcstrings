@@ -921,6 +921,16 @@
         }
       }
     },
+    "Die Preise konnten gerade nicht vom App Store geladen werden.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The prices could not be loaded from the App Store right now."
+          }
+        }
+      }
+    },
     "Die Unterordner in einer Leiste über den Bildern zeigen": {
       "localizations": {
         "en": {
@@ -1087,6 +1097,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Grant Access Again …"
+          }
+        }
+      }
+    },
+    "Erneut versuchen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try Again"
           }
         }
       }
