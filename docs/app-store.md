@@ -230,3 +230,5 @@ Wie bei Leser ist die Reihenfolge wichtig, weil der erste Verbrauchsartikel nur 
 3. Im Entwurf prüfen, dass Version und alle Käufe enthalten sind, dann „Zur Prüfung übermitteln“.
 
 Version 1.0 (Build 46) mit den drei Trinkgeldern wurde am 27. September 2026 eingereicht; der Stand trägt den Tag `v1.0-build46`.
+
+Nach zwei Rückfragen nach Guideline 2.1 (Video und Antworten, dann wo die In-App-Käufe zu finden sind; die Käufe waren korrekt in der Übermittlung, Antwort mit dem Weg über „Hilfe → Motiv unterstützen …“) ist Motiv 1.0 seit Oktober 2026 im App Store: https://apps.apple.com/app/id6816479220. Die Homepage zeigt das Abzeichen und „live · 1.0“; bei einem Update ändert sich dort nur `VERSIONS` in `projects/assets/js/app.js`.
