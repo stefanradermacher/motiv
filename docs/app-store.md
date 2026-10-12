@@ -57,6 +57,7 @@ Informationen
 Angenehm im Alltag
 • Videos erscheinen mit Standbild und öffnen sich per Doppelklick im Standardprogramm
 • In Vorschau öffnen, Öffnen mit, Teilen, im Finder zeigen
+• Drucken, ein Bild pro Seite, passend zum Papier gedreht und skaliert
 • Ist der Hinweis für sensible Inhalte in macOS eingeschaltet, zeigt Motiv betroffene Bilder weichgezeichnet
 • JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, SVG, RAW und alles, was macOS lesen kann
 
@@ -72,7 +73,15 @@ Bilder,Fotos,Galerie,Betrachter,Viewer,Ordner,EXIF,vergleichen,Metadaten,HEIC,RA
 
 ## Neue Funktionen (4000)
 
-Erste Version.
+Für Version 1.0.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+
+Neu in Version 1.0.1
+
+• Drucken: das gezeigte Bild oder alle ausgewählten, je eins pro Seite, mit ⌘P
+• Im Druckdialog: Bilder automatisch drehen, Originalgröße, große Bilder verkleinern oder auf Papierformat skalieren
+• Laden die Preise für ein Trinkgeld einmal nicht, lässt sich das Laden wiederholen
+
+Version 1.0: Erste Version.
 
 ## Englische Texte
 
@@ -115,6 +124,7 @@ Information
 Pleasant every day
 • Videos appear with a still frame and open in their default app on double-click
 • Open in Preview, Open With, Share, Show in Finder
+• Printing, one image per page, rotated and scaled to suit the paper
 • If Sensitive Content Warning is switched on in macOS, Motiv displays affected images blurred
 • JPEG, PNG, HEIC, TIFF, GIF, WebP, AVIF, SVG, RAW and everything macOS can read
 
@@ -128,7 +138,15 @@ Honest and open
 
 images,photos,gallery,viewer,browser,folder,EXIF,compare,metadata,HEIC,RAW,ad-free,privacy
 
-**Neue Funktionen:** First release.
+**Neue Funktionen (4000):**
+
+New in version 1.0.1
+
+• Printing: the image displayed or all selected images, one per page, with ⌘P
+• In the print dialog: rotate images automatically, actual size, shrink large images or scale to paper size
+• If the prices for a tip do not load, you can try again
+
+Version 1.0: First release.
 
 ## In-App-Käufe
 
@@ -170,6 +188,8 @@ Standard-App: Motiv fragt an seltenen Stellen, ob es die Standard-App für Bilde
 
 Videos erkennt Motiv, spielt sie aber nicht ab; ein Doppelklick öffnet sie im Standardprogramm.
 
+Drucken (neu in 1.0.1): „Ablage → Drucken …“ (⌘P) druckt das gezeigte Bild oder die ausgewählten Bilder; dafür hat Motiv das Entitlement `com.apple.security.print`. Motiv darf weiterhin nur lesen. „Als PDF sichern …“ im PDF-Menü des Druckdialogs braucht Schreibrechte und bleibt deshalb ohne Wirkung; ein PDF entsteht über „PDF → In Vorschau öffnen“.
+
 **Englische Fassung für App Store Connect:**
 
 Motiv is a pure image and gallery viewer and never changes files; rotating and flipping affect the view only. There is no sign-in, no account and no demo credentials.
@@ -183,6 +203,8 @@ The three in-app purchases are voluntary tips for further development. They unlo
 Default app: Motiv occasionally asks whether it should become the default app for images. The question appears as a slim bar in the window, only after Motiv was used on three different days, at most twice in total and at least 30 days apart. The change uses NSWorkspace.setDefaultApplication; macOS asks the user to confirm each format. In Settings this can be set and reset per format; Motiv then gives each format back to the app it had before, otherwise Preview. Camera RAW formats are deliberately not offered.
 
 Videos are recognised but not played; a double-click opens them in their default app.
+
+Printing (new in 1.0.1): “File → Print…” (⌘P) prints the image displayed or the selected images; for this Motiv has the entitlement com.apple.security.print. Motiv still has read-only file access. “Save as PDF…” in the PDF menu of the print dialog needs write access and therefore has no effect; a PDF can be made with “PDF → Open in Preview”.
 
 ## Screenshots
 
@@ -232,3 +254,30 @@ Wie bei Leser ist die Reihenfolge wichtig, weil der erste Verbrauchsartikel nur 
 Version 1.0 (Build 46) mit den drei Trinkgeldern wurde am 27. September 2026 eingereicht; der Stand trägt den Tag `v1.0-build46`.
 
 Nach zwei Rückfragen nach Guideline 2.1 (Video und Antworten, dann wo die In-App-Käufe zu finden sind; die Käufe waren korrekt in der Übermittlung, Antwort mit dem Weg über „Hilfe → Motiv unterstützen …“) ist Motiv 1.0 seit Oktober 2026 im App Store: https://apps.apple.com/app/id6816479220. Die Homepage zeigt das Abzeichen und „live · 1.0“; bei einem Update ändert sich dort nur `VERSIONS` in `projects/assets/js/app.js`.
+
+## App-Sandbox in App Store Connect
+
+Unter „Informationen zur App-Sandbox“ steht zu jedem Entitlement eine Begründung. Mit 1.0.1 kommt dazu:
+
+| Entitlement | Nutzungsinformation |
+|---|---|
+| com.apple.security.print | Used only when the user chooses File → Print… (⌘P) to print the image displayed or the selected images. Motiv hands the images to the macOS print system; it writes no files. |
+
+## Version 1.0.1
+
+Bringt das Drucken nach, das von Anfang an hätte dabei sein sollen, deshalb 1.0.1 und nicht 1.1. Dazu „Erneut versuchen“ im Trinkgeldfenster, wenn die Preise nicht laden. Die drei Trinkgelder sind seit 1.0 freigegeben und müssen nicht erneut eingereicht werden.
+
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen. Die Build-Nummer ist schon erhöht.
+2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.0.1 anlegen.
+3. „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben), die Beschreibung um die Zeile zum Drucken ergänzen.
+4. Den Build wählen, unter „Informationen zur App-Sandbox“ `com.apple.security.print` mit der Begründung oben ergänzen und den Absatz zum Drucken an die Hinweise für die Prüfung anhängen.
+5. „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.0.1-build<Nummer>` taggen.
+
+## Nach der Freigabe einer neuen Version
+
+- [ ] In `CHANGELOG.md` und `CHANGELOG.en.md` „noch nicht veröffentlicht“ durch das Datum der Freigabe ersetzen.
+- [ ] Webseite: In `projects/assets/js/app.js` des Homepage-Repos die Version in `VERSIONS` (Eintrag `motiv`) anpassen und, weil sich `app.js` ändert, den Cache-Breaker `?v=` in allen Seiten hochsetzen.
+- [ ] Webseite: Haben sich Funktionen, Tastaturkürzel oder gespeicherte Daten geändert, Produktseite, Hilfe und Datenschutz (mit neuem Stand) anpassen. Für 1.0.1: Drucken und ⌘P in der Hilfe, Drucken unter „Teilen und andere Apps“ im Datenschutz.
+- [ ] Die Änderungen pushen.
+
+Der Link zum Store (`https://apps.apple.com/app/id6816479220`) bleibt bei Updates gleich.

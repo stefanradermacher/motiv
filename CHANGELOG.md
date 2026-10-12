@@ -1,0 +1,21 @@
+# Änderungen
+
+Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
+
+## 1.0.1 – noch nicht veröffentlicht
+
+### Neu
+
+**Drucken.** „Ablage → Drucken …“ (⌘P) druckt das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite. In der Einzelansicht kommt das Bild so gedreht und gespiegelt aufs Papier, wie du es siehst; für breite Bilder ist das Querformat vorgewählt. „Ablage → Papierformat …“ (⇧⌘P) legt Papier und Ausrichtung fest. Videos und weichgezeichnete sensible Bilder druckt Motiv nicht.
+
+**Druckoptionen.** Ein eigener Bereich „Motiv“ im Druckdialog dreht Bilder auf Wunsch automatisch passend zum Papier und bietet Originalgröße nach der Auflösung des Bildes, „Große Bilder verkleinern“ und „Auf Papierformat skalieren“. Motiv merkt sich die Wahl für den nächsten Druck. Ein PDF entsteht über „PDF → In Vorschau öffnen“, denn Motiv selbst schreibt keine Dateien.
+
+### Verbessert
+
+**Trinkgeld.** Können die Preise gerade nicht vom App Store geladen werden, sagt das Fenster „Motiv unterstützen“ das jetzt und bietet „Erneut versuchen“ an.
+
+**Handbuch.** Das Handbuch beschreibt das Drucken, und die letzte Zeile längerer Absätze ist nicht mehr angeschnitten.
+
+## 1.0 – Oktober 2026
+
+Erste Version.
