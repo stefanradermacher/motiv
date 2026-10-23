@@ -35,12 +35,9 @@ enum AppLinks {
 }
 
 extension Color {
-    /// The petrol of the app icon, a little lighter in dark mode.
-    static let motivPetrol = Color(nsColor: NSColor(name: nil) { appearance in
-        appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-            ? NSColor(srgbRed: 0.38, green: 0.70, blue: 0.74, alpha: 1)
-            : NSColor(srgbRed: 0.16, green: 0.45, blue: 0.49, alpha: 1)
-    })
+    /// The petrol of the app icon, a little lighter in dark mode. It is the app's accent color
+    /// (Assets: AccentColor), so controls take it as well.
+    static let motivPetrol = Color("AccentColor")
 }
 
 struct AboutView: View {
