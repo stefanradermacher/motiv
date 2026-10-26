@@ -14,6 +14,10 @@ Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGE
 
 ## 1.0.2 – noch nicht veröffentlicht
 
+### Verbessert
+
+**Eigene Akzentfarbe.** Motiv hat jetzt eine eigene Akzentfarbe, das Petrol seines Symbols. Ist in den Systemeinstellungen unter „Erscheinungsbild“ die Akzentfarbe „Mehrfarbig“ gewählt, nehmen Knöpfe, Schalter und Auswahl in Motiv diese Farbe an; bei jeder anderen Wahl bleibt es bei der Farbe des Systems.
+
 ### Behoben
 
 **Schwarze Miniaturen.** Auf manchen Macs zeigte Motiv die Miniaturen von Fotos aus Apples Kamera-App als schwarze Flächen; die Einzelansicht war richtig. Motiv zeichnet Miniaturen jetzt immer als gewöhnliche Bilder ohne HDR-Angaben.
