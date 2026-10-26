@@ -24,7 +24,7 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 **Printing.** “File → Print…” (⌘P) prints the image displayed or all selected images, each on a page of its own. In the single image view the image is printed rotated and flipped as you see it; for wide images landscape is preselected. “File → Page Setup…” (⇧⌘P) sets paper and orientation. Motiv does not print videos or blurred sensitive images.
 
-**Print options.** A “Motiv” section in the print dialog rotates images automatically to suit the paper if you like, and offers actual size according to the image’s resolution, “Shrink large images” and “Scale to paper size”. Motiv remembers your choice for the next print. To get a PDF, use “PDF → Open in Preview”, because Motiv itself does not write any files.
+**Print options.** A “Motiv” section in the print dialog rotates images automatically to suit the paper if you like, and offers actual size according to the image’s resolution, “Shrink large images”, and “Scale to paper size”. Motiv remembers your choice for the next print. To get a PDF, use “PDF → Open in Preview”, because Motiv itself does not write any files.
 
 ### Improved
 
