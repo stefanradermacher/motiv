@@ -55,7 +55,8 @@ final class ThumbnailCache {
         // Scrolled past while waiting: not needed any more.
         guard !Task.isCancelled else { return nil }
         if let image = cached(url, pixels: pixels) { return image }
-        let image = await Stills.thumbnail(of: url, pixels: pixels).map { NSImage(cgImage: $0, size: CGSize(width: $0.width, height: $0.height)) }
+        let image = await Stills.thumbnail(of: url, pixels: pixels).map { Stills.plain($0) }
+            .map { NSImage(cgImage: $0, size: CGSize(width: $0.width, height: $0.height)) }
             ?? NSWorkspace.shared.icon(forFile: url.path)
         cache.setObject(image, forKey: key(url, pixels), cost: pixels * pixels * 4)
         return image
@@ -89,16 +90,13 @@ struct ThumbnailImage: View {
                     .fill(Color(cgColor: SensitiveContentGuard.strictFill))
                     .aspectRatio(image.size, contentMode: .fit)
                     .overlay { ConcealedBadge(size: size) }
-            } else if let image, let concealed {
-                Image(nsImage: image)
-                    .resizable()
-                    .interpolation(.high)
-                    .scaledToFit()
-                    .blur(radius: concealed ? max(6, size * 0.08) : 0, opaque: true)
+            } else if let image, concealed == true {
+                picture(image)
+                    .blur(radius: max(6, size * 0.08), opaque: true)
                     .clipped()
-                    .overlay {
-                        if concealed { ConcealedBadge(size: size) }
-                    }
+                    .overlay { ConcealedBadge(size: size) }
+            } else if let image, concealed != nil {
+                picture(image)
             } else {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(.quaternary)
@@ -116,6 +114,17 @@ struct ThumbnailImage: View {
         .task(id: "\(url.path)|\(guardian.isBlurring)") {
             if guardian.isBlurring { await guardian.check(url, isVideo: isVideo) }
         }
+    }
+
+    /// Always drawn in standard dynamic range. On some Macs (reported for macOS 15 and 27.0)
+    /// thumbnails of HDR photos from Apple's Camera app came out black; they were then still drawn
+    /// with a blur of radius 0 even when not concealed.
+    private func picture(_ image: NSImage) -> some View {
+        Image(nsImage: image)
+            .resizable()
+            .interpolation(.high)
+            .allowedDynamicRange(.standard)
+            .scaledToFit()
     }
 }
 
@@ -163,6 +172,21 @@ enum Stills {
         return try? await generator.image(at: time).image
     }
 
+    /// A copy as a plain 8-bit bitmap in Display P3, without anything attached for HDR such as a
+    /// gain map or a headroom. JPEGs from Apple's Camera app carry an HDR gain map, and on some
+    /// Macs their thumbnails came out black; a thumbnail redrawn this way is an ordinary picture,
+    /// whichever way it was made.
+    nonisolated static func plain(_ image: CGImage) -> CGImage {
+        let hasAlpha = ![.none, .noneSkipFirst, .noneSkipLast].contains(image.alphaInfo)
+        guard let context = CGContext(data: nil, width: image.width, height: image.height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpace(name: CGColorSpace.displayP3)!,
+                                      bitmapInfo: (hasAlpha ? CGImageAlphaInfo.premultipliedLast : .noneSkipLast).rawValue)
+        else { return image }
+        context.interpolationQuality = .none
+        context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
+        return context.makeImage() ?? image
+    }
+
     /// Quick Look, for the few formats Motiv cannot read itself.
     nonisolated static func quickLook(_ url: URL, pixels: Int) async -> CGImage? {
         let request = QLThumbnailGenerator.Request(fileAt: url, size: CGSize(width: pixels, height: pixels),
@@ -191,6 +215,8 @@ enum Stills {
                 kCGImageSourceCreateThumbnailWithTransform: true,
                 kCGImageSourceShouldCacheImmediately: true,
                 kCGImageSourceThumbnailMaxPixelSize: pixels,
+                // Thumbnails stay in standard dynamic range, whatever HDR the photo carries.
+                kCGImageSourceDecodeRequest: kCGImageSourceDecodeToSDR,
             ]
             let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? [CFString: Any] ?? [:]
             let largest = max(properties[kCGImagePropertyPixelWidth] as? Int ?? 0, properties[kCGImagePropertyPixelHeight] as? Int ?? 0)

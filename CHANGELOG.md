@@ -2,6 +2,12 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
+## 1.0.2 – noch nicht veröffentlicht
+
+### Behoben
+
+**Schwarze Miniaturen.** Auf manchen Macs zeigte Motiv die Miniaturen von Fotos aus Apples Kamera-App als schwarze Flächen; die Einzelansicht war richtig. Motiv zeichnet Miniaturen jetzt immer als gewöhnliche Bilder ohne HDR-Angaben.
+
 ## 1.0.1 – noch nicht veröffentlicht
 
 ### Neu

@@ -2,6 +2,12 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
+## 1.0.2 – not yet released
+
+### Fixed
+
+**Black thumbnails.** On some Macs, Motiv displayed the thumbnails of photos from Apple’s Camera app as black areas, while the single image view was correct. Motiv now always draws thumbnails as ordinary images without HDR information.
+
 ## 1.0.1 – not yet released
 
 ### New

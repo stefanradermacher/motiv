@@ -7,7 +7,7 @@
 #include? "Local.xcconfig"
 
 // Versionsnummer, wie sie im App Store und unter „Über Motiv“ steht.
-MARKETING_VERSION = 1.0.1
+MARKETING_VERSION = 1.0.2
 
 // Build-Nummer. Info.plist setzt CFBundleVersion daraus. Der Wert steht bewusst
 // hier im Repository statt beim Bauen erzeugt zu werden: So liefern Xcode und
@@ -15,4 +15,4 @@ MARKETING_VERSION = 1.0.1
 //
 // Vor jedem Upload in den App Store einmal ./scripts/bump-build.sh ausführen und
 // mitcommitten — App Store Connect verlangt für jeden Upload eine höhere Nummer.
-CURRENT_PROJECT_VERSION = 54
+CURRENT_PROJECT_VERSION = 55
