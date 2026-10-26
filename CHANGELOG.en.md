@@ -4,6 +4,10 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 ## 1.0.2 – not yet released
 
+### Improved
+
+**Accent colour of its own.** Motiv now has an accent colour of its own, the petrol of its icon. If the accent colour “Multicolour” is chosen in System Settings under “Appearance”, buttons, switches, and selections in Motiv take on this colour; with any other choice, the system's colour stays.
+
 ### Fixed
 
 **Black thumbnails.** On some Macs, Motiv displayed the thumbnails of photos from Apple’s Camera app as black areas, while the single image view was correct. Motiv now always draws thumbnails as ordinary images without HDR information.
