@@ -646,6 +646,8 @@ final class Gallery {
         var urls: [URL]
         var index: Int
         var isPaused = false
+        /// Whether the last change went forward; a push comes from the right then.
+        var forward = true
         /// The selection the slideshow was started with, restored when it ends.
         var selection: Set<URL>
     }
@@ -720,6 +722,7 @@ final class Gallery {
             }
         }
         running.index = next
+        running.forward = offset >= 0
         slideshow = running
         show(running.urls[next])
         scheduleSlide()

@@ -26,7 +26,9 @@ struct ViewerView: View {
         VStack(spacing: 0) {
             ZStack {
                 ImageCanvas(picture: shownPicture, enlargesSmallImages: enlargesSmallImages,
-                            isPresenting: gallery.isPresenting, crossfades: gallery.slideshow != nil,
+                            isPresenting: gallery.isPresenting,
+                            transition: gallery.slideshow.map { _ in Preferences.slideshowTransition },
+                            transitionForward: gallery.slideshow?.forward ?? true,
                             model: viewer, gestures: gestures)
                 overlay
                 if let hint = slideshowHint {

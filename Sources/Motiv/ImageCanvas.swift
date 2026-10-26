@@ -22,8 +22,10 @@ struct ImageCanvas: NSViewRepresentable {
     let enlargesSmallImages: Bool
     /// Only the image, full screen: on black, without a pointer.
     let isPresenting: Bool
-    /// In a slideshow, a new picture fades in over the previous one.
-    var crossfades = false
+    /// In a slideshow, how a new picture replaces the previous one.
+    var transition: SlideTransition? = nil
+    /// Whether the slideshow went forward, for the direction of a push or wipe.
+    var transitionForward = true
     let model: ImageViewerModel
     /// What trackpad gestures do beyond zooming: page through the folder and rotate.
     let gestures: CanvasGestures
@@ -46,7 +48,8 @@ struct ImageCanvas: NSViewRepresentable {
         view.enlargesSmallImages = enlargesSmallImages
         view.backgroundColor = isPresenting ? .black : .underPageBackgroundColor
         view.gestures = gestures
-        view.crossfades = crossfades
+        view.transition = transition
+        view.transitionForward = transitionForward
         view.show(picture)
         if isPresenting { NSCursor.setHiddenUntilMouseMoves(true) }
     }
@@ -99,15 +102,19 @@ final class ImageScrollView: NSScrollView {
     /// Set when another picture is about to come, see `show`.
     private var expectsNewPicture = true
     var gestures = CanvasGestures()
-    /// See `ImageCanvas.crossfades`.
-    var crossfades = false
+    /// See `ImageCanvas.transition`.
+    var transition: SlideTransition?
+    var transitionForward = true
+    /// The previous picture during a wipe or iris, above the new one.
+    private var outgoing: CALayer?
     /// Rotation of the current two-finger turn not yet used for a quarter turn, in degrees.
     private var pendingRotation: CGFloat = 0
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         contentView = CenteringClipView()
-        // Layer-backed, so that a slideshow can fade from one picture to the next.
+        // Layer-backed, for the transitions of a slideshow.
+        wantsLayer = true
         contentView.wantsLayer = true
         documentView = pictureView
         hasHorizontalScroller = true
@@ -227,12 +234,8 @@ final class ImageScrollView: NSScrollView {
             return
         }
         if picture != nil { expectsNewPicture = false }
-        if crossfades, picture != nil, let layer = contentView.layer {
-            let fade = CATransition()
-            fade.type = .fade
-            fade.duration = 0.8
-            layer.add(fade, forKey: "crossfade")
-        }
+        let leaving = picture != nil ? snapshotForTransition() : nil
+        if picture != nil { beginTransition() }
         self.picture = picture
         pictureView.picture = picture
         pictureView.frame = NSRect(origin: .zero, size: picture?.size ?? .zero)
@@ -241,6 +244,99 @@ final class ImageScrollView: NSScrollView {
         } else {
             centerPicture()
         }
+        if let leaving { finishTransition(revealingFrom: leaving) }
+    }
+
+    // MARK: Slideshow transitions
+
+    private static let transitionDuration: CFTimeInterval = 0.8
+
+    /// Dissolve and push are done by Core Animation on the clip view.
+    private func beginTransition() {
+        guard let transition, let layer = contentView.layer else { return }
+        let animation = CATransition()
+        animation.duration = Self.transitionDuration
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        switch transition {
+        case .dissolve:
+            animation.type = .fade
+        case .push:
+            animation.type = .push
+            animation.subtype = transitionForward ? .fromRight : .fromLeft
+        case .wipe, .iris, .none:
+            return
+        }
+        layer.add(animation, forKey: "slideshow")
+    }
+
+    /// For a wipe or iris: the previous picture as it is shown now, on the background, to lay
+    /// over the new one while it is masked away.
+    private func snapshotForTransition() -> CALayer? {
+        outgoing?.removeFromSuperlayer()
+        outgoing = nil
+        guard transition == .wipe || transition == .iris, self.picture != nil,
+              let contents = pictureView.layer?.contents, let host = layer
+        else { return nil }
+        let cover = CALayer()
+        cover.frame = bounds
+        cover.backgroundColor = backgroundColor.cgColor
+        cover.zPosition = 1000
+        let image = CALayer()
+        image.contents = contents
+        image.contentsGravity = .resize
+        image.minificationFilter = .trilinear
+        // Where the picture is now, zoomed and scrolled; the cover clips what lies outside.
+        image.frame = convert(pictureView.bounds, from: pictureView)
+        cover.addSublayer(image)
+        cover.masksToBounds = true
+        host.addSublayer(cover)
+        outgoing = cover
+        return cover
+    }
+
+    /// Masks the previous picture away: a wipe across, or a growing circle in the middle.
+    private func finishTransition(revealingFrom cover: CALayer) {
+        let size = cover.bounds.size
+        let mask = CAShapeLayer()
+        mask.frame = cover.bounds
+        mask.fillRule = .evenOdd
+        let from: CGPath
+        let to: CGPath
+        switch transition {
+        case .iris:
+            let radius = hypot(size.width, size.height) / 2 + 2
+            let centre = CGPoint(x: size.width / 2, y: size.height / 2)
+            func ring(_ r: CGFloat) -> CGPath {
+                let path = CGMutablePath()
+                path.addRect(cover.bounds)
+                path.addEllipse(in: CGRect(x: centre.x - r, y: centre.y - r, width: 2 * r, height: 2 * r))
+                return path
+            }
+            from = ring(0.5)
+            to = ring(radius)
+        default:
+            // Forward the new picture comes in from the right, as with a push: the previous one
+            // shrinks towards the left edge. Backward the other way round.
+            let end = transitionForward
+                ? CGRect(x: 0, y: 0, width: 0, height: size.height)
+                : CGRect(x: size.width, y: 0, width: 0, height: size.height)
+            from = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
+            to = CGPath(rect: end, transform: nil)
+        }
+        mask.path = to
+        cover.mask = mask
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.fromValue = from
+        animation.toValue = to
+        animation.duration = Self.transitionDuration
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self, weak cover] in
+            cover?.removeFromSuperlayer()
+            if self?.outgoing === cover { self?.outgoing = nil }
+        }
+        mask.add(animation, forKey: "path")
+        CATransaction.commit()
     }
 
     /// Fits the picture as chosen by the user; this also enlarges pictures smaller than the window.

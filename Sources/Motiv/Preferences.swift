@@ -34,6 +34,7 @@ enum Preferences {
     static let sidebarViewKey = "sidebarView"
     static let slideshowIntervalKey = "slideshowInterval"
     static let slideshowEndKey = "slideshowEnd"
+    static let slideshowTransitionKey = "slideshowTransition"
     /// The folder shown last in any window, for new windows.
     static let lastFolderKey = "lastFolder"
 
@@ -58,6 +59,7 @@ enum Preferences {
             folderStripHeightKey: FolderStrip.defaultHeight,
             slideshowIntervalKey: 4,
             slideshowEndKey: SlideshowEnd.loop.rawValue,
+            slideshowTransitionKey: SlideTransition.dissolve.rawValue,
         ])
     }
 
@@ -69,12 +71,33 @@ enum Preferences {
         return seconds > 0 ? seconds : 4
     }
 
+    static var slideshowTransition: SlideTransition {
+        SlideTransition(rawValue: UserDefaults.standard.string(forKey: slideshowTransitionKey) ?? "") ?? .dissolve
+    }
+
     static var slideshowEnd: SlideshowEnd {
         SlideshowEnd(rawValue: UserDefaults.standard.string(forKey: slideshowEndKey) ?? "") ?? .loop
     }
 
     static var sortKey: SortKey {
         SortKey(rawValue: UserDefaults.standard.string(forKey: sortKeyKey) ?? "") ?? .name
+    }
+}
+
+/// How a slideshow changes from one image to the next.
+enum SlideTransition: String, CaseIterable, Identifiable {
+    case dissolve, push, wipe, iris, none
+
+    var id: Self { self }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .dissolve: "Überblenden"
+        case .push: "Schieben"
+        case .wipe: "Wischen"
+        case .iris: "Kreisblende"
+        case .none: "Ohne Übergang"
+        }
     }
 }
 
@@ -99,6 +122,7 @@ struct SettingsView: View {
     @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
     @AppStorage(Preferences.slideshowIntervalKey) private var slideshowInterval = 4
     @AppStorage(Preferences.slideshowEndKey) private var slideshowEnd = SlideshowEnd.loop
+    @AppStorage(Preferences.slideshowTransitionKey) private var slideshowTransition = SlideTransition.dissolve
 
     var body: some View {
         Form {
@@ -141,6 +165,11 @@ struct SettingsView: View {
                 Picker("Dauer pro Bild", selection: $slideshowInterval) {
                     ForEach(Preferences.slideshowIntervals, id: \.self) { seconds in
                         Text("\(seconds) Sekunden").tag(seconds)
+                    }
+                }
+                Picker("Übergang", selection: $slideshowTransition) {
+                    ForEach(SlideTransition.allCases) { transition in
+                        Text(transition.title).tag(transition)
                     }
                 }
                 Picker("Nach dem letzten Bild", selection: $slideshowEnd) {
