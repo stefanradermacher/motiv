@@ -671,8 +671,11 @@ final class Gallery {
     func startSlideshow() {
         guard canStartSlideshow else { return }
         let urls = slideshowURLs
-        let start = (mode == .view ? current : cursor).flatMap { urls.firstIndex(of: $0) } ?? 0
-        slideshow = Slideshow(urls: urls, index: start, selection: selection)
+        let marked = mode == .view ? current : (cursor ?? selectedURLs.first)
+        let start = marked.flatMap { urls.firstIndex(of: $0) } ?? 0
+        // Only images of this folder count; the selection may still name files no longer shown.
+        let chosen = Set(selectedURLs)
+        slideshow = Slideshow(urls: urls, index: start, selection: mode == .browse && chosen.count > 1 ? chosen : [])
         show(urls[start])
         isPresenting = true
         scheduleSlide()

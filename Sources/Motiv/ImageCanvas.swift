@@ -235,7 +235,6 @@ final class ImageScrollView: NSScrollView {
         }
         if picture != nil { expectsNewPicture = false }
         let leaving = picture != nil ? snapshotForTransition() : nil
-        if picture != nil { beginTransition() }
         self.picture = picture
         pictureView.picture = picture
         pictureView.frame = NSRect(origin: .zero, size: picture?.size ?? .zero)
@@ -251,92 +250,102 @@ final class ImageScrollView: NSScrollView {
 
     private static let transitionDuration: CFTimeInterval = 0.8
 
-    /// Dissolve and push are done by Core Animation on the clip view.
-    private func beginTransition() {
-        guard let transition, let layer = contentView.layer else { return }
-        let animation = CATransition()
-        animation.duration = Self.transitionDuration
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        switch transition {
-        case .dissolve:
-            animation.type = .fade
-        case .push:
-            animation.type = .push
-            animation.subtype = transitionForward ? .fromRight : .fromLeft
-        case .wipe, .iris, .none:
-            return
-        }
-        layer.add(animation, forKey: "slideshow")
-    }
-
-    /// For a wipe or iris: the previous picture as it is shown now, on the background, to lay
-    /// over the new one while it is masked away.
+    /// The previous picture as it is shown now, on the background, laid over the view while the
+    /// new picture is put in place underneath. Core Animation's own transitions on the clip view
+    /// do not work here: fitting the new picture changes the magnification at the same time, and
+    /// a push then showed the picture in the wrong place.
     private func snapshotForTransition() -> CALayer? {
         outgoing?.removeFromSuperlayer()
         outgoing = nil
-        guard transition == .wipe || transition == .iris, self.picture != nil,
+        guard let transition, transition != .cut, self.picture != nil,
               let contents = pictureView.layer?.contents, let host = layer
         else { return nil }
         let cover = CALayer()
         cover.frame = bounds
         cover.backgroundColor = backgroundColor.cgColor
-        cover.zPosition = 1000
-        let image = CALayer()
-        image.contents = contents
-        image.contentsGravity = .resize
-        image.minificationFilter = .trilinear
-        // Where the picture is now, zoomed and scrolled; the cover clips what lies outside.
-        image.frame = convert(pictureView.bounds, from: pictureView)
-        cover.addSublayer(image)
         cover.masksToBounds = true
+        cover.zPosition = 1000
+        cover.addSublayer(pictureLayer(contents, frame: convert(pictureView.bounds, from: pictureView)))
         host.addSublayer(cover)
         outgoing = cover
         return cover
     }
 
-    /// Masks the previous picture away: a wipe across, or a growing circle in the middle.
+    private func pictureLayer(_ contents: Any, frame: CGRect) -> CALayer {
+        let layer = CALayer()
+        layer.contents = contents
+        layer.contentsGravity = .resize
+        layer.minificationFilter = .trilinear
+        layer.frame = frame
+        return layer
+    }
+
+    /// Takes the previous picture away once the new one is in place underneath.
     private func finishTransition(revealingFrom cover: CALayer) {
         let size = cover.bounds.size
-        let mask = CAShapeLayer()
-        mask.frame = cover.bounds
-        mask.fillRule = .evenOdd
-        let from: CGPath
-        let to: CGPath
-        switch transition {
-        case .iris:
-            let radius = hypot(size.width, size.height) / 2 + 2
-            let centre = CGPoint(x: size.width / 2, y: size.height / 2)
-            func ring(_ r: CGFloat) -> CGPath {
-                let path = CGMutablePath()
-                path.addRect(cover.bounds)
-                path.addEllipse(in: CGRect(x: centre.x - r, y: centre.y - r, width: 2 * r, height: 2 * r))
-                return path
-            }
-            from = ring(0.5)
-            to = ring(radius)
-        default:
-            // Forward the new picture comes in from the right, as with a push: the previous one
-            // shrinks towards the left edge. Backward the other way round.
-            let end = transitionForward
-                ? CGRect(x: 0, y: 0, width: 0, height: size.height)
-                : CGRect(x: size.width, y: 0, width: 0, height: size.height)
-            from = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
-            to = CGPath(rect: end, transform: nil)
-        }
-        mask.path = to
-        cover.mask = mask
-        let animation = CABasicAnimation(keyPath: "path")
-        animation.fromValue = from
-        animation.toValue = to
-        animation.duration = Self.transitionDuration
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        let timing = CAMediaTimingFunction(name: .easeInEaseOut)
+        let duration = Self.transitionDuration
         CATransaction.begin()
         CATransaction.setCompletionBlock { [weak self, weak cover] in
             cover?.removeFromSuperlayer()
             if self?.outgoing === cover { self?.outgoing = nil }
         }
-        mask.add(animation, forKey: "path")
-        CATransaction.commit()
+        defer { CATransaction.commit() }
+
+        func animate(_ layer: CALayer, _ keyPath: String, from: Any, to: Any) {
+            let animation = CABasicAnimation(keyPath: keyPath)
+            animation.fromValue = from
+            animation.toValue = to
+            animation.duration = duration
+            animation.timingFunction = timing
+            layer.setValue(to, forKeyPath: keyPath)
+            layer.add(animation, forKey: keyPath)
+        }
+
+        switch transition {
+        case .dissolve:
+            animate(cover, "opacity", from: Float(1), to: Float(0))
+        case .push:
+            // The new picture as it now lies underneath, moved in beside the previous one.
+            guard let previous = cover.sublayers?.first, let image = picture?.image else { return }
+            let incoming = pictureLayer(image, frame: convert(pictureView.bounds, from: pictureView))
+            cover.addSublayer(incoming)
+            // Forward the new picture comes in from the right, backward from the left.
+            let shift = transitionForward ? size.width : -size.width
+            animate(incoming, "position.x", from: incoming.position.x + shift, to: incoming.position.x)
+            animate(previous, "position.x", from: previous.position.x, to: previous.position.x - shift)
+        case .wipe, .iris:
+            let mask = CAShapeLayer()
+            mask.frame = cover.bounds
+            mask.fillRule = .evenOdd
+            let from: CGPath
+            let to: CGPath
+            if transition == .iris {
+                // A circle growing from the middle, as in the Lucas wipe.
+                let radius = hypot(size.width, size.height) / 2 + 2
+                let centre = CGPoint(x: size.width / 2, y: size.height / 2)
+                func ring(_ r: CGFloat) -> CGPath {
+                    let path = CGMutablePath()
+                    path.addRect(cover.bounds)
+                    path.addEllipse(in: CGRect(x: centre.x - r, y: centre.y - r, width: 2 * r, height: 2 * r))
+                    return path
+                }
+                from = ring(0.5)
+                to = ring(radius)
+            } else {
+                // Forward the new picture comes in from the right, as with a push: the previous
+                // one shrinks towards the left edge. Backward the other way round.
+                let end = transitionForward
+                    ? CGRect(x: 0, y: 0, width: 0, height: size.height)
+                    : CGRect(x: size.width, y: 0, width: 0, height: size.height)
+                from = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
+                to = CGPath(rect: end, transform: nil)
+            }
+            cover.mask = mask
+            animate(mask, "path", from: from, to: to)
+        case .cut?, nil:
+            cover.removeFromSuperlayer()
+        }
     }
 
     /// Fits the picture as chosen by the user; this also enlarges pictures smaller than the window.

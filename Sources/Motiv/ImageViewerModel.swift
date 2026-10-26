@@ -45,6 +45,14 @@ enum CanvasPicture {
         }
     }
 
+    /// The still image drawn; for an animated GIF its first frame.
+    var image: CGImage? {
+        switch self {
+        case .image(let image, _), .concealed(let image, _): image
+        case .animated(let image): image.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        }
+    }
+
     func isSame(as other: CanvasPicture?) -> Bool {
         switch (self, other) {
         case (.image(let a, _), .image(let b, _)?): a === b
