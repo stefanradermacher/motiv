@@ -2,6 +2,12 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
+## 1.1 – noch nicht veröffentlicht
+
+### Neu
+
+**Diashow.** Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten; Videos lässt sie aus. Die Bilder füllen den Bildschirm und gehen weich ineinander über. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. In den Einstellungen wählst du, wie lange jedes Bild bleibt (2 bis 10 Sekunden, voreingestellt 4) und ob die Diashow nach dem letzten Bild von vorn beginnt, anhält oder zur Übersicht zurückkehrt. Danke an Marcus für die Idee.
+
 ## 1.0.2 – noch nicht veröffentlicht
 
 ### Behoben

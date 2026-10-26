@@ -32,6 +32,8 @@ enum Preferences {
     static let folderStripHeightKey = "folderStripHeight"
     static let sidebarBrowseKey = "sidebarBrowse"
     static let sidebarViewKey = "sidebarView"
+    static let slideshowIntervalKey = "slideshowInterval"
+    static let slideshowEndKey = "slideshowEnd"
     /// The folder shown last in any window, for new windows.
     static let lastFolderKey = "lastFolder"
 
@@ -54,7 +56,21 @@ enum Preferences {
             showsQuickInfoKey: false,
             showsFolderStripKey: true,
             folderStripHeightKey: FolderStrip.defaultHeight,
+            slideshowIntervalKey: 4,
+            slideshowEndKey: SlideshowEnd.loop.rawValue,
         ])
+    }
+
+    /// Seconds each image stays in a slideshow.
+    static let slideshowIntervals = [2, 3, 4, 5, 8, 10]
+
+    static var slideshowInterval: Int {
+        let seconds = UserDefaults.standard.integer(forKey: slideshowIntervalKey)
+        return seconds > 0 ? seconds : 4
+    }
+
+    static var slideshowEnd: SlideshowEnd {
+        SlideshowEnd(rawValue: UserDefaults.standard.string(forKey: slideshowEndKey) ?? "") ?? .loop
     }
 
     static var sortKey: SortKey {
@@ -62,10 +78,27 @@ enum Preferences {
     }
 }
 
+/// What a slideshow does after the last image.
+enum SlideshowEnd: String, CaseIterable, Identifiable {
+    case loop, stop, overview
+
+    var id: Self { self }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .loop: "Von vorn beginnen"
+        case .stop: "Beim letzten Bild anhalten"
+        case .overview: "Zurück zur Übersicht"
+        }
+    }
+}
+
 struct SettingsView: View {
     @AppStorage(Preferences.showNamesKey) private var showNames = true
     @AppStorage(Preferences.usesSystemThumbnailCacheKey) private var usesSystemThumbnailCache = false
     @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
+    @AppStorage(Preferences.slideshowIntervalKey) private var slideshowInterval = 4
+    @AppStorage(Preferences.slideshowEndKey) private var slideshowEnd = SlideshowEnd.loop
 
     var body: some View {
         Form {
@@ -101,6 +134,24 @@ struct SettingsView: View {
                 Text("Einzelansicht")
             } footer: {
                 Text("Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+            Section {
+                Picker("Dauer pro Bild", selection: $slideshowInterval) {
+                    ForEach(Preferences.slideshowIntervals, id: \.self) { seconds in
+                        Text("\(seconds) Sekunden").tag(seconds)
+                    }
+                }
+                Picker("Nach dem letzten Bild", selection: $slideshowEnd) {
+                    ForEach(SlideshowEnd.allCases) { end in
+                        Text(end.title).tag(end)
+                    }
+                }
+            } header: {
+                Text("Diashow")
+            } footer: {
+                Text("Die Leertaste startet in der Übersicht eine Diashow mit den ausgewählten Bildern oder, ist nur eines ausgewählt, mit allen Bildern des Ordners. In der Diashow hält die Leertaste an, die Pfeiltasten blättern, Esc führt zurück zur Übersicht.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }

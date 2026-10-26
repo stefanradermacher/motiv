@@ -2,6 +2,12 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
+## 1.1 – not yet released
+
+### New
+
+**Slideshow.** In the overview, the space bar starts a slideshow, as does “View → Slideshow” (⇧⌘F). If several images are selected, it displays exactly those, otherwise all images in the folder from the marked one on; videos are left out. The images fill the screen and fade into one another. The space bar pauses and resumes, the arrow keys page through the images, and Esc returns to the overview. In Settings you choose how long each image stays (2 to 10 seconds, 4 by default) and whether the slideshow starts over, stops, or returns to the overview after the last image. Thanks to Marcus for the idea.
+
 ## 1.0.2 – not yet released
 
 ### Fixed

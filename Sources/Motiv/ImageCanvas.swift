@@ -22,6 +22,8 @@ struct ImageCanvas: NSViewRepresentable {
     let enlargesSmallImages: Bool
     /// Only the image, full screen: on black, without a pointer.
     let isPresenting: Bool
+    /// In a slideshow, a new picture fades in over the previous one.
+    var crossfades = false
     let model: ImageViewerModel
     /// What trackpad gestures do beyond zooming: page through the folder and rotate.
     let gestures: CanvasGestures
@@ -44,6 +46,7 @@ struct ImageCanvas: NSViewRepresentable {
         view.enlargesSmallImages = enlargesSmallImages
         view.backgroundColor = isPresenting ? .black : .underPageBackgroundColor
         view.gestures = gestures
+        view.crossfades = crossfades
         view.show(picture)
         if isPresenting { NSCursor.setHiddenUntilMouseMoves(true) }
     }
@@ -96,12 +99,16 @@ final class ImageScrollView: NSScrollView {
     /// Set when another picture is about to come, see `show`.
     private var expectsNewPicture = true
     var gestures = CanvasGestures()
+    /// See `ImageCanvas.crossfades`.
+    var crossfades = false
     /// Rotation of the current two-finger turn not yet used for a quarter turn, in degrees.
     private var pendingRotation: CGFloat = 0
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         contentView = CenteringClipView()
+        // Layer-backed, so that a slideshow can fade from one picture to the next.
+        contentView.wantsLayer = true
         documentView = pictureView
         hasHorizontalScroller = true
         hasVerticalScroller = true
@@ -220,6 +227,12 @@ final class ImageScrollView: NSScrollView {
             return
         }
         if picture != nil { expectsNewPicture = false }
+        if crossfades, picture != nil, let layer = contentView.layer {
+            let fade = CATransition()
+            fade.type = .fade
+            fade.duration = 0.8
+            layer.add(fade, forKey: "crossfade")
+        }
         self.picture = picture
         pictureView.picture = picture
         pictureView.frame = NSRect(origin: .zero, size: picture?.size ?? .zero)

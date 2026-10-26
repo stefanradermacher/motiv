@@ -74,6 +74,10 @@ In der Einzelansicht blätterst du mit den Pfeiltasten, der Leertaste oder mit z
 
 Ein Bild passt sich zunächst ins Fenster ein. Ein Doppelklick zeigt es in Originalgröße an der angeklickten Stelle, ein zweiter passt es wieder ein. Über die Prozentzahl in der Symbolleiste passt du an Breite oder Höhe an oder wählst eine Zoomstufe. Sehr große Bilder lädt Motiv erst beim Hineinzoomen in voller Auflösung, so bleibt es flüssig.
 
+## Diashow
+
+Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten. Die Bilder füllen den Bildschirm und gehen weich ineinander über. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. Wie lange jedes Bild bleibt und was nach dem letzten geschieht, stellst du in den Einstellungen ein.
+
 ## Drehen und Spiegeln
 
 Drehen (⌘L, ⌘R oder mit zwei Fingern) und Spiegeln wirken nur auf die Ansicht. Die Datei bleibt unverändert; beim nächsten Bild ist alles wieder wie gespeichert.
@@ -177,6 +181,7 @@ Die wichtigsten Befehle lassen sich ohne Maus erreichen:
 | Seitenleiste umschalten | ⌃⌘1 bis ⌃⌘4 |
 | Informationen, Schnellinfo | ⌘I, ⌥⌘I |
 | Nur das Bild im Vollbild | ⌥⌘F |
+| Diashow | Leertaste (Übersicht), ⇧⌘F |
 | Bilder vergleichen | ⌃⌘C |
 | In Vorschau öffnen | ⌘E |
 | Drucken | ⌘P |

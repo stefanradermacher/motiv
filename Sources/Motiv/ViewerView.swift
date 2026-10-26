@@ -26,8 +26,23 @@ struct ViewerView: View {
         VStack(spacing: 0) {
             ZStack {
                 ImageCanvas(picture: shownPicture, enlargesSmallImages: enlargesSmallImages,
-                            isPresenting: gallery.isPresenting, model: viewer, gestures: gestures)
+                            isPresenting: gallery.isPresenting, crossfades: gallery.slideshow != nil,
+                            model: viewer, gestures: gestures)
                 overlay
+                if let hint = slideshowHint {
+                    Label(hint.title, systemImage: hint.symbol)
+                        .font(.title3.weight(.medium))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(.black.opacity(0.6), in: Capsule())
+                        .transition(.opacity)
+                        .allowsHitTesting(false)
+                }
+            }
+            .onChange(of: gallery.slideshow?.isPaused) { old, paused in
+                guard let old, let paused, old != paused else { return }
+                showHint(paused ? .paused : .running)
             }
             .overlay(alignment: .bottom) {
                 if gallery.showsQuickInfo && !gallery.isPresenting, let item = viewer.item {
@@ -49,6 +64,38 @@ struct ViewerView: View {
             await SensitiveContentGuard.shared.check(item.url, isVideo: item.isVideo)
         }
         .onAppear { focused = true }
+    }
+
+    /// Shown for a moment when a slideshow is paused or continues.
+    private enum SlideshowHint {
+        case paused, running
+
+        var title: LocalizedStringKey {
+            switch self {
+            case .paused: "Angehalten"
+            case .running: "Weiter"
+            }
+        }
+
+        var symbol: String {
+            switch self {
+            case .paused: "pause.fill"
+            case .running: "play.fill"
+            }
+        }
+    }
+
+    @State private var slideshowHint: SlideshowHint?
+    @State private var hintTask: Task<Void, Never>?
+
+    private func showHint(_ hint: SlideshowHint) {
+        withAnimation(.easeOut(duration: 0.15)) { slideshowHint = hint }
+        hintTask?.cancel()
+        hintTask = Task {
+            try? await Task.sleep(for: .seconds(1.2))
+            guard !Task.isCancelled else { return }
+            withAnimation(.easeIn(duration: 0.3)) { slideshowHint = nil }
+        }
     }
 
     private var gestures: CanvasGestures {
@@ -107,6 +154,8 @@ struct ViewerView: View {
     private func handle(_ press: KeyPress) -> KeyPress.Result {
         guard press.modifiers.isDisjoint(with: [.command, .option, .control]) else { return .ignored }
         switch press.key {
+        case .space where gallery.slideshow != nil:
+            if press.phase == .down { gallery.toggleSlideshowPause() }
         // Up and down as well, to match the image list in the sidebar.
         case .leftArrow, .upArrow, .pageUp: gallery.step(-1)
         case .rightArrow, .downArrow, .pageDown, .space: gallery.step(1)

@@ -114,6 +114,12 @@ struct MotivCommands: Commands {
             }
             .keyboardShortcut("f", modifiers: [.command, .option])
             .disabled(gallery?.items.contains { !$0.isVideo } != true)
+            Button(gallery?.slideshow != nil ? "Diashow beenden" : "Diashow") {
+                if gallery?.slideshow != nil { gallery?.endSlideshow() } else { gallery?.startSlideshow() }
+            }
+            // As in Preview.
+            .keyboardShortcut("f", modifiers: [.command, .shift])
+            .disabled(gallery?.slideshow == nil && gallery?.canStartSlideshow != true)
             Divider()
             Toggle("Unterordner einbeziehen", isOn: binding(\.includeSubfolders))
                 .keyboardShortcut("u", modifiers: [.command, .option])

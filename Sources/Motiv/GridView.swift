@@ -105,8 +105,11 @@ struct GridView: View {
     private func type(_ characters: String) {
         let now = Date()
         if now.timeIntervalSince(typedAt) > typingPause { typed = "" }
-        // A space only continues a search; on its own it has no meaning in the overview.
-        guard !(typed.isEmpty && characters == " ") else { return }
+        // A space continues a search; on its own it starts a slideshow.
+        if typed.isEmpty && characters == " " {
+            gallery.startSlideshow()
+            return
+        }
         typed += characters
         typedAt = now
         typedMatches = gallery.selectItem(named: typed)

@@ -377,8 +377,14 @@ for (index, block) in blocks.enumerated() {
         y -= 18
     case .heading(let title):
         y -= 6
-        // A heading never stays alone at the foot of a page: it needs room for a few lines below.
-        if y - 90 < bottomMargin {
+        // A heading never stays alone at the foot of a page: it needs room for a few lines below,
+        // and for the whole paragraph that follows, since a paragraph is not split across pages.
+        let heading = height(text(title, size: 14, weight: .semibold)) + 6
+        var following: CGFloat = 90
+        if index + 1 < blocks.count, case .body(let next) = blocks[index + 1] {
+            following = heading + height(text(next, size: 11.5, alignment: .justified, lineSpacing: 3.5))
+        }
+        if y - following < bottomMargin {
             endPage()
             beginPage()
         }

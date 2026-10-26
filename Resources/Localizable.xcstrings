@@ -201,6 +201,16 @@
         }
       }
     },
+    "%lld Sekunden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld seconds"
+          }
+        }
+      }
+    },
     "%lld Videos": {
       "localizations": {
         "de": {
@@ -421,6 +431,16 @@
         }
       }
     },
+    "Angehalten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused"
+          }
+        }
+      }
+    },
     "Anpassen …": {
       "localizations": {
         "en": {
@@ -607,6 +627,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Automatic"
+          }
+        }
+      }
+    },
+    "Beim letzten Bild anhalten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop at the Last Image"
           }
         }
       }
@@ -841,6 +871,16 @@
         }
       }
     },
+    "Dauer pro Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time per image"
+          }
+        }
+      }
+    },
     "Dauerhaft behalten": {
       "localizations": {
         "en": {
@@ -901,12 +941,42 @@
         }
       }
     },
+    "Diashow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slideshow"
+          }
+        }
+      }
+    },
+    "Diashow beenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End Slideshow"
+          }
+        }
+      }
+    },
     "Die Datei lässt sich nicht anzeigen": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "This file can’t be displayed"
+          }
+        }
+      }
+    },
+    "Die Leertaste startet in der Übersicht eine Diashow mit den ausgewählten Bildern oder, ist nur eines ausgewählt, mit allen Bildern des Ordners. In der Diashow hält die Leertaste an, die Pfeiltasten blättern, Esc führt zurück zur Übersicht.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the overview, the space bar starts a slideshow with the selected images or, if only one is selected, with all images in the folder. During the slideshow, the space bar pauses, the arrow keys page through the images, and Esc returns to the overview."
           }
         }
       }
@@ -1851,6 +1921,16 @@
         }
       }
     },
+    "Nach dem letzten Bild": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After the last image"
+          }
+        }
+      }
+    },
     "Nach links drehen": {
       "localizations": {
         "en": {
@@ -2561,6 +2641,16 @@
         }
       }
     },
+    "Von vorn beginnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Over"
+          }
+        }
+      }
+    },
     "Vorheriges Bild": {
       "localizations": {
         "en": {
@@ -2617,6 +2707,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Blurred (Communication Safety)"
+          }
+        }
+      }
+    },
+    "Weiter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumed"
           }
         }
       }

@@ -525,6 +525,10 @@ final class Gallery {
 
     /// Moves to another image in the single-image view, or the cursor in the overview.
     func step(_ offset: Int, extendingSelection: Bool = false) {
+        if slideshow != nil, mode == .view {
+            stepSlideshow(offset)
+            return
+        }
         guard !items.isEmpty else { return }
         let target = activeIndex.map { $0 + offset } ?? (offset >= 0 ? 0 : items.count - 1)
         go(to: min(max(target, 0), items.count - 1), extendingSelection: extendingSelection)
@@ -583,6 +587,7 @@ final class Gallery {
     }
 
     func closeViewer() {
+        if slideshow != nil { endSlideshow(); return }
         if isPresenting { isPresenting = false }
         mode = .browse
     }
@@ -629,7 +634,106 @@ final class Gallery {
     }
 
     func stopPresenting() {
+        if slideshow != nil { endSlideshow(); return }
         isPresenting = false
+    }
+
+    // MARK: Slideshow
+
+    /// A slideshow running in this window: only the image, full screen, moving on by itself.
+    struct Slideshow: Equatable {
+        /// The images shown, in the order of the overview; videos are left out.
+        var urls: [URL]
+        var index: Int
+        var isPaused = false
+        /// The selection the slideshow was started with, restored when it ends.
+        var selection: Set<URL>
+    }
+
+    private(set) var slideshow: Slideshow?
+    @ObservationIgnored private var slideshowTimer: Task<Void, Never>?
+
+    /// The images a slideshow would show: the selected ones if there are several, else the
+    /// whole folder. Videos are left out.
+    private var slideshowURLs: [URL] {
+        let images = items.filter { !$0.isVideo }
+        let chosen = images.filter { selection.contains($0.url) }
+        return (mode == .browse && chosen.count > 1 ? chosen : images).map(\.url)
+    }
+
+    var canStartSlideshow: Bool {
+        mode != .compare && slideshow == nil && slideshowURLs.count > 1
+    }
+
+    /// Starts with the image marked in the overview or shown in the single-image view.
+    func startSlideshow() {
+        guard canStartSlideshow else { return }
+        let urls = slideshowURLs
+        let start = (mode == .view ? current : cursor).flatMap { urls.firstIndex(of: $0) } ?? 0
+        slideshow = Slideshow(urls: urls, index: start, selection: selection)
+        show(urls[start])
+        isPresenting = true
+        scheduleSlide()
+    }
+
+    /// Back to the overview, with the selection the slideshow was started with.
+    func endSlideshow() {
+        guard let ended = slideshow else { return }
+        slideshowTimer?.cancel()
+        slideshow = nil
+        let last = current
+        isPresenting = false
+        mode = .browse
+        if ended.selection.count > 1 {
+            selection = ended.selection
+            cursor = last.flatMap { ended.selection.contains($0) ? $0 : nil } ?? cursor
+        } else if let last {
+            selection = [last]
+            cursor = last
+            anchor = last
+        }
+    }
+
+    func toggleSlideshowPause() {
+        guard slideshow != nil else { return }
+        slideshow?.isPaused.toggle()
+        scheduleSlide()
+    }
+
+    /// One image on or back. By hand the slideshow always goes round in a circle; on its own it
+    /// does at the end what the settings say.
+    private func stepSlideshow(_ offset: Int, automatically: Bool = false) {
+        guard var running = slideshow, !running.urls.isEmpty else { return }
+        var next = running.index + offset
+        if !running.urls.indices.contains(next) {
+            let end = automatically ? Preferences.slideshowEnd : .loop
+            switch end {
+            case .loop:
+                next = (next + running.urls.count) % running.urls.count
+            case .stop:
+                running.isPaused = true
+                slideshow = running
+                return
+            case .overview:
+                endSlideshow()
+                return
+            }
+        }
+        running.index = next
+        slideshow = running
+        show(running.urls[next])
+        scheduleSlide()
+    }
+
+    private func scheduleSlide() {
+        slideshowTimer?.cancel()
+        guard let slideshow, !slideshow.isPaused else { return }
+        let seconds = Preferences.slideshowInterval
+        slideshowTimer = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(seconds))
+            guard !Task.isCancelled else { return }
+            self?.stepSlideshow(1, automatically: true)
+        }
     }
 
     // MARK: Capture dates

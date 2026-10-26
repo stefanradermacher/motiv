@@ -25,6 +25,7 @@ Ausführlich steht alles im Handbuch: https://github.com/stefanradermacher/motiv
 | Seitenleiste: Ordner, Bilder, Informationen, beides | ⌃⌘1 bis ⌃⌘4 |
 | Informationen, Schnellinfo im Bild | ⌘I, ⌥⌘I |
 | Nur das Bild im Vollbild | ⌥⌘F |
+| Diashow starten | Leertaste in der Übersicht, ⇧⌘F |
 | Ausgewählte Bilder vergleichen | ⌃⌘C |
 | Im Vergleich umschalten | Leertaste, A–D |
 | Überblenden, Trennlinie verschieben | ← → |
