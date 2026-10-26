@@ -8,12 +8,6 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 **Slideshow.** In the overview, the space bar starts a slideshow, as does “View → Slideshow” (⇧⌘F). If several images are selected, it displays exactly those, otherwise all images in the folder from the marked one on; videos are left out. The images fill the screen and change with a transition of your choice: dissolve (by default), push, wipe, clock wipe as in Star Wars, iris, or none. The space bar pauses and resumes, the arrow keys page through the images, and Esc returns to the overview. In Settings you choose how long each image stays (2 to 10 seconds, 4 by default) and whether the slideshow starts over, stops, or returns to the overview after the last image. Thanks to Marcus for the idea.
 
-### Fixed
-
-**Full screen.** In “Just the image” and in the slideshow, the image now reaches the top edge of the screen; before, a grey strip for the hidden title bar remained there.
-
-## 1.0.2 – not yet released
-
 ### Improved
 
 **Accent colour of its own.** Motiv now has an accent colour of its own, the petrol of its icon. If the accent colour “Multicolour” is chosen in System Settings under “Appearance”, buttons, switches, and selections in Motiv take on this colour; with any other choice, the system's colour stays.
@@ -21,6 +15,8 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 ### Fixed
 
 **Black thumbnails.** On some Macs, Motiv displayed the thumbnails of photos from Apple’s Camera app as black areas, while the single image view was correct. Motiv now always draws thumbnails as ordinary images without HDR information.
+
+**Full screen.** In “Just the image” and in the slideshow, the image now reaches the top edge of the screen; before, a grey strip for the hidden title bar remained there.
 
 ## 1.0.1 – not yet released
 

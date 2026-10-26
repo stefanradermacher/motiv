@@ -42,6 +42,7 @@ Ansehen
 • Einzelansicht mit Zoom, Einpassen an Fenster, Breite oder Höhe
 • Drehen und Spiegeln nur in der Ansicht – die Datei bleibt unverändert
 • Nur das Bild im Vollbild, ohne Leisten und Mauszeiger
+• Diashow mit wählbarem Übergang: Überblenden, Schieben, Wischen, Uhrzeiger oder Kreisblende
 • Trackpad: mit zwei Fingern blättern, drehen und zoomen
 
 Vergleichen
@@ -73,14 +74,20 @@ Bilder,Fotos,Galerie,Betrachter,Viewer,Ordner,EXIF,vergleichen,Metadaten,HEIC,RA
 
 ## Neue Funktionen (4000)
 
-Für Version 1.0.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+Für Version 1.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
 
-Neu in Version 1.0.1
+Neu in Version 1.1
 
-• Drucken: das gezeigte Bild oder alle ausgewählten, je eins pro Seite, mit ⌘P
-• Im Druckdialog: Bilder automatisch drehen, Originalgröße, große Bilder verkleinern oder auf Papierformat skalieren
-• Laden die Preise für ein Trinkgeld einmal nicht, lässt sich das Laden wiederholen
+• Diashow: die Leertaste in der Übersicht zeigt die ausgewählten Bilder oder den ganzen Ordner im Vollbild
+• Übergänge nach Wahl: Überblenden, Schieben, Wischen, Uhrzeiger oder Kreisblende; die Dauer pro Bild und was nach dem letzten Bild geschieht, legst du in den Einstellungen fest
+• Eigene Akzentfarbe, das Petrol des Symbols, wenn in macOS die Akzentfarbe „Mehrfarbig“ gewählt ist
 
+Behoben
+
+• Auf manchen Macs erschienen die Miniaturen von Fotos aus Apples Kamera-App schwarz
+• Bei „Nur das Bild“ blieb oben ein grauer Streifen stehen
+
+Version 1.0.1: Drucken, mit Optionen zum Drehen und Skalieren.
 Version 1.0: Erste Version.
 
 ## Englische Texte
@@ -109,6 +116,7 @@ Viewing
 • Single image view with zoom, fit to window, width or height
 • Rotate and flip in the view only – the file stays unchanged
 • Just the image in full screen, without bars or pointer
+• Slideshow with a choice of transitions: dissolve, push, wipe, clock wipe, or iris
 • Trackpad: page, rotate and zoom with two fingers
 
 Comparing
@@ -140,12 +148,18 @@ images,photos,gallery,viewer,browser,folder,EXIF,compare,metadata,HEIC,RAW,ad-fr
 
 **Neue Funktionen (4000):**
 
-New in version 1.0.1
+New in version 1.1
 
-• Printing: the image displayed or all selected images, one per page, with ⌘P
-• In the print dialog: rotate images automatically, actual size, shrink large images or scale to paper size
-• If the prices for a tip do not load, you can try again
+• Slideshow: in the overview, the space bar displays the selected images or the whole folder in full screen
+• A choice of transitions: dissolve, push, wipe, clock wipe, or iris; the time per image and what happens after the last image are set in Settings
+• An accent colour of its own, the petrol of the icon, when the accent colour “Multicolour” is chosen in macOS
 
+Fixed
+
+• On some Macs, thumbnails of photos from Apple’s Camera app appeared black
+• In “Just the image”, a grey strip remained at the top
+
+Version 1.0.1: Printing, with options to rotate and scale.
 Version 1.0: First release.
 
 ## In-App-Käufe
@@ -275,11 +289,21 @@ Bringt das Drucken nach, das von Anfang an hätte dabei sein sollen, deshalb 1.0
 
 Version 1.0.1 (Build 53) wurde am 13. Oktober 2026 eingereicht; der Stand trägt den Tag `v1.0.1-build53`.
 
+## Version 1.1
+
+Bringt die Diashow (Wunsch aus GitHub-Issue #1), die eigene Akzentfarbe und zwei Korrekturen: die schwarzen Miniaturen, die ein Nutzer unter macOS 15 und 27.0 gemeldet hat, und den grauen Streifen bei „Nur das Bild“. Eine Version 1.0.2 nur mit der Korrektur der Miniaturen gibt es nicht; sie ist in 1.1 aufgegangen, und der Nutzer prüft mit 1.1. Neue Entitlements gibt es nicht.
+
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen. Vorher `./scripts/bump-build.sh`, falls seit dem letzten Upload gebaut wurde.
+2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1 anlegen.
+3. „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben), die Beschreibung um die Zeile zur Diashow ergänzen.
+4. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1-build<Nummer>` taggen.
+
 ## Nach der Freigabe einer neuen Version
 
 - [ ] In `CHANGELOG.md` und `CHANGELOG.en.md` „noch nicht veröffentlicht“ durch das Datum der Freigabe ersetzen.
 - [ ] Webseite: In `projects/assets/js/app.js` des Homepage-Repos die Version in `VERSIONS` (Eintrag `motiv`) anpassen und, weil sich `app.js` ändert, den Cache-Breaker `?v=` in allen Seiten hochsetzen.
-- [ ] Webseite: Haben sich Funktionen, Tastaturkürzel oder gespeicherte Daten geändert, Produktseite, Hilfe und Datenschutz (mit neuem Stand) anpassen. Für 1.0.1: Drucken und ⌘P in der Hilfe, Drucken unter „Teilen und andere Apps“ im Datenschutz.
+- [ ] Webseite: Haben sich Funktionen, Tastaturkürzel oder gespeicherte Daten geändert, Produktseite, Hilfe und Datenschutz (mit neuem Stand) anpassen. Für 1.0.1: Drucken und ⌘P in der Hilfe, Drucken unter „Teilen und andere Apps“ im Datenschutz. Für 1.1: die Diashow auf der Produktseite und in der Hilfe (Leertaste, ⇧⌘F).
 - [ ] Die Änderungen pushen.
+- [ ] Für 1.1: GitHub-Issue #1 (Diashow) schließen und dem Nutzer mit den schwarzen Miniaturen Bescheid geben, dass er mit 1.1 prüfen kann.
 
 Der Link zum Store (`https://apps.apple.com/app/id6816479220`) bleibt bei Updates gleich.
