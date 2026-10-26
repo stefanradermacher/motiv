@@ -65,7 +65,7 @@ An image first fits the window. A double-click displays it at actual size at the
 
 ## Slideshow
 
-In the overview, the space bar starts a slideshow, as does “View → Slideshow” (⇧⌘F). If several images are selected, it displays exactly those, otherwise all images in the folder from the marked one on. The images fill the screen. The space bar pauses and resumes, the arrow keys page through the images, and Esc returns to the overview. How long each image stays, how one image replaces the next (dissolve, push, wipe, iris, or none), and what happens after the last one are set in Settings.
+In the overview, the space bar starts a slideshow, as does “View → Slideshow” (⇧⌘F). If several images are selected, it displays exactly those, otherwise all images in the folder from the marked one on. The images fill the screen. The space bar pauses and resumes, the arrow keys page through the images, and Esc returns to the overview. How long each image stays, how one image replaces the next (dissolve, push, wipe, clock wipe, iris, or none), and what happens after the last one are set in Settings.
 
 ## Rotating and Flipping
 

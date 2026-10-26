@@ -6,7 +6,11 @@ Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGE
 
 ### Neu
 
-**Diashow.** Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten; Videos lässt sie aus. Die Bilder füllen den Bildschirm und wechseln mit einem Übergang nach Wahl: Überblenden (voreingestellt), Schieben, Wischen, Kreisblende oder ohne Übergang. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. In den Einstellungen wählst du, wie lange jedes Bild bleibt (2 bis 10 Sekunden, voreingestellt 4) und ob die Diashow nach dem letzten Bild von vorn beginnt, anhält oder zur Übersicht zurückkehrt. Danke an Marcus für die Idee.
+**Diashow.** Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten; Videos lässt sie aus. Die Bilder füllen den Bildschirm und wechseln mit einem Übergang nach Wahl: Überblenden (voreingestellt), Schieben, Wischen, Uhrzeiger wie in Star Wars, Kreisblende oder ohne Übergang. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. In den Einstellungen wählst du, wie lange jedes Bild bleibt (2 bis 10 Sekunden, voreingestellt 4) und ob die Diashow nach dem letzten Bild von vorn beginnt, anhält oder zur Übersicht zurückkehrt. Danke an Marcus für die Idee.
+
+### Behoben
+
+**Vollbild.** Bei „Nur das Bild“ und in der Diashow reicht das Bild jetzt bis an den oberen Bildschirmrand; zuvor blieb dort ein grauer Streifen für die ausgeblendete Titelleiste.
 
 ## 1.0.2 – noch nicht veröffentlicht
 

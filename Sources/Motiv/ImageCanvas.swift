@@ -314,6 +314,26 @@ final class ImageScrollView: NSScrollView {
             let shift = transitionForward ? size.width : -size.width
             animate(incoming, "position.x", from: incoming.position.x + shift, to: incoming.position.x)
             animate(previous, "position.x", from: previous.position.x, to: previous.position.x - shift)
+        case .clock:
+            // A hand sweeping clockwise from twelve o'clock, as in the clock wipe of Star Wars:
+            // a ring so wide that it covers the whole picture, with its start running round.
+            let radius = hypot(size.width, size.height) / 2 + 2
+            let centre = CGPoint(x: size.width / 2, y: size.height / 2)
+            // The layers here are drawn flipped (y downwards): twelve o'clock is then at -90°, and
+            // a hand turning clockwise on screen runs the other way round in layer coordinates.
+            let flipped = cover.contentsAreFlipped()
+            let top: CGFloat = flipped ? -.pi / 2 : .pi / 2
+            let ring = CGMutablePath()
+            ring.addArc(center: centre, radius: radius / 2, startAngle: top,
+                        endAngle: flipped ? top + 2 * .pi : top - 2 * .pi, clockwise: !flipped)
+            let mask = CAShapeLayer()
+            mask.frame = cover.bounds
+            mask.path = ring
+            mask.fillColor = nil
+            mask.strokeColor = CGColor(gray: 0, alpha: 1)
+            mask.lineWidth = radius
+            cover.mask = mask
+            animate(mask, "strokeStart", from: CGFloat(0), to: CGFloat(1))
         case .wipe, .iris:
             let mask = CAShapeLayer()
             mask.frame = cover.bounds

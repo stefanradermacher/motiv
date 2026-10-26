@@ -87,7 +87,7 @@ enum Preferences {
 /// How a slideshow changes from one image to the next.
 enum SlideTransition: String, CaseIterable, Identifiable {
     /// `cut`, not `none`, so that it cannot be mistaken for a missing value.
-    case dissolve, push, wipe, iris, cut
+    case dissolve, push, wipe, clock, iris, cut
 
     var id: Self { self }
 
@@ -96,6 +96,7 @@ enum SlideTransition: String, CaseIterable, Identifiable {
         case .dissolve: "Überblenden"
         case .push: "Schieben"
         case .wipe: "Wischen"
+        case .clock: "Uhrzeiger"
         case .iris: "Kreisblende"
         case .cut: "Ohne Übergang"
         }

@@ -56,6 +56,10 @@ struct ViewerView: View {
                 Filmstrip(gallery: gallery)
             }
         }
+        // Only the image and the slideshow reach up to the top edge: in full screen the window
+        // otherwise keeps a strip for its hidden title bar above the picture.
+        .background(gallery.isPresenting ? Color.black : Color.clear)
+        .ignoresSafeArea(edges: gallery.isPresenting ? .top : [])
         .focusable()
         .focusEffectDisabled()
         .focused($focused)
