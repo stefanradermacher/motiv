@@ -204,6 +204,8 @@ Videos erkennt Motiv, spielt sie aber nicht ab; ein Doppelklick öffnet sie im S
 
 Drucken (neu in 1.0.1): „Ablage → Drucken …“ (⌘P) druckt das gezeigte Bild oder die ausgewählten Bilder; dafür hat Motiv das Entitlement `com.apple.security.print`. Motiv darf weiterhin nur lesen. „Als PDF sichern …“ im PDF-Menü des Druckdialogs braucht Schreibrechte und bleibt deshalb ohne Wirkung; ein PDF entsteht über „PDF → In Vorschau öffnen“.
 
+Diashow (neu in 1.1): In der Übersicht startet die Leertaste eine Diashow im Vollbild, mit den ausgewählten Bildern oder allen Bildern des Ordners; ebenso „Darstellung → Diashow“ (⇧⌘F). Die Leertaste hält an, die Pfeiltasten blättern, Esc beendet sie. Übergang, Dauer pro Bild und das Verhalten nach dem letzten Bild stehen in den Einstellungen.
+
 **Englische Fassung für App Store Connect:**
 
 Motiv is a pure image and gallery viewer and never changes files; rotating and flipping affect the view only. There is no sign-in, no account and no demo credentials.
@@ -219,6 +221,8 @@ Default app: Motiv occasionally asks whether it should become the default app fo
 Videos are recognised but not played; a double-click opens them in their default app.
 
 Printing (new in 1.0.1): “File → Print…” (⌘P) prints the image displayed or the selected images; for this Motiv has the entitlement com.apple.security.print. Motiv still has read-only file access. “Save as PDF…” in the PDF menu of the print dialog needs write access and therefore has no effect; a PDF can be made with “PDF → Open in Preview”.
+
+Slideshow (new in 1.1): in the overview, the space bar starts a full-screen slideshow with the selected images or all images in the folder, as does “View → Slideshow” (⇧⌘F). The space bar pauses, the arrow keys page through the images, and Esc ends it. The transition, the time per image, and what happens after the last image are set in Settings.
 
 ## Screenshots
 
@@ -293,10 +297,11 @@ Version 1.0.1 (Build 53) wurde am 13. Oktober 2026 eingereicht und am 14. Oktobe
 
 Bringt die Diashow (Wunsch aus GitHub-Issue #1), die eigene Akzentfarbe und zwei Korrekturen: die schwarzen Miniaturen, die ein Nutzer unter macOS 15 und 27.0 gemeldet hat, und den grauen Streifen bei „Nur das Bild“. Eine Version 1.0.2 nur mit der Korrektur der Miniaturen gibt es nicht; sie ist in 1.1 aufgegangen, und der Nutzer prüft mit 1.1. Neue Entitlements gibt es nicht.
 
-1. Archivieren (Xcode: Product → Archive), validieren und hochladen. Vorher `./scripts/bump-build.sh`, falls seit dem letzten Upload gebaut wurde.
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen. Build 65 ist der Stand mit allen Änderungen; erst nach weiteren Änderungen `./scripts/bump-build.sh`.
 2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1 anlegen.
 3. „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben), die Beschreibung um die Zeile zur Diashow ergänzen.
-4. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1-build<Nummer>` taggen.
+4. Den Build wählen und den Absatz zur Diashow an die Hinweise für die Prüfung anhängen.
+5. „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1-build<Nummer>` taggen.
 
 ## Nach der Freigabe einer neuen Version
 
