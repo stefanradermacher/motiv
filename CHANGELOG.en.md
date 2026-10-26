@@ -32,6 +32,6 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 **Manual.** The manual describes printing, and the last line of longer paragraphs is no longer cut off.
 
-## 1.0 – October 2026
+## 1.0 – 7 October 2026
 
 First release.

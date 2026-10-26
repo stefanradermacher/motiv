@@ -32,6 +32,6 @@ Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGE
 
 **Handbuch.** Das Handbuch beschreibt das Drucken, und die letzte Zeile längerer Absätze ist nicht mehr angeschnitten.
 
-## 1.0 – Oktober 2026
+## 1.0 – 7. Oktober 2026
 
 Erste Version.
