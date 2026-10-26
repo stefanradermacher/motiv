@@ -18,7 +18,7 @@ Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGE
 
 **Vollbild.** Bei „Nur das Bild“ und in der Diashow reicht das Bild jetzt bis an den oberen Bildschirmrand; zuvor blieb dort ein grauer Streifen für die ausgeblendete Titelleiste.
 
-## 1.0.1 – noch nicht veröffentlicht
+## 1.0.1 – 14. Oktober 2026
 
 ### Neu
 

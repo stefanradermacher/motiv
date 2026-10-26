@@ -18,7 +18,7 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 **Full screen.** In “Just the image” and in the slideshow, the image now reaches the top edge of the screen; before, a grey strip for the hidden title bar remained there.
 
-## 1.0.1 – not yet released
+## 1.0.1 – 14 October 2026
 
 ### New
 

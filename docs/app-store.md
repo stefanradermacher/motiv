@@ -287,7 +287,7 @@ Bringt das Drucken nach, das von Anfang an hätte dabei sein sollen, deshalb 1.0
 4. Den Build wählen, unter „Informationen zur App-Sandbox“ `com.apple.security.print` mit der Begründung oben ergänzen und den Absatz zum Drucken an die Hinweise für die Prüfung anhängen.
 5. „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.0.1-build<Nummer>` taggen.
 
-Version 1.0.1 (Build 53) wurde am 13. Oktober 2026 eingereicht; der Stand trägt den Tag `v1.0.1-build53`.
+Version 1.0.1 (Build 53) wurde am 13. Oktober 2026 eingereicht und am 14. Oktober 2026 veröffentlicht; der Stand trägt den Tag `v1.0.1-build53`.
 
 ## Version 1.1
 
