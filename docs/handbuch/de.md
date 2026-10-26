@@ -76,7 +76,7 @@ Ein Bild passt sich zunächst ins Fenster ein. Ein Doppelklick zeigt es in Origi
 
 ## Diashow
 
-Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten. Die Bilder füllen den Bildschirm und gehen weich ineinander über. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. Wie lange jedes Bild bleibt und was nach dem letzten geschieht, stellst du in den Einstellungen ein.
+Die Leertaste startet in der Übersicht eine Diashow, ebenso „Darstellung → Diashow“ (⇧⌘F). Sind mehrere Bilder ausgewählt, zeigt sie genau diese, sonst alle Bilder des Ordners ab dem markierten. Die Bilder füllen den Bildschirm. Die Leertaste hält an und lässt weiterlaufen, die Pfeiltasten blättern, Esc führt zurück zur Übersicht. Wie lange jedes Bild bleibt, wie die Bilder wechseln (Überblenden, Schieben, Wischen, Kreisblende oder ohne Übergang) und was nach dem letzten geschieht, stellst du in den Einstellungen ein.
 
 ## Drehen und Spiegeln
 
