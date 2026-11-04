@@ -2,7 +2,13 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
-## 1.1 – noch nicht veröffentlicht
+## 1.1.1 – noch nicht veröffentlicht
+
+### Behoben
+
+**Scrollbalken in der Diashow.** Auf einem MacBook mit Notch zeigten die Diashow und „Nur das Bild“ rechts einen Scrollbalken, bei breiten Bildern auch unten, obwohl das Bild ins Fenster eingepasst war. Im Vollbild bleibt das Bild jetzt unterhalb der Notch, und Scrollbalken erscheinen dort gar nicht mehr. Danke an Marcus für den Hinweis.
+
+## 1.1 – 26. Oktober 2026
 
 ### Neu
 

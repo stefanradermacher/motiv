@@ -2,7 +2,13 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
-## 1.1 – not yet released
+## 1.1.1 – not yet released
+
+### Fixed
+
+**Scroll bars in the slideshow.** On a MacBook with a notch, the slideshow and “Just the image” showed a scroll bar on the right, and with wide images at the bottom as well, although the image was fitted to the window. In full screen the image now stays below the notch, and scroll bars no longer appear there at all. Thanks to Marcus for pointing it out.
+
+## 1.1 – 26 October 2026
 
 ### New
 

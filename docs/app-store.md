@@ -74,7 +74,11 @@ Bilder,Fotos,Galerie,Betrachter,Viewer,Ordner,EXIF,vergleichen,Metadaten,HEIC,RA
 
 ## Neue Funktionen (4000)
 
-Für Version 1.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+Für Version 1.1.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+
+Behoben in Version 1.1.1
+
+• Auf einem MacBook mit Notch zeigten die Diashow und „Nur das Bild“ Scrollbalken, obwohl das Bild eingepasst war
 
 Neu in Version 1.1
 
@@ -82,7 +86,7 @@ Neu in Version 1.1
 • Übergänge nach Wahl: Überblenden, Schieben, Wischen, Uhrzeiger oder Kreisblende; die Dauer pro Bild und was nach dem letzten Bild geschieht, legst du in den Einstellungen fest
 • Eigene Akzentfarbe, das Petrol des Symbols, wenn in macOS die Akzentfarbe „Mehrfarbig“ gewählt ist
 
-Behoben
+Behoben in Version 1.1
 
 • Auf manchen Macs erschienen die Miniaturen von Fotos aus Apples Kamera-App schwarz
 • Bei „Nur das Bild“ blieb oben ein grauer Streifen stehen
@@ -148,13 +152,17 @@ images,photos,gallery,viewer,browser,folder,EXIF,compare,metadata,HEIC,RAW,ad-fr
 
 **Neue Funktionen (4000):**
 
+Fixed in version 1.1.1
+
+• On a MacBook with a notch, the slideshow and “Just the image” showed scroll bars although the image was fitted
+
 New in version 1.1
 
 • Slideshow: in the overview, the space bar displays the selected images or the whole folder in full screen
 • A choice of transitions: dissolve, push, wipe, clock wipe, or iris; the time per image and what happens after the last image are set in Settings
 • An accent colour of its own, the petrol of the icon, when the accent colour “Multicolour” is chosen in macOS
 
-Fixed
+Fixed in version 1.1
 
 • On some Macs, thumbnails of photos from Apple’s Camera app appeared black
 • In “Just the image”, a grey strip remained at the top
@@ -303,6 +311,16 @@ Bringt die Diashow (Wunsch aus GitHub-Issue #1), die eigene Akzentfarbe und zwei
 4. Den Build wählen und den Absatz zur Diashow an die Hinweise für die Prüfung anhängen.
 5. „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1-build<Nummer>` taggen.
 
+Version 1.1 (Build 65) wurde am 26. Oktober 2026 eingereicht und freigegeben; der Stand trägt den Tag `v1.1-build65`.
+
+## Version 1.1.1
+
+Behebt die Scrollbalken, die die Diashow und „Nur das Bild“ auf MacBooks mit Notch zeigten (GitHub-Issue #1). Seit 1.1 reichte die Bildfläche im Vollbild bis an den oberen Rand; AppKit rückte den Inhalt dann um die Höhe der Notch ein, das eingepasste Bild war dadurch höher als der sichtbare Bereich. Neue Entitlements oder Texte außer „Neue Funktionen“ gibt es nicht.
+
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen.
+2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.1 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).
+3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.1-build<Nummer>` taggen.
+
 ## Nach der Freigabe einer neuen Version
 
 - [ ] In `CHANGELOG.md` und `CHANGELOG.en.md` „noch nicht veröffentlicht“ durch das Datum der Freigabe ersetzen.
@@ -310,6 +328,7 @@ Bringt die Diashow (Wunsch aus GitHub-Issue #1), die eigene Akzentfarbe und zwei
 - [ ] Webseite: Den neuen Abschnitt aus beiden Changelogs in `projects/motiv/neuigkeiten/index.html` übernehmen, oben in den Block der jeweiligen Sprache.
 - [ ] Webseite: Haben sich Funktionen, Tastaturkürzel oder gespeicherte Daten geändert, Produktseite, Hilfe und Datenschutz (mit neuem Stand) anpassen. Für 1.0.1: Drucken und ⌘P in der Hilfe, Drucken unter „Teilen und andere Apps“ im Datenschutz. Für 1.1: die Diashow auf der Produktseite und in der Hilfe (Leertaste, ⇧⌘F).
 - [ ] Die Änderungen pushen.
-- [ ] Für 1.1: GitHub-Issue #1 (Diashow) schließen und dem Nutzer mit den schwarzen Miniaturen Bescheid geben, dass er mit 1.1 prüfen kann.
+- [x] Für 1.1: dem Nutzer mit den schwarzen Miniaturen Bescheid geben, dass er mit 1.1 prüfen kann.
+- [ ] Für 1.1.1: GitHub-Issue #1 (Diashow, Scrollbalken) schließen.
 
 Der Link zum Store (`https://apps.apple.com/app/id6816479220`) bleibt bei Updates gleich.
