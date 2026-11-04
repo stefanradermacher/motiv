@@ -328,7 +328,7 @@ Behebt die Scrollbalken, die die Diashow und „Nur das Bild“ auf MacBooks mit
 - [ ] Webseite: Den neuen Abschnitt aus beiden Changelogs in `projects/motiv/neuigkeiten/index.html` übernehmen, oben in den Block der jeweiligen Sprache.
 - [ ] Webseite: Haben sich Funktionen, Tastaturkürzel oder gespeicherte Daten geändert, Produktseite, Hilfe und Datenschutz (mit neuem Stand) anpassen. Für 1.0.1: Drucken und ⌘P in der Hilfe, Drucken unter „Teilen und andere Apps“ im Datenschutz. Für 1.1: die Diashow auf der Produktseite und in der Hilfe (Leertaste, ⇧⌘F).
 - [ ] Die Änderungen pushen.
-- [x] Für 1.1: dem Nutzer mit den schwarzen Miniaturen Bescheid geben, dass er mit 1.1 prüfen kann.
+- [ ] Für 1.1: dem Nutzer mit den schwarzen Miniaturen Bescheid geben, dass er mit 1.1 prüfen kann.
 - [ ] Für 1.1.1: GitHub-Issue #1 (Diashow, Scrollbalken) schließen.
 
 Der Link zum Store (`https://apps.apple.com/app/id6816479220`) bleibt bei Updates gleich.
