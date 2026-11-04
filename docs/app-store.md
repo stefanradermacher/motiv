@@ -321,6 +321,8 @@ Behebt die Scrollbalken, die die Diashow und „Nur das Bild“ auf MacBooks mit
 2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.1 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).
 3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.1-build<Nummer>` taggen.
 
+Build 67 wurde vor dem Einreichen über TestFlight auf einem MacBook mit Notch geprüft (Diashow, „Nur das Bild“, Zoomen, Bildlaufleisten immer sichtbar). Version 1.1.1 (Build 67) wurde am 4. November 2026 eingereicht; der Stand trägt den Tag `v1.1.1-build67`.
+
 ## Nach der Freigabe einer neuen Version
 
 - [ ] In `CHANGELOG.md` und `CHANGELOG.en.md` „noch nicht veröffentlicht“ durch das Datum der Freigabe ersetzen.
