@@ -47,6 +47,9 @@ struct ImageCanvas: NSViewRepresentable {
         model.canvas = view
         view.enlargesSmallImages = enlargesSmallImages
         view.backgroundColor = isPresenting ? .black : .underPageBackgroundColor
+        // Only the image and the slideshow have no scroll bars; a zoomed picture still scrolls.
+        view.hasHorizontalScroller = !isPresenting
+        view.hasVerticalScroller = !isPresenting
         view.gestures = gestures
         view.transition = transition
         view.transitionForward = transitionForward
@@ -120,6 +123,11 @@ final class ImageScrollView: NSScrollView {
         hasHorizontalScroller = true
         hasVerticalScroller = true
         autohidesScrollers = true
+        // Motiv fits the picture to the whole scroll view. Insets AppKit adds by itself, e.g. for
+        // the notch of a MacBook when the view reaches under it in full screen, would make the
+        // fitted picture taller than the visible area and show a scroll bar.
+        automaticallyAdjustsContentInsets = false
+        contentInsets = NSEdgeInsetsZero
         allowsMagnification = true
         minMagnification = 0.01
         maxMagnification = 32
@@ -386,7 +394,12 @@ final class ImageScrollView: NSScrollView {
         case .width: widthScale
         case .height: heightScale
         }
+        let fitted = scale
         if !enlargesSmallImages && !fitsOnRequest { scale = min(scale, 1) }
+        // When the window limits the size: a hair smaller, so that rounding never makes the
+        // picture a fraction of a point larger than the visible area, which would show a scroll
+        // bar. Pictures shown at 100 % stay exactly at 100 %.
+        if fitMode == .window && scale == fitted && scale != 1 { scale *= 0.9999 }
         minMagnification = min(0.01, scale)
         magnification = scale
         reportZoom()

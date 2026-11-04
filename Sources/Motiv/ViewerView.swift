@@ -57,9 +57,10 @@ struct ViewerView: View {
             }
         }
         // Only the image and the slideshow reach up to the top edge: in full screen the window
-        // otherwise keeps a strip for its hidden title bar above the picture.
-        .background(gallery.isPresenting ? Color.black : Color.clear)
-        .ignoresSafeArea(edges: gallery.isPresenting ? .top : [])
+        // otherwise keeps a strip for its hidden title bar above the picture. On a display with
+        // a notch the picture stays below it; the strip there is black.
+        .background { if gallery.isPresenting { Color.black.ignoresSafeArea() } }
+        .ignoresSafeArea(edges: gallery.isPresenting && !Self.screenHasNotch ? .top : [])
         .focusable()
         .focusEffectDisabled()
         .focused($focused)
@@ -70,6 +71,11 @@ struct ViewerView: View {
             await SensitiveContentGuard.shared.check(item.url, isVideo: item.isVideo)
         }
         .onAppear { focused = true }
+    }
+
+    /// Whether the screen of the window in front has a notch, which a picture should not reach under.
+    private static var screenHasNotch: Bool {
+        ((NSApp.keyWindow ?? NSApp.mainWindow)?.screen ?? NSScreen.main).map { $0.safeAreaInsets.top > 0 } ?? false
     }
 
     /// Shown for a moment when a slideshow is paused or continues.
