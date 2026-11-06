@@ -2,7 +2,7 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
-## 1.1.1 – noch nicht veröffentlicht
+## 1.1.1 – 4. November 2026
 
 ### Behoben
 
