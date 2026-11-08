@@ -831,6 +831,16 @@
         }
       }
     },
+    "Das Vergrößern gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem. Ohne den Wechsel zur Übersicht bleibt Motiv nach dem Freigeben beim geöffneten Bild.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlarging applies when opening and browsing images. Otherwise Motiv displays images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway. Without the switch to the overview, Motiv stays on the open image after you grant access."
+          }
+        }
+      }
+    },
     "Datei": {
       "localizations": {
         "en": {
@@ -1327,16 +1337,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gives the image formats back to the apps they had before Motiv, otherwise Preview"
-          }
-        }
-      }
-    },
-    "Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Applies when opening and browsing images. Otherwise Motiv shows images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway."
           }
         }
       }
@@ -1927,6 +1927,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "N"
+          }
+        }
+      }
+    },
+    "Nach dem Freigeben eines Ordners zur Übersicht wechseln": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to the overview after granting access to a folder"
           }
         }
       }

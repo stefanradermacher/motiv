@@ -13,6 +13,7 @@ Ausführlich steht alles im Handbuch: https://github.com/stefanradermacher/motiv
 | Funktion | Kürzel |
 |---|---|
 | Ordner hinzufügen | ⌘O |
+| Ordner des geöffneten Bildes freigeben, nur bis zum Beenden | ⇧⌘O, ⌃⌥⌘O |
 | Bild öffnen, zurück zur Übersicht | ↩, Esc |
 | Vorheriges, nächstes Bild | ← →, in der Einzelansicht auch ↑ ↓ und Leertaste |
 | Erstes, letztes Bild | Pos1, Ende |

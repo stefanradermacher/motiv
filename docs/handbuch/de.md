@@ -40,7 +40,7 @@ Motiv zeigt keine Mediathek, sondern deine Ordner. Einen Ordner fügst du über 
 
 ## Warum Ordner freigeben?
 
-Wie jede App aus dem App Store darf Motiv nur lesen, was du ausgewählt hast. Öffnest du ein einzelnes Bild aus dem Finder, zeigt Motiv es sofort; die Bilder daneben sieht es erst, wenn du den Ordner mit „Ordner freigeben …“ in der Titelzeile freigibst. Motiv merkt sich die Freigabe, und zwar nur zum Lesen.
+Wie jede App aus dem App Store darf Motiv nur lesen, was du ausgewählt hast. Öffnest du ein einzelnes Bild aus dem Finder, zeigt Motiv es sofort; die Bilder daneben sieht es erst, wenn du den Ordner mit „Ordner freigeben …“ in der Titelzeile oder mit ⇧⌘O freigibst. Motiv merkt sich die Freigabe, und zwar nur zum Lesen. Soll Motiv danach die Übersicht zeigen statt beim Bild zu bleiben, schaltest du das in den Einstellungen ein.
 
 ## Favoriten
 
@@ -169,6 +169,7 @@ Nichts, außer dass sie angezeigt werden. Motiv modifiziert deine Bilder nicht u
 Die wichtigsten Befehle lassen sich ohne Maus erreichen:
 
 | Ordner hinzufügen | ⌘O |
+| Ordner des Bildes freigeben, nur bis zum Beenden | ⇧⌘O, ⌃⌥⌘O |
 | Bild öffnen, zurück zur Übersicht | ↩, Esc |
 | Vorheriges und nächstes Bild | ← und → |
 | Erstes und letztes Bild | Pos1, Ende |

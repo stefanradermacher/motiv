@@ -22,6 +22,8 @@ enum Preferences {
     /// a folder is shown again, but copies of the pictures stay behind. Off by default.
     static let usesSystemThumbnailCacheKey = "usesSystemThumbnailCache"
     static let enlargeSmallImagesKey = "enlargeSmallImages"
+    /// After granting access to the folder of a single file: the overview instead of that file.
+    static let overviewAfterGrantKey = "overviewAfterGrant"
     static let includeSubfoldersKey = "includeSubfolders"
     static let sortKeyKey = "sortKey"
     static let sortAscendingKey = "sortAscending"
@@ -49,6 +51,7 @@ enum Preferences {
             showNamesKey: true,
             usesSystemThumbnailCacheKey: false,
             enlargeSmallImagesKey: false,
+            overviewAfterGrantKey: false,
             includeSubfoldersKey: false,
             sortKeyKey: SortKey.name.rawValue,
             sortAscendingKey: true,
@@ -122,6 +125,7 @@ struct SettingsView: View {
     @AppStorage(Preferences.showNamesKey) private var showNames = true
     @AppStorage(Preferences.usesSystemThumbnailCacheKey) private var usesSystemThumbnailCache = false
     @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
+    @AppStorage(Preferences.overviewAfterGrantKey) private var overviewAfterGrant = false
     @AppStorage(Preferences.slideshowIntervalKey) private var slideshowInterval = 4
     @AppStorage(Preferences.slideshowEndKey) private var slideshowEnd = SlideshowEnd.loop
     @AppStorage(Preferences.slideshowTransitionKey) private var slideshowTransition = SlideTransition.dissolve
@@ -156,10 +160,11 @@ struct SettingsView: View {
             }
             Section {
                 Toggle("Kleine Bilder auf Fenstergröße vergrößern", isOn: $enlargeSmallImages)
+                Toggle("Nach dem Freigeben eines Ordners zur Übersicht wechseln", isOn: $overviewAfterGrant)
             } header: {
                 Text("Einzelansicht")
             } footer: {
-                Text("Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.")
+                Text("Das Vergrößern gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem. Ohne den Wechsel zur Übersicht bleibt Motiv nach dem Freigeben beim geöffneten Bild.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }

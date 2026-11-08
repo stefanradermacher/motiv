@@ -29,7 +29,7 @@ Motiv does not display any library, only your folders. Add a folder with “File
 
 ## Why Grant Access to Folders?
 
-Like every app from the App Store, Motiv may only read what you chose. If you open a single image from the Finder, Motiv displays it right away; it sees the images next to it only once you grant access to the folder with “Grant Folder Access …” in the title bar. Motiv remembers the access, for reading only.
+Like every app from the App Store, Motiv may only read what you chose. If you open a single image from the Finder, Motiv displays it right away; it sees the images next to it only once you grant access to the folder with “Grant Folder Access …” in the title bar or with ⇧⌘O. Motiv remembers the access, for reading only. If Motiv should display the overview afterwards instead of staying on the image, switch that on in Settings.
 
 ## Favourites
 
@@ -158,6 +158,7 @@ Nothing, except that they are displayed. Motiv never modifies your images and do
 The most important commands work without a mouse:
 
 | Add folder | ⌘O |
+| Grant access to the image’s folder, only until quit | ⇧⌘O, ⌃⌥⌘O |
 | Open image, back to the overview | ↩, Esc |
 | Previous and next image | ← and → |
 | First and last image | Home, End |

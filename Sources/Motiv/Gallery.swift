@@ -202,6 +202,8 @@ final class Gallery {
     @ObservationIgnored private var loadTask: Task<Void, Never>?
     /// A file to show once the folder has been read.
     @ObservationIgnored private var pendingReveal: URL?
+    /// The pending file is marked in the overview instead of being opened.
+    @ObservationIgnored private var revealsInOverview = false
     /// The user agreed to show a very large folder tree anyway.
     @ObservationIgnored private var allowsLargeScan = false
     /// Set when the folder with its subfolders holds more than `Preferences.subfolderItemLimit`
@@ -360,9 +362,18 @@ final class Gallery {
         if let cursor, !urls.contains(cursor) { self.cursor = nil }
         if let target = pendingReveal {
             pendingReveal = nil
+            let inOverview = revealsInOverview
+            revealsInOverview = false
             let path = target.standardizedFileURL.path
             if let item = items.first(where: { $0.url.standardizedFileURL.path == path }) {
-                show(item.url)
+                if inOverview {
+                    selection = [item.url]
+                    cursor = item.url
+                    anchor = item.url
+                    closeViewer()
+                } else {
+                    show(item.url)
+                }
                 return
             }
         }
@@ -442,6 +453,7 @@ final class Gallery {
     /// `temporarily`: only until Motiv quits, see `Place.isTemporary`.
     func grantFolderAccess(temporarily: Bool = false) {
         guard let file = singleFile, Library.shared.requestAccess(toFolderOf: file, temporarily: temporarily) else { return }
+        revealsInOverview = UserDefaults.standard.bool(forKey: Preferences.overviewAfterGrantKey)
         reveal(file)
     }
 

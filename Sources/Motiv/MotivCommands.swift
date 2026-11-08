@@ -45,6 +45,14 @@ struct MotivCommands: Commands {
                 if let folder = Library.shared.chooseFolders().first { gallery?.showFolder(folder) }
             }
             .keyboardShortcut("o")
+            // The same commands as the button in the toolbar, which appears only for a single
+            // file whose folder Motiv may not read yet.
+            Button("Ordner freigeben …") { gallery?.grantFolderAccess() }
+                .keyboardShortcut("o", modifiers: [.command, .shift])
+                .disabled(gallery?.singleFile == nil)
+            Button("Nur bis zum Beenden freigeben …") { gallery?.grantFolderAccess(temporarily: true) }
+                .keyboardShortcut("o", modifiers: [.command, .control, .option])
+                .disabled(gallery?.singleFile == nil)
             Divider()
             Button("In Vorschau öffnen") { FileActions.openInPreview(targets) }
                 .keyboardShortcut("e")
