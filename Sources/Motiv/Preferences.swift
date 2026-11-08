@@ -121,53 +121,108 @@ enum SlideshowEnd: String, CaseIterable, Identifiable {
     }
 }
 
+/// The settings window: tabs in its toolbar, as in other Mac apps, each as tall as its content.
 struct SettingsView: View {
-    @AppStorage(Preferences.showNamesKey) private var showNames = true
-    @AppStorage(Preferences.usesSystemThumbnailCacheKey) private var usesSystemThumbnailCache = false
-    @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
-    @AppStorage(Preferences.overviewAfterGrantKey) private var overviewAfterGrant = false
-    @AppStorage(Preferences.slideshowIntervalKey) private var slideshowInterval = 4
-    @AppStorage(Preferences.slideshowEndKey) private var slideshowEnd = SlideshowEnd.loop
-    @AppStorage(Preferences.slideshowTransitionKey) private var slideshowTransition = SlideTransition.dissolve
+    var body: some View {
+        TabView {
+            GeneralSettings()
+                .tabItem { Label("Allgemein", systemImage: "gearshape") }
+            ViewSettings()
+                .tabItem { Label("Darstellung", systemImage: "photo") }
+            SlideshowSettings()
+                .tabItem { Label("Diashow", systemImage: "play.rectangle") }
+        }
+    }
+}
+
+/// A tab of the settings, as wide as all of them and as tall as its content, so that
+/// nothing scrolls and no scroller appears.
+private struct SettingsTab<Content: View>: View {
+    @ViewBuilder let content: Content
 
     var body: some View {
-        Form {
+        Form { content }
+            .formStyle(.grouped)
+            .scrollDisabled(true)
+            .frame(width: 520)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+/// A short explanation below a setting.
+private struct SettingsFooter: View {
+    let text: LocalizedStringKey
+
+    init(_ text: LocalizedStringKey) {
+        self.text = text
+    }
+
+    var body: some View {
+        Text(text)
+            .font(.callout)
+            .foregroundStyle(.secondary)
+    }
+}
+
+private struct GeneralSettings: View {
+    @AppStorage(Preferences.overviewAfterGrantKey) private var overviewAfterGrant = false
+
+    var body: some View {
+        SettingsTab {
             Section {
                 DefaultAppSettingsRow()
             } footer: {
                 if !DefaultAppOffer.isInstalled {
-                    Text("Um Motiv als Standard festzulegen, muss die App im Ordner „Programme“ liegen.")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                    SettingsFooter("Um Motiv als Standard festzulegen, muss die App im Ordner „Programme“ liegen.")
                 }
             }
             Section {
                 SensitiveContentSettingsRow()
             } footer: {
-                Text("Ist in den Systemeinstellungen unter „Datenschutz & Sicherheit“ der Hinweis für sensible Inhalte eingeschaltet, zeigt Motiv Bilder mit möglicherweise sensiblen Inhalten zunächst unscharf. Geprüft wird nur auf diesem Mac.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                SettingsFooter("Ist in den Systemeinstellungen unter „Datenschutz & Sicherheit“ der Hinweis für sensible Inhalte eingeschaltet, zeigt Motiv Bilder mit möglicherweise sensiblen Inhalten zunächst unscharf. Geprüft wird nur auf diesem Mac.")
             }
+            Section {
+                Toggle("Nach dem Freigeben eines Ordners zur Übersicht wechseln", isOn: $overviewAfterGrant)
+            } footer: {
+                SettingsFooter("Gilt, wenn du den Ordner eines einzeln geöffneten Bildes freigibst. Sonst bleibt Motiv bei diesem Bild.")
+            }
+        }
+    }
+}
+
+private struct ViewSettings: View {
+    @AppStorage(Preferences.showNamesKey) private var showNames = true
+    @AppStorage(Preferences.usesSystemThumbnailCacheKey) private var usesSystemThumbnailCache = false
+    @AppStorage(Preferences.enlargeSmallImagesKey) private var enlargeSmallImages = false
+
+    var body: some View {
+        SettingsTab {
             Section {
                 Toggle("Dateinamen unter den Miniaturen anzeigen", isOn: $showNames)
                 Toggle("Miniaturen im Systemcache ablegen", isOn: $usesSystemThumbnailCache)
             } header: {
                 Text("Übersicht")
             } footer: {
-                Text("Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie soweit möglich selbst und nutzt den Systemcache nur für Formate, die es nicht selbst lesen kann.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                SettingsFooter("Schneller, wenn du einen Ordner wieder öffnest. macOS legt die Miniaturen dann wie für den Finder in seinem geschützten Cache auf der Platte ab. Ausgeschaltet erzeugt Motiv sie soweit möglich selbst und nutzt den Systemcache nur für Formate, die es nicht selbst lesen kann.")
             }
             Section {
                 Toggle("Kleine Bilder auf Fenstergröße vergrößern", isOn: $enlargeSmallImages)
-                Toggle("Nach dem Freigeben eines Ordners zur Übersicht wechseln", isOn: $overviewAfterGrant)
             } header: {
                 Text("Einzelansicht")
             } footer: {
-                Text("Das Vergrößern gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem. Ohne den Wechsel zur Übersicht bleibt Motiv nach dem Freigeben beim geöffneten Bild.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                SettingsFooter("Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.")
             }
+        }
+    }
+}
+
+private struct SlideshowSettings: View {
+    @AppStorage(Preferences.slideshowIntervalKey) private var slideshowInterval = 4
+    @AppStorage(Preferences.slideshowEndKey) private var slideshowEnd = SlideshowEnd.loop
+    @AppStorage(Preferences.slideshowTransitionKey) private var slideshowTransition = SlideTransition.dissolve
+
+    var body: some View {
+        SettingsTab {
             Section {
                 Picker("Dauer pro Bild", selection: $slideshowInterval) {
                     ForEach(Preferences.slideshowIntervals, id: \.self) { seconds in
@@ -184,17 +239,9 @@ struct SettingsView: View {
                         Text(end.title).tag(end)
                     }
                 }
-            } header: {
-                Text("Diashow")
             } footer: {
-                Text("Die Leertaste startet in der Übersicht eine Diashow mit den ausgewählten Bildern oder, ist nur eines ausgewählt, mit allen Bildern des Ordners. In der Diashow hält die Leertaste an, die Pfeiltasten blättern, Esc führt zurück zur Übersicht.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                SettingsFooter("Die Leertaste startet in der Übersicht eine Diashow mit den ausgewählten Bildern oder, ist nur eines ausgewählt, mit allen Bildern des Ordners. In der Diashow hält die Leertaste an, die Pfeiltasten blättern, Esc führt zurück zur Übersicht.")
             }
         }
-        .formStyle(.grouped)
-        .scrollDisabled(true)
-        .frame(width: 520)
-        .fixedSize(horizontal: false, vertical: true)
     }
 }

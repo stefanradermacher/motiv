@@ -391,6 +391,16 @@
         }
       }
     },
+    "Allgemein": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        }
+      }
+    },
     "Als Standard festlegen": {
       "localizations": {
         "en": {
@@ -831,12 +841,12 @@
         }
       }
     },
-    "Das Vergrößern gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem. Ohne den Wechsel zur Übersicht bleibt Motiv nach dem Freigeben beim geöffneten Bild.": {
+    "Darstellung": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Enlarging applies when opening and browsing images. Otherwise Motiv displays images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway. Without the switch to the overview, Motiv stays on the open image after you grant access."
+            "value": "View"
           }
         }
       }
@@ -1337,6 +1347,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gives the image formats back to the apps they had before Motiv, otherwise Preview"
+          }
+        }
+      }
+    },
+    "Gilt beim Öffnen und Blättern. Sonst zeigt Motiv Bilder, die kleiner als das Fenster sind, in Originalgröße; „An Fenster anpassen“ (⌘9) vergrößert sie trotzdem.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applies when opening and browsing images. Otherwise Motiv displays images smaller than the window at actual size; “Zoom to Fit” (⌘9) enlarges them anyway."
+          }
+        }
+      }
+    },
+    "Gilt, wenn du den Ordner eines einzeln geöffneten Bildes freigibst. Sonst bleibt Motiv bei diesem Bild.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applies when you grant access to the folder of an image opened on its own. Otherwise Motiv stays on that image."
           }
         }
       }

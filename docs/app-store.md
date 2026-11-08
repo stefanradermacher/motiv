@@ -74,7 +74,13 @@ Bilder,Fotos,Galerie,Betrachter,Viewer,Ordner,EXIF,vergleichen,Metadaten,HEIC,RA
 
 ## Neue Funktionen (4000)
 
-Für Version 1.1.1. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+Für Version 1.1.2. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+
+Neu in Version 1.1.2
+
+• Ordner freigeben per Tastatur: ⇧⌘O, nur bis zum Beenden ⌃⌥⌘O
+• Auf Wunsch wechselt Motiv nach dem Freigeben eines Ordners zur Übersicht
+• Einstellungen in Tabs
 
 Behoben in Version 1.1.1
 
@@ -151,6 +157,12 @@ Honest and open
 images,photos,gallery,viewer,browser,folder,EXIF,compare,metadata,HEIC,RAW,ad-free,privacy
 
 **Neue Funktionen (4000):**
+
+New in version 1.1.2
+
+• Grant access to a folder by keyboard: ⇧⌘O, or ⌃⌥⌘O only until Motiv quits
+• If you like, Motiv switches to the overview after you grant access to a folder
+• Settings in tabs
 
 Fixed in version 1.1.1
 
@@ -322,6 +334,14 @@ Behebt die Scrollbalken, die die Diashow und „Nur das Bild“ auf MacBooks mit
 3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.1-build<Nummer>` taggen.
 
 Build 67 wurde vor dem Einreichen über TestFlight auf einem MacBook mit Notch geprüft (Diashow, „Nur das Bild“, Zoomen, Bildlaufleisten immer sichtbar). Version 1.1.1 (Build 67) wurde am 4. November 2026 eingereicht und am selben Tag freigegeben; der Stand trägt den Tag `v1.1.1-build67`.
+
+## Version 1.1.2
+
+Bringt die Tastaturkürzel für „Ordner freigeben …“ (⇧⌘O, ⌃⌥⌘O), die Einstellung „Nach dem Freigeben eines Ordners zur Übersicht wechseln“ und die Einstellungen in Tabs. Neue Entitlements oder Texte außer „Neue Funktionen“ gibt es nicht.
+
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen.
+2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.2 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).
+3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.2-build<Nummer>` taggen.
 
 ## Nach der Freigabe einer neuen Version
 

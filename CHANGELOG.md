@@ -2,6 +2,18 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
+## 1.1.2 – noch nicht veröffentlicht
+
+### Neu
+
+**Ordner freigeben per Tastatur.** Hast du ein einzelnes Bild aus dem Finder geöffnet, gibt ⇧⌘O seinen Ordner frei, ⌃⌥⌘O nur bis zum Beenden von Motiv. Beide Befehle stehen auch im Menü „Ablage“.
+
+**Nach dem Freigeben zur Übersicht.** Eine neue Einstellung lässt Motiv nach dem Freigeben eines Ordners zur Übersicht wechseln, mit dem geöffneten Bild markiert. Sonst bleibt Motiv wie bisher beim Bild.
+
+### Verbessert
+
+**Einstellungen in Tabs.** Die Einstellungen sind in „Allgemein“, „Darstellung“ und „Diashow“ aufgeteilt und passen so auch auf kleine Bildschirme.
+
 ## 1.1.1 – 4. November 2026
 
 ### Behoben

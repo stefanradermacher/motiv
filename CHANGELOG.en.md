@@ -2,6 +2,18 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
+## 1.1.2 – not yet released
+
+### New
+
+**Granting folder access by keyboard.** If you opened a single image from the Finder, ⇧⌘O grants access to its folder, and ⌃⌥⌘O grants it only until Motiv quits. Both commands are also in the “File” menu.
+
+**To the overview after granting access.** A new setting makes Motiv switch to the overview after you grant access to a folder, with the open image marked. Otherwise Motiv stays on the image, as before.
+
+### Improved
+
+**Settings in tabs.** The settings are divided into “General”, “View”, and “Slideshow”, and so also fit on small screens.
+
 ## 1.1.1 – 4 November 2026
 
 ### Fixed
