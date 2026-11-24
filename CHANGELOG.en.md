@@ -14,6 +14,8 @@ What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](
 
 **Settings in tabs.** The settings are divided into “General”, “View”, and “Slideshow”, and so also fit on small screens.
 
+**Larger images on MacBooks with a notch.** In “Just the image” and in the slideshow, the image now starts right below the notch. Before, the space of the hidden toolbar below it was left empty as well. Thanks to Marcus for pointing it out.
+
 ## 1.1.1 – 4 November 2026
 
 ### Fixed

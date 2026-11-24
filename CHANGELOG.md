@@ -14,6 +14,8 @@ Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGE
 
 **Einstellungen in Tabs.** Die Einstellungen sind in „Allgemein“, „Darstellung“ und „Diashow“ aufgeteilt und passen so auch auf kleine Bildschirme.
 
+**Größere Bilder auf MacBooks mit Notch.** Bei „Nur das Bild“ und in der Diashow beginnt das Bild jetzt direkt unter der Notch. Bisher blieb darunter zusätzlich der Platz der ausgeblendeten Symbolleiste frei. Danke an Marcus für den Hinweis.
+
 ## 1.1.1 – 4. November 2026
 
 ### Behoben

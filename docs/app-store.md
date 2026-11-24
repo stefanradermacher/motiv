@@ -81,6 +81,7 @@ Neu in Version 1.1.2
 • Ordner freigeben per Tastatur: ⇧⌘O, nur bis zum Beenden ⌃⌥⌘O
 • Auf Wunsch wechselt Motiv nach dem Freigeben eines Ordners zur Übersicht
 • Einstellungen in Tabs
+• Auf MacBooks mit Notch beginnt das Bild im Vollbild direkt unter der Notch und wird dadurch größer
 
 Behoben in Version 1.1.1
 
@@ -163,6 +164,7 @@ New in version 1.1.2
 • Grant access to a folder by keyboard: ⇧⌘O, or ⌃⌥⌘O only until Motiv quits
 • If you like, Motiv switches to the overview after you grant access to a folder
 • Settings in tabs
+• On MacBooks with a notch, the image in full screen starts right below the notch and is therefore larger
 
 Fixed in version 1.1.1
 
@@ -337,7 +339,7 @@ Build 67 wurde vor dem Einreichen über TestFlight auf einem MacBook mit Notch g
 
 ## Version 1.1.2
 
-Bringt die Tastaturkürzel für „Ordner freigeben …“ (⇧⌘O, ⌃⌥⌘O), die Einstellung „Nach dem Freigeben eines Ordners zur Übersicht wechseln“ und die Einstellungen in Tabs. Neue Entitlements oder Texte außer „Neue Funktionen“ gibt es nicht.
+Bringt die Tastaturkürzel für „Ordner freigeben …“ (⇧⌘O, ⌃⌥⌘O), die Einstellung „Nach dem Freigeben eines Ordners zur Übersicht wechseln“, die Einstellungen in Tabs und größere Bilder im Vollbild auf MacBooks mit Notch (GitHub-Issue #2: unter der Notch blieb auch der Platz der ausgeblendeten Symbolleiste frei). Neue Entitlements oder Texte außer „Neue Funktionen“ gibt es nicht.
 
 1. Archivieren (Xcode: Product → Archive), validieren und hochladen.
 2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.2 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).

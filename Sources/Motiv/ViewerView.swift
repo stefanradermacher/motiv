@@ -58,9 +58,11 @@ struct ViewerView: View {
         }
         // Only the image and the slideshow reach up to the top edge: in full screen the window
         // otherwise keeps a strip for its hidden title bar above the picture. On a display with
-        // a notch the picture stays below it; the strip there is black.
-        .background { if gallery.isPresenting { Color.black.ignoresSafeArea() } }
-        .ignoresSafeArea(edges: gallery.isPresenting && !Self.screenHasNotch ? .top : [])
+        // a notch the picture starts right below the notch's row, which stays black; the title
+        // bar's strip below it is used as well (GitHub issue #2).
+        .padding(.top, gallery.isPresenting ? Self.notchHeight : 0)
+        .background { if gallery.isPresenting { Color.black } }
+        .ignoresSafeArea(edges: gallery.isPresenting ? .top : [])
         .focusable()
         .focusEffectDisabled()
         .focused($focused)
@@ -73,9 +75,10 @@ struct ViewerView: View {
         .onAppear { focused = true }
     }
 
-    /// Whether the screen of the window in front has a notch, which a picture should not reach under.
-    private static var screenHasNotch: Bool {
-        ((NSApp.keyWindow ?? NSApp.mainWindow)?.screen ?? NSScreen.main).map { $0.safeAreaInsets.top > 0 } ?? false
+    /// The height of the notch's row at the top of the screen of the window in front; 0 without
+    /// a notch. A full-screen window covers this row, but a picture should not reach under it.
+    private static var notchHeight: CGFloat {
+        ((NSApp.keyWindow ?? NSApp.mainWindow)?.screen ?? NSScreen.main)?.safeAreaInsets.top ?? 0
     }
 
     /// Shown for a moment when a slideshow is paused or continues.
