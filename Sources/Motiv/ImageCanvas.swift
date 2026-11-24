@@ -124,8 +124,8 @@ final class ImageScrollView: NSScrollView {
         hasVerticalScroller = true
         autohidesScrollers = true
         // Motiv fits the picture to the whole scroll view. Insets AppKit adds by itself, e.g. for
-        // the notch of a MacBook when the view reaches under it in full screen, would make the
-        // fitted picture taller than the visible area and show a scroll bar.
+        // the hidden title bar when the view reaches up to the top in full screen, would make the
+        // fitted picture taller than the visible area and show a scroll bar (GitHub issue #1).
         automaticallyAdjustsContentInsets = false
         contentInsets = NSEdgeInsetsZero
         allowsMagnification = true
