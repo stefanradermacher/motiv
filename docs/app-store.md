@@ -345,6 +345,8 @@ Bringt die Tastaturkürzel für „Ordner freigeben …“ (⇧⌘O, ⌃⌥⌘O)
 2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.2 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).
 3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.2-build<Nummer>` taggen.
 
+Build 71 wurde vor dem Einreichen als Ad-hoc-Build auf einem MacBook mit Notch geprüft. Version 1.1.2 (Build 71) wurde am 24. November 2026 eingereicht; der Stand trägt den Tag `v1.1.2-build71`.
+
 ## Nach der Freigabe einer neuen Version
 
 - [ ] In `CHANGELOG.md` und `CHANGELOG.en.md` „noch nicht veröffentlicht“ durch das Datum der Freigabe ersetzen.
