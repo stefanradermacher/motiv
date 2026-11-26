@@ -2,7 +2,7 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
-## 1.1.2 – not yet released
+## 1.1.2 – 26 November 2026
 
 ### New
 
