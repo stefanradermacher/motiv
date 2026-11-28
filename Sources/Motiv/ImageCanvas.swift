@@ -29,6 +29,8 @@ struct ImageCanvas: NSViewRepresentable {
     let model: ImageViewerModel
     /// What trackpad gestures do beyond zooming: page through the folder and rotate.
     let gestures: CanvasGestures
+    /// Drags the picture out of Motiv, when it is shown whole; see `ImageScrollView.dragOut`.
+    var dragOut: (() -> Void)? = nil
     /// Called once with the scroll view, e.g. to keep several pictures in step when comparing.
     var onCanvas: ((ImageScrollView) -> Void)? = nil
 
@@ -51,6 +53,7 @@ struct ImageCanvas: NSViewRepresentable {
         view.hasHorizontalScroller = !isPresenting
         view.hasVerticalScroller = !isPresenting
         view.gestures = gestures
+        view.dragOut = dragOut
         view.transition = transition
         view.transitionForward = transitionForward
         view.show(picture)
@@ -105,6 +108,16 @@ final class ImageScrollView: NSScrollView {
     /// Set when another picture is about to come, see `show`.
     private var expectsNewPicture = true
     var gestures = CanvasGestures()
+    /// Starts dragging the file out; nil where that makes no sense, e.g. when comparing.
+    var dragOut: (() -> Void)?
+
+    /// Whether the whole picture is visible, so that dragging it need not move it in the window.
+    var showsWholePicture: Bool {
+        let size = pictureView.frame.size
+        let visible = contentView.bounds.size
+        return picture != nil && size.width <= visible.width + 0.5 && size.height <= visible.height + 0.5
+    }
+
     /// See `ImageCanvas.transition`.
     var transition: SlideTransition?
     var transitionForward = true
@@ -133,6 +146,8 @@ final class ImageScrollView: NSScrollView {
         maxMagnification = 32
         backgroundColor = .underPageBackgroundColor
         pictureView.onDoubleClick = { [weak self] point in self?.toggleZoom(at: point) }
+        pictureView.canDragOut = { [weak self] in self?.showsWholePicture == true && self?.dragOut != nil }
+        pictureView.onDragOut = { [weak self] in self?.dragOut?() }
         contentView.postsBoundsChangedNotifications = true
 
         let center = NotificationCenter.default
@@ -520,6 +535,21 @@ final class ImageScrollView: NSScrollView {
         if abs(magnification - before) < 0.001 { setZoom(2, centeredAt: point) }
     }
 
+    /// Clicks beside the picture, or before the clip view has settled after a new picture, reach
+    /// the scroll view rather than the picture; a drag there takes the picture out as well.
+    private var draggingOut = false
+
+    override func mouseDown(with event: NSEvent) {
+        draggingOut = false
+        super.mouseDown(with: event)
+    }
+
+    override func mouseDragged(with event: NSEvent) {
+        guard !draggingOut, showsWholePicture, let dragOut else { return super.mouseDragged(with: event) }
+        draggingOut = true
+        dragOut()
+    }
+
     private func centerPicture() {
         let size = pictureView.frame.size
         let visible = contentView.bounds.size
@@ -556,6 +586,11 @@ final class CenteringClipView: NSClipView {
 /// redrawing. Dragging moves the picture, a double-click zooms.
 final class PictureView: NSView {
     var onDoubleClick: ((NSPoint) -> Void)?
+    /// Whether a drag takes the file out of Motiv instead of moving the picture in the window.
+    var canDragOut: () -> Bool = { false }
+    var onDragOut: () -> Void = {}
+    /// Set once a drag has been handed to the file drag, until the button goes up.
+    private var draggingOut = false
 
     /// Double-tap with two fingers on the picture, handed on as a double-click at that point.
     override func smartMagnify(with event: NSEvent) {
@@ -612,12 +647,19 @@ final class PictureView: NSView {
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
 
     override func mouseDown(with event: NSEvent) {
+        draggingOut = false
         if event.clickCount == 2 {
             onDoubleClick?(convert(event.locationInWindow, from: nil))
         }
     }
 
     override func mouseDragged(with event: NSEvent) {
+        if draggingOut { return }
+        if canDragOut() {
+            draggingOut = true
+            onDragOut()
+            return
+        }
         guard let scrollView = enclosingScrollView else { return }
         let clipView = scrollView.contentView
         let scale = scrollView.magnification

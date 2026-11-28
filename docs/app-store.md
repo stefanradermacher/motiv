@@ -74,7 +74,12 @@ Bilder,Fotos,Galerie,Betrachter,Viewer,Ordner,EXIF,vergleichen,Metadaten,HEIC,RA
 
 ## Neue Funktionen (4000)
 
-Für Version 1.1.2. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+Für Version 1.1.3. Ausführlich steht alles in `CHANGELOG.md` und `CHANGELOG.en.md`.
+
+Neu in Version 1.1.3
+
+• Bilder aus der Übersicht und der Einzelansicht in den Finder oder in andere Apps ziehen
+• Ein mit ⌘C kopiertes Bild lässt sich auch direkt in Mail, Nachrichten oder Pages einfügen
 
 Neu in Version 1.1.2
 
@@ -158,6 +163,11 @@ Honest and open
 images,photos,gallery,viewer,browser,folder,EXIF,compare,metadata,HEIC,RAW,ad-free,privacy
 
 **Neue Funktionen (4000):**
+
+New in version 1.1.3
+
+• Drag images from the overview and the single image view to the Finder or into other apps
+• An image copied with ⌘C can also be pasted right into Mail, Messages, or Pages
 
 New in version 1.1.2
 
@@ -346,6 +356,14 @@ Bringt die Tastaturkürzel für „Ordner freigeben …“ (⇧⌘O, ⌃⌥⌘O)
 3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.2-build<Nummer>` taggen.
 
 Build 71 wurde vor dem Einreichen als Ad-hoc-Build auf einem MacBook mit Notch geprüft. Version 1.1.2 (Build 71) wurde am 24. November 2026 eingereicht und am 26. November 2026 freigegeben; der Stand trägt den Tag `v1.1.2-build71`.
+
+## Version 1.1.3
+
+Bringt das Ziehen von Bildern in den Finder und in andere Apps und Bilddaten beim Kopieren eines einzelnen Bildes. Motiv selbst schreibt dabei keine Datei: Kopieren oder Verschieben übernimmt die App, die die Bilder empfängt. Neue Entitlements oder Texte außer „Neue Funktionen“ gibt es nicht.
+
+1. Archivieren (Xcode: Product → Archive), validieren und hochladen.
+2. In App Store Connect unter „macOS-App“ mit „+“ die Version 1.1.3 anlegen und „Neue Funktionen“ auf Deutsch und Englisch eintragen (oben).
+3. Den Build wählen, „Zur Prüfung hinzufügen“ und übermitteln, den Stand mit `v1.1.3-build<Nummer>` taggen.
 
 ## Nach der Freigabe einer neuen Version
 

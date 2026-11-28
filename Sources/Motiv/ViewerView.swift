@@ -29,7 +29,8 @@ struct ViewerView: View {
                             isPresenting: gallery.isPresenting,
                             transition: gallery.slideshow.map { _ in Preferences.slideshowTransition },
                             transitionForward: gallery.slideshow?.forward ?? true,
-                            model: viewer, gestures: gestures)
+                            model: viewer, gestures: gestures,
+                            dragOut: gallery.isPresenting ? nil : dragOut)
                 overlay
                 if let hint = slideshowHint {
                     Label(hint.title, systemImage: hint.symbol)
@@ -104,6 +105,13 @@ struct ViewerView: View {
             guard !Task.isCancelled else { return }
             withAnimation(.easeIn(duration: 0.3)) { slideshowHint = nil }
         }
+    }
+
+    /// Drags the image shown out of Motiv; if the receiver moves it, the folder is read again.
+    private var dragOut: (() -> Void)? {
+        guard let url = viewer.item?.url else { return nil }
+        let gallery = gallery
+        return { FileDrag.begin([url]) { gallery.reload() } }
     }
 
     private var gestures: CanvasGestures {

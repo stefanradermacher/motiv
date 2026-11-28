@@ -2,6 +2,16 @@
 
 Was sich in Motiv von Version zu Version geändert hat. English version: [CHANGELOG.en.md](CHANGELOG.en.md).
 
+## 1.1.3 – noch nicht veröffentlicht
+
+### Neu
+
+**Bilder ziehen.** Ausgewählte Bilder aus der Übersicht und das gezeigte Bild der Einzelansicht lassen sich in den Finder oder in andere Apps ziehen. Der Finder kopiert oder verschiebt sie wie gewohnt; werden sie verschoben, liest Motiv den Ordner neu ein. In der Einzelansicht geht das, solange das ganze Bild zu sehen ist, sonst verschiebt Ziehen weiter den Ausschnitt.
+
+### Verbessert
+
+**Kopieren mit ⌘C.** Ein einzelnes kopiertes Bild lässt sich jetzt auch direkt in Apps wie Mail, Nachrichten oder Pages einfügen, nicht nur als Datei im Finder.
+
 ## 1.1.2 – 26. November 2026
 
 ### Neu

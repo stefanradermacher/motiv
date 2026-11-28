@@ -113,6 +113,10 @@ Motiv recognises videos and displays them with a still frame, but does not play 
 
 Motiv never modifies any images. ⌘E opens an image in Preview, “Open With” in any other app. Sharing and copying hand over files only when you explicitly ask for it.
 
+## Copying and Dragging
+
+⌘C copies the selected images or the image displayed. In the Finder you paste them as files. A single image can also be pasted right into apps such as Mail, Messages, or Pages. You can also drag images from the overview or the single image view to the Finder or into another app. The Finder copies or moves them as usual; with ⌥ it always copies. In the single image view this works while the whole image is visible; you move an enlarged image within the window by dragging.
+
 ## Printing
 
 ⌘P prints the image displayed or all selected images, each on its own page. For wide images, Motiv preselects landscape. In the “Motiv” section of the print dialog you choose whether images are rotated automatically to match the paper and how large they appear: at actual size according to their resolution, shrunk only when they do not fit, or scaled to the paper size. Motiv remembers your choice. In the single image view it prints the image rotated and flipped as you see it. To get a PDF, choose “PDF → Open in Preview” in the print dialog and save it in Preview, because Motiv itself does not write any files.
@@ -174,6 +178,7 @@ The most important commands work without a mouse:
 | Slideshow | Space bar (overview), ⇧⌘F |
 | Compare images | ⌃⌘C |
 | Open in Preview | ⌘E |
+| Copy | ⌘C |
 | Print | ⌘P |
 | Show in Finder | ⇧⌘R |
 

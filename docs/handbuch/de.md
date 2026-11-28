@@ -124,6 +124,10 @@ Motiv erkennt Videos und zeigt sie mit einem Standbild, spielt sie aber nicht ab
 
 Motiv modifiziert keine Bilder. Mit ⌘E öffnest du ein Bild in Vorschau, über „Öffnen mit“ in jedem anderen Programm. Teilen und Kopieren übergeben die Dateien nur, wenn du es ausdrücklich möchtest.
 
+## Kopieren und Ziehen
+
+⌘C kopiert die ausgewählten Bilder oder das gezeigte Bild. Im Finder fügst du sie als Dateien ein. Ein einzelnes Bild lässt sich auch direkt in Apps wie Mail, Nachrichten oder Pages einsetzen. Ebenso ziehst du Bilder aus der Übersicht oder der Einzelansicht in den Finder oder in eine andere App. Der Finder kopiert oder verschiebt sie dabei wie gewohnt, mit ⌥ wird immer kopiert. In der Einzelansicht geht das, solange das ganze Bild zu sehen ist; ein vergrößertes Bild verschiebst du durch Ziehen im Fenster.
+
 ## Drucken
 
 Mit ⌘P druckst du das gezeigte Bild oder alle ausgewählten, jedes auf einer eigenen Seite. Für breite Bilder wählt Motiv das Querformat vor. Im Abschnitt „Motiv“ des Druckdialogs wählst du, ob Bilder automatisch zum Papier gedreht werden und wie groß sie erscheinen: in Originalgröße nach ihrer Auflösung, nur verkleinert, wenn sie nicht passen, oder auf das Papierformat skaliert. Motiv merkt sich die Wahl. In der Einzelansicht druckt es das Bild so gedreht und gespiegelt, wie du es siehst. Ein PDF bekommst du über „PDF → In Vorschau öffnen“ im Druckdialog und sicherst es dann in Vorschau, denn Motiv selbst schreibt keine Dateien.
@@ -185,6 +189,7 @@ Die wichtigsten Befehle lassen sich ohne Maus erreichen:
 | Diashow | Leertaste (Übersicht), ⇧⌘F |
 | Bilder vergleichen | ⌃⌘C |
 | In Vorschau öffnen | ⌘E |
+| Kopieren | ⌘C |
 | Drucken | ⌘P |
 | Im Finder zeigen | ⇧⌘R |
 

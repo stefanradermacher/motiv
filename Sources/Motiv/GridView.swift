@@ -136,6 +136,11 @@ struct GridView: View {
                 gallery.click(item, modifiers: NSEvent.modifierFlags)
                 focused = true
             })
+            // Dragging takes the selection along if the item belongs to it, otherwise only the item.
+            .gesture(DragGesture(minimumDistance: 4).onChanged { _ in
+                if !gallery.selection.contains(item.url) { gallery.click(item, modifiers: []) }
+                FileDrag.begin(gallery.selectedURLs) { gallery.reload() }
+            })
             .contextMenu { ItemContextMenu(gallery: gallery, item: item) }
             .help(item.relativePath)
     }

@@ -2,6 +2,16 @@
 
 What changed in Motiv from version to version. Deutsche Fassung: [CHANGELOG.md](CHANGELOG.md).
 
+## 1.1.3 – not yet released
+
+### New
+
+**Dragging images.** Selected images in the overview and the image displayed in the single image view can be dragged to the Finder or into other apps. The Finder copies or moves them as usual; if they are moved, Motiv reads the folder again. In the single image view this works while the whole image is visible; otherwise dragging still moves the visible area.
+
+### Improved
+
+**Copying with ⌘C.** A single copied image can now also be pasted right into apps such as Mail, Messages, or Pages, not only as a file in the Finder.
+
 ## 1.1.2 – 26 November 2026
 
 ### New

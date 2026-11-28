@@ -14,6 +14,7 @@
 
 import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 /// Handing files to other apps. Motiv itself never changes a file; editing, rotating for good
 /// or playing videos happens elsewhere.
@@ -42,11 +43,24 @@ enum FileActions {
         NSWorkspace.shared.activateFileViewerSelecting(urls)
     }
 
+    /// The files, for the Finder; for a single image also the image itself, so that it can be
+    /// pasted into apps such as Mail, Messages, or Pages. Several images go only as files: their
+    /// data could be large, and the pasteboard would ask for all of it when Motiv quits.
     static func copy(_ urls: [URL]) {
         guard !urls.isEmpty else { return }
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
-        pasteboard.writeObjects(urls as [NSURL])
+        if urls.count == 1, let url = urls.first,
+           let type = UTType(filenameExtension: url.pathExtension), type.conforms(to: .image) {
+            let item = NSPasteboardItem()
+            item.setString(url.absoluteString, forType: .fileURL)
+            let provider = ImageDataProvider(url: url)
+            ImageDataProvider.current = provider
+            item.setDataProvider(provider, forTypes: [NSPasteboard.PasteboardType(type.identifier), .tiff])
+            pasteboard.writeObjects([item])
+        } else {
+            pasteboard.writeObjects(urls as [NSURL])
+        }
     }
 
     static func defaultApplication(for url: URL) -> URL? {

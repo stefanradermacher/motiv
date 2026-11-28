@@ -33,6 +33,7 @@ Ausführlich steht alles im Handbuch: https://github.com/stefanradermacher/motiv
 | Sensible Inhalte bis zum Beenden nicht weichzeichnen | ⇧⌘U |
 | Mit Unterordnern | ⌥⌘U |
 | In Vorschau öffnen, im Finder zeigen | ⌘E, ⇧⌘R |
+| Kopieren (auch Ziehen in andere Apps) | ⌘C |
 | Drucken | ⌘P |
 
 In der Übersicht springst du zu einem Bild, indem du den Anfang seines Namens tippst. Auf dem Trackpad blätterst du in der Einzelansicht mit zwei Fingern, drehst mit zwei Fingern und tippst doppelt mit zwei Fingern für 100 %.
